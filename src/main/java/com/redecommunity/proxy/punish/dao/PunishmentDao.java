@@ -6,8 +6,15 @@ import com.redecommunity.common.shared.databases.mysql.dao.Table;
  * Created by @SrGutyerrez
  */
 public class PunishmentDao extends Table {
-    public PunishmentDao() {
-        super("server_punishments", "general");
+
+    @Override
+    public String getDatabaseName() {
+        return "general";
+    }
+
+    @Override
+    public String getTableName() {
+        return "server_punishments";
     }
 
     @Override
