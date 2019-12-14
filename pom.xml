@@ -23,12 +23,19 @@
     </properties>
 
     <dependencies>
+        <!-- common -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- Bungeecord -->
+        <!-- api -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>api-bungee</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- bungeecord -->
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
