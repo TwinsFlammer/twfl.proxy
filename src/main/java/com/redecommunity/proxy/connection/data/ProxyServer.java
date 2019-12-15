@@ -1,9 +1,13 @@
 package com.redecommunity.proxy.connection.data;
 
+import com.redecommunity.common.shared.permissions.user.data.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.Collection;
 
 /**
  * Created by @SrGutyerrez
@@ -13,16 +17,19 @@ public class ProxyServer {
     @Getter
     private final Integer id;
     @Getter
-    @Setter
-    private Integer playerCount;
-    @Getter
     private final String name;
 
     @Setter
     private Boolean status;
+    @Getter
+    private final Collection<Integer> usersId;
 
     public Boolean isOnline() {
         return this.status;
+    }
+
+    public Integer getPlayerCount() {
+        return this.usersId.size();
     }
 
     public void broadcastMessage(String message) {
@@ -33,7 +40,12 @@ public class ProxyServer {
         JSONObject object = new JSONObject();
 
         object.put("proxy_id", this.id);
-        object.put("player_count", this.playerCount);
+
+        JSONArray players = new JSONArray();
+
+        players.addAll(this.usersId);
+
+        object.put("players_id", players);
         object.put("name", this.name);
         object.put("status", this.status);
 
