@@ -1,14 +1,14 @@
 package com.redecommunity.proxy;
 
+import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.Collection;
 
 /**
  * Created by @SrGutyerrez
  */
-public class Proxy extends Plugin {
+public class Proxy extends CommunityPlugin {
     private static Proxy instance;
 
     public Proxy() {
@@ -16,7 +16,13 @@ public class Proxy extends Plugin {
     }
 
     @Override
-    public void onEnable() {
+    public void onEnablePlugin() {
+
+    }
+
+    @Override
+    public void onDisablePlugin() {
+
     }
 
     public static Proxy getInstance() {
