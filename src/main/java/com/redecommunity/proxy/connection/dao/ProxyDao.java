@@ -1,14 +1,17 @@
 package com.redecommunity.proxy.connection.dao;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.redis.data.Redis;
 import com.redecommunity.proxy.connection.data.ProxyServer;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisDataException;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,10 +33,16 @@ public class ProxyDao {
 
             Integer proxyId = (Integer) object.get("proxy_id");
             String name = (String) object.get("name");
-            Integer playerCount = (Integer) object.get("player_count");
+
+            JSONArray playersId = (JSONArray) object.get("players_id");
+
+            Collection<Integer> users = Lists.newArrayList();
+
+            playersId.forEach(o -> users.add((Integer) o));
+
             Boolean online = (Boolean) object.get("status");
 
-            return (T) new ProxyServer(proxyId, playerCount, name, online);
+            return (T) new ProxyServer(proxyId, name, online, users);
         } catch (JedisDataException exception) {
             exception.printStackTrace();
         }
@@ -68,7 +77,6 @@ public class ProxyDao {
         } catch (JedisDataException exception) {
             exception.printStackTrace();
         }
-        return;
     }
 
     @Deprecated
