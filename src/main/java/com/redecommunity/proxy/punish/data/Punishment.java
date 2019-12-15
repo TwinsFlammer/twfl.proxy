@@ -27,7 +27,6 @@ public class Punishment {
 
     @Getter
     private final String network,
-            revokeReason,
             proof;
 
     @Getter
