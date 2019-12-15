@@ -2,6 +2,7 @@ package com.redecommunity.proxy;
 
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.proxy.punish.manager.StartManager;
 
 import java.util.Collection;
 
@@ -17,7 +18,7 @@ public class Proxy extends CommunityPlugin {
 
     @Override
     public void onEnablePlugin() {
-
+        new StartManager();
     }
 
     @Override
