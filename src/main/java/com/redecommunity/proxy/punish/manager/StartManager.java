@@ -58,9 +58,12 @@ class CommandManager {
         ClassGetter.getClassesForPackage(Proxy.class).forEach(clazz -> {
             if (CustomCommand.class.isAssignableFrom(clazz)) {
                 try {
-                    CustomCommand listener = (CustomCommand) clazz.newInstance();
+                    CustomCommand customCommand = (CustomCommand) clazz.newInstance();
 
-                    // TODO not implemented yet
+                    com.redecommunity.api.bungeecord.commands.manager.CommandManager.registerCommand(
+                            Proxy.getInstance(),
+                            customCommand
+                    );
                 } catch (InstantiationException | IllegalAccessException exception) {
                     exception.printStackTrace();
                 }
