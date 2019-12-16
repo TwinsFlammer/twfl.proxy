@@ -1,6 +1,5 @@
 package com.redecommunity.proxy.punish.dao;
 
-import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.proxy.punish.data.Punishment;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
