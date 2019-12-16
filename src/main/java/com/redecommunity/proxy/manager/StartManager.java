@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.punish.manager;
+package com.redecommunity.proxy.manager;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
