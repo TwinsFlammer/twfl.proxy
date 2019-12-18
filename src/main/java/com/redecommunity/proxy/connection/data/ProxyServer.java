@@ -1,6 +1,5 @@
 package com.redecommunity.proxy.connection.data;
 
-import com.redecommunity.common.shared.permissions.user.data.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,8 @@ public class ProxyServer {
     @Setter
     private Boolean status;
     @Getter
-    private final Collection<Integer> usersId;
+    @Setter
+    private Collection<Integer> usersId;
 
     public Boolean isOnline() {
         return this.status;
