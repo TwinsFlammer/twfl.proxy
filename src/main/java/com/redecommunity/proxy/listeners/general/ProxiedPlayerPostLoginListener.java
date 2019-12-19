@@ -21,7 +21,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
     public void onLoin(PostLoginEvent event) {
         ProxiedPlayer proxiedPlayer = event.getPlayer();
 
-        if (this.isValidUUID(proxiedPlayer.getUniqueId(), proxiedPlayer.getName())) {
+        if (!this.isValidUUID(proxiedPlayer.getUniqueId(), proxiedPlayer.getName())) {
             proxiedPlayer.disconnect(Messages.INVALID_UUID_MESSAGE);
             return;
         }
@@ -54,12 +54,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
-        System.out.println(uuid);
-
-        UUID other = UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(Charsets.UTF_8));
-
-        System.out.println(other);
-
-        return uuid.equals(other);
+        return uuid.equals(UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(Charsets.UTF_8)));
     }
 }
