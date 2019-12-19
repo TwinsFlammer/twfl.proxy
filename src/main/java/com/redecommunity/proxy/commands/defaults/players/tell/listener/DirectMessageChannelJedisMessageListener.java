@@ -7,7 +7,7 @@ import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
-import com.redecommunity.proxy.commands.defaults.players.tell.manager.TellManager;
+import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.json.simple.JSONObject;
@@ -16,8 +16,8 @@ import org.json.simple.JSONValue;
 /**
  * Created by @SrGutyerrez
  */
-public class TellChannelJedisMessageListener implements JedisMessageListener {
-    @ChannelName(name = TellManager.CHANNEL_NAME)
+public class DirectMessageChannelJedisMessageListener implements JedisMessageListener {
+    @ChannelName(name = DirectMessageManager.CHANNEL_NAME)
     public void onMessage(JedisMessageEvent event) {
         String message = event.getMessage();
 
@@ -55,7 +55,7 @@ public class TellChannelJedisMessageListener implements JedisMessageListener {
         }
 
         if (senderPlayer != null) {
-            TellManager.setDirectMessageId(
+            DirectMessageManager.setDirectMessageId(
                     senderId,
                     targetId
             );
