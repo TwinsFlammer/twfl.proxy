@@ -1,17 +1,17 @@
-package com.redecommunity.proxy.commands.defaults.players.tell.channel;
+package com.redecommunity.proxy.commands.defaults.players.tell;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
-import com.redecommunity.proxy.commands.defaults.players.tell.manager.TellManager;
+import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 
 /**
  * Created by @SrGutyerrez
  */
-public class ReplyCommand extends CustomCommand {
-    public ReplyCommand() {
+public class ReplyDirectMessageCommand extends CustomCommand {
+    public ReplyDirectMessageCommand() {
         super("r", CommandRestriction.IN_GAME, null);
     }
 
@@ -29,7 +29,7 @@ public class ReplyCommand extends CustomCommand {
             return;
         }
 
-        Integer targetId = TellManager.getDirectMessageId(user.getId());
+        Integer targetId = DirectMessageManager.getDirectMessageId(user.getId());
 
         if (targetId == null) {
             user.sendMessage(
@@ -40,7 +40,7 @@ public class ReplyCommand extends CustomCommand {
 
         User user1 = UserManager.getUser(targetId);
 
-        TellManager.sendMessage(
+        DirectMessageManager.sendMessage(
                 user,
                 user1,
                 args
