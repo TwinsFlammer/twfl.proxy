@@ -42,4 +42,8 @@
             <version>1.8-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+    </build>
 </project>
