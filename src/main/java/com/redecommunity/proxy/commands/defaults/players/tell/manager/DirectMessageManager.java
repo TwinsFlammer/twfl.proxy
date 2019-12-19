@@ -13,13 +13,13 @@ import java.util.Objects;
 /**
  * Created by @SrGutyerrez
  */
-public class TellManager {
-    public static final String CHANNEL_NAME = "tell_channel";
+public class DirectMessageManager {
+    public static final String CHANNEL_NAME = "direct_message_channel";
 
     private static HashMap<Integer, Integer> directMessages = Maps.newHashMap();
 
     public static Integer getDirectMessageId(Integer id) {
-        return TellManager.directMessages
+        return DirectMessageManager.directMessages
                 .entrySet()
                 .stream()
                 .filter(Objects::nonNull)
@@ -30,7 +30,7 @@ public class TellManager {
     }
 
     public static Integer setDirectMessageId(Integer userId, Integer targetId) {
-        return TellManager.directMessages.put(userId, targetId);
+        return DirectMessageManager.directMessages.put(userId, targetId);
     }
 
     public static void sendMessage(User user, User user1, String[] args) {
@@ -65,7 +65,7 @@ public class TellManager {
         jsonObject.put("subject", message.toString());
 
         redis.sendMessage(
-                TellManager.CHANNEL_NAME,
+                DirectMessageManager.CHANNEL_NAME,
                 jsonObject.toString()
         );
     }
