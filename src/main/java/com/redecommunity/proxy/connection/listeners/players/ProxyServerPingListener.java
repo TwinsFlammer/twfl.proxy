@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.connection.listeners;
+package com.redecommunity.proxy.connection.listeners.players;
 
 import com.redecommunity.proxy.Proxy;
 import net.md_5.bungee.api.ServerPing;
