@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.listeners.general;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -53,6 +54,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
-        return uuid.equals(UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes()));
+        return uuid.equals(UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(Charsets.UTF_8)));
     }
 }
