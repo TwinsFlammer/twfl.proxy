@@ -33,7 +33,7 @@ public class PunishmentDao extends Table {
                 String.format(
                         "CREATE TABLE IF NOT EXISTS %s " +
                                 "(" +
-                                "`id` INTEGER NOT NULL PRIMARY KET AUTO_INCREMENT," +
+                                "`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT," +
                                 "`user_id` INTEGER NOT NULL," +
                                 "`staffer_id` INTEGER NOT NULL," +
                                 "`motive_id` INTEGER NOT NULL," +
