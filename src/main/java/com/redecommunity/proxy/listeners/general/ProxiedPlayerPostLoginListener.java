@@ -50,7 +50,9 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             userDao.insert(user);
         }
 
-        UserManager.getUser(proxiedPlayer.getUniqueId());
+        user = UserManager.getUser(proxiedPlayer.getUniqueId());
+
+        if (user == null) proxiedPlayer.disconnect(Messages.INVALID_USER);
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
