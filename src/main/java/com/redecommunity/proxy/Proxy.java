@@ -5,7 +5,6 @@ import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.proxy.manager.StartManager;
 
-import java.io.File;
 import java.util.Collection;
 
 /**
@@ -26,11 +25,6 @@ public class Proxy extends CommunityPlugin {
     @Override
     public void onDisablePlugin() {
 
-    }
-
-    @Override
-    public File getAbsoluteFile() {
-        return Proxy.this.getFile();
     }
 
     public static Proxy getInstance() {
