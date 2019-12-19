@@ -1,6 +1,5 @@
 package com.redecommunity.proxy.listeners.general;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -10,6 +9,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import org.apache.commons.io.Charsets;
 
 import java.util.UUID;
 
