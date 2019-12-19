@@ -34,7 +34,7 @@ public class MotiveDao extends Table {
                                 "`name` VARCHAR(255) NOT NULL," +
                                 "`display_name` VARCHAR(255) NOT NULL," +
                                 "`description` TEXT NOT NULL," +
-                                "`group_id` INTEGER NO NULL," +
+                                "`group_id` INTEGER NOT NULL," +
                                 "`type` VARCHAR(255) NOT NULL," +
                                 "`duration` INTEGER NOT NULL," +
                                 "`duration_type` VARCHAR(255) NOT NULL" +
