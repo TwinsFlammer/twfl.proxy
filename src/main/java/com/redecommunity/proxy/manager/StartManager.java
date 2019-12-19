@@ -1,6 +1,7 @@
 package com.redecommunity.proxy.manager;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
+import com.redecommunity.api.bungeecord.commands.registry.CommandRegistry;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
@@ -60,7 +61,7 @@ class CommandManager {
                 try {
                     CustomCommand customCommand = (CustomCommand) clazz.newInstance();
 
-                    com.redecommunity.api.bungeecord.commands.manager.CommandManager.registerCommand(
+                    CommandRegistry.registerCommand(
                             Proxy.getInstance(),
                             customCommand
                     );
