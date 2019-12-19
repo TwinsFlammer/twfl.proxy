@@ -1,5 +1,6 @@
 package com.redecommunity.proxy;
 
+import com.google.common.collect.Lists;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.proxy.manager.StartManager;
@@ -31,6 +32,8 @@ public class Proxy extends CommunityPlugin {
     }
 
     public static Collection<User> getUsers() {
-        return null;
+        Collection<User> users = Lists.newArrayList();
+
+        return users;
     }
 }
