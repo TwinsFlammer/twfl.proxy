@@ -1,9 +1,11 @@
 package com.redecommunity.proxy.connection.manager;
 
 import com.google.common.collect.Lists;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
@@ -29,5 +31,22 @@ public class ProxyServerManager {
 
     public static Boolean addProxyServer(ProxyServer proxyServer) {
         return ProxyServerManager.proxies.add(proxyServer);
+    }
+
+    public static List<Integer> getUsers() {
+        List<Integer> users = Lists.newArrayList();
+
+        ProxyServerManager.proxies.forEach(proxyServer -> users.addAll(proxyServer.getUsersId()));
+
+        return users;
+    }
+
+    public static ProxyServer getCurrentProxy() {
+        return ProxyServerManager.proxies
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(proxyServer -> proxyServer.getId() == Proxy.getInstance().getId())
+                .findFirst()
+                .orElse(null);
     }
 }
