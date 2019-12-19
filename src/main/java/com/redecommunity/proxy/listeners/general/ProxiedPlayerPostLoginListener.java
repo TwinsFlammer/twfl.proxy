@@ -1,10 +1,13 @@
 package com.redecommunity.proxy.listeners.general;
 
-import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.common.shared.server.data.Server;
+import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.util.Messages;
+import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -31,20 +34,9 @@ public class ProxiedPlayerPostLoginListener implements Listener {
         UserDao userDao = new UserDao();
 
         if (user == null) {
-            user = new User(
-                    null,
-                    proxiedPlayer.getName().toLowerCase(),
+            user = UserManager.generateUser(
                     proxiedPlayer.getName(),
-                    proxiedPlayer.getUniqueId(),
-                    null,
-                    null,
-                    System.currentTimeMillis(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    1,
-                    Lists.newArrayList()
+                    proxiedPlayer.getUniqueId()
             );
 
             userDao.insert(user);
@@ -52,7 +44,22 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
-        if (user == null) proxiedPlayer.disconnect(Messages.INVALID_USER);
+        if (user == null) {
+            proxiedPlayer.disconnect(Messages.INVALID_USER);
+            return;
+        }
+
+        ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
+
+        String name = serverInfo.getName();
+
+        Server server = ServerManager.getServer(name);
+
+        user.setServer(
+                Proxy.getInstance().getId(),
+                "none",
+                server
+        );
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
