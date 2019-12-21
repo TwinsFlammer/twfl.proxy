@@ -50,21 +50,20 @@ public class ProxyServerDao {
 
     public <T extends ProxyServer> Set<T> findAll() {
         try (Jedis jedis = this.redis.getJedisPool().getResource()) {
-            Map<String, String> value = jedis.hgetAll("proxies");
+            Map<String, String> proxies1 = jedis.hgetAll("proxies");
 
-            Set<T> proxies = Sets.newConcurrentHashSet();
+            Set<T> proxies2 = Sets.newConcurrentHashSet();
 
-            value.forEach((key, value1) -> {
+            proxies1.keySet().forEach(key -> {
                 System.out.println(key);
-                System.out.println(value1);
 
                 ProxyServer proxy = this.findOne(key);
 
                 System.out.println(proxy.toJSONString());
 
-                proxies.add((T) proxy);
+                proxies2.add((T) proxy);
             });
-            return proxies;
+            return proxies2;
         } catch (JedisDataException exception) {
             exception.printStackTrace();
         }
