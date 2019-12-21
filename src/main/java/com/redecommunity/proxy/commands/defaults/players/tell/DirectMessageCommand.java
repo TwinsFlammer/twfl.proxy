@@ -35,7 +35,8 @@ public class DirectMessageCommand extends CustomCommand {
         DirectMessageManager.sendMessage(
                 user,
                 user1,
-                args
+                args,
+                DirectMessageManager.MessageType.DIRECT_MESSAGE
         );
     }
 }
