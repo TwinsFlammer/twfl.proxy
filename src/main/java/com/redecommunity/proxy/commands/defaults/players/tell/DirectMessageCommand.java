@@ -23,6 +23,7 @@ public class DirectMessageCommand extends CustomCommand {
             user.sendMessage(
                     String.format(
                             language.getMessage("messages.default_commands.invalid_usage"),
+                            this.getName(),
                             "<usuário> <mensagem>"
                     )
             );
