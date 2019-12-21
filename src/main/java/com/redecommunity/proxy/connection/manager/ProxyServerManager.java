@@ -1,7 +1,6 @@
 package com.redecommunity.proxy.connection.manager;
 
 import com.google.common.collect.Lists;
-import com.redecommunity.common.shared.Common;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
@@ -31,9 +30,9 @@ public class ProxyServerManager {
 
         ProxyServerManager.proxies.add(proxyServer);
 
-        Common.getInstance().getScheduler().scheduleWithFixedDelay(
+        Proxy.getProxyServer().getScheduler().schedule(
+                Proxy.getInstance(),
                 new ProxyServerRefreshRunnable(),
-                0,
                 1,
                 TimeUnit.SECONDS
         );
