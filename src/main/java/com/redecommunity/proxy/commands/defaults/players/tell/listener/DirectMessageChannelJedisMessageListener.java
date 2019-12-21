@@ -21,8 +21,6 @@ public class DirectMessageChannelJedisMessageListener implements JedisMessageLis
     public void onMessage(JedisMessageEvent event) {
         String message = event.getMessage();
 
-        System.out.println(message);
-
         JSONObject jsonObject = (JSONObject) JSONValue.parse(message);
 
         Integer targetId = ((Long) jsonObject.get("target_id")).intValue();
