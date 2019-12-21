@@ -22,6 +22,8 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
+        System.out.println(proxiedPlayer.getServer());
+
         if (proxiedPlayer.getServer() == null) return;
 
         ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
