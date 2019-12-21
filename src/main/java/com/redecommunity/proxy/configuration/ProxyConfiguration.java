@@ -58,7 +58,7 @@ public class ProxyConfiguration {
 
         JSONObject jsonObject = (JSONObject) JSONValue.parse(fileReader);
 
-        this.id = (Integer) jsonObject.get("proxy_id");
+        this.id = ((Long) jsonObject.get("proxy_id")).intValue();
         this.name = (String) jsonObject.get("proxy_name");
     }
 }
