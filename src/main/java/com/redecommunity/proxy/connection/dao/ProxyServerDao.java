@@ -36,11 +36,13 @@ public class ProxyServerDao {
 
             JSONArray playersId = (JSONArray) jsonObject.get("players_id");
 
-            System.out.println(playersId);
-
             List<Integer> users = Lists.newArrayList();
 
-            playersId.forEach(o -> users.add((Integer) o));
+            playersId.forEach(o -> {
+                Integer userId = ((Long) o).intValue();
+
+                users.add(userId);
+            });
 
             Boolean online = (Boolean) jsonObject.get("status");
 
@@ -58,11 +60,7 @@ public class ProxyServerDao {
             Set<T> proxies2 = Sets.newConcurrentHashSet();
 
             proxies1.keySet().forEach(key -> {
-                System.out.println(key);
-
                 ProxyServer proxy = this.findOne(key);
-
-                System.out.println(proxy.toJSONString());
 
                 proxies2.add((T) proxy);
             });
