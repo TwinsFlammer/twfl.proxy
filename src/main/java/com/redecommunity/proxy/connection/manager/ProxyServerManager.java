@@ -22,7 +22,7 @@ public class ProxyServerManager {
                 Proxy.getInstance().getId(),
                 Proxy.getInstance().getName(),
                 false,
-                Collections.emptyList()
+                Lists.newArrayList()
         );
 
         proxyServerDao.insert(proxyServer);
