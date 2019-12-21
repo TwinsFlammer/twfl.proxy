@@ -33,7 +33,7 @@ public class DirectMessageManager {
         return DirectMessageManager.directMessages.put(userId, targetId);
     }
 
-    public static void sendMessage(User user, User user1, String[] args) {
+    public static void sendMessage(User user, User user1, String[] args, MessageType messageType) {
         Redis redis = user.getRedis();
 
         Language language = user.getLanguage();
@@ -56,7 +56,7 @@ public class DirectMessageManager {
 
         StringBuilder message = new StringBuilder();
 
-        for (int i = 1; i < args.length; i++)
+        for (int i = (messageType == MessageType.DIRECT_MESSAGE ? 1 : 0); i < args.length; i++)
             message.append(args[i])
                     .append(" ");
 
@@ -68,5 +68,10 @@ public class DirectMessageManager {
                 DirectMessageManager.CHANNEL_NAME,
                 jsonObject.toString()
         );
+    }
+
+    public enum MessageType {
+        DIRECT_MESSAGE,
+        REPLY_MESSAGE;
     }
 }
