@@ -31,7 +31,7 @@ public class ProxyServerDao {
 
             JSONObject object = (JSONObject) JSONValue.parse(value);
 
-            Integer proxyId = (Integer) object.get("proxy_id");
+            Integer proxyId = ((Long) object.get("proxy_id")).intValue();
             String name = (String) object.get("name");
 
             JSONArray playersId = (JSONArray) object.get("players_id");
