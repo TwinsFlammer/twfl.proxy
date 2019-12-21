@@ -56,6 +56,9 @@ public class ProxyServerDao {
             Set<T> proxies = Sets.newConcurrentHashSet();
 
             value.forEach((key, value1) -> {
+                System.out.println(key);
+                System.out.println(value1);
+
                 ProxyServer proxy = this.findOne(value1);
 
                 System.out.println(proxy.toJSONString());
