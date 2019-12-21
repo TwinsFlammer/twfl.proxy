@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.listeners.general;
 
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
@@ -21,11 +22,7 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
 
         String hostString = proxiedPlayer.getPendingConnection().getVirtualHost().getHostString();
 
-        System.out.println(hostString);
-
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
-
-        System.out.println(proxiedPlayer.getServer());
 
         if (proxiedPlayer.getServer() == null) return;
 
@@ -34,6 +31,15 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
         String name = serverInfo.getName();
 
         Server server = ServerManager.getServer(name);
+
+        if (server == null) {
+            Language language = user.getLanguage();
+
+            proxiedPlayer.disconnect(
+                    language.getMessage("errors.invalid_server")
+            );
+            return;
+        }
 
         user.setServer(
                 Proxy.getInstance().getId(),
