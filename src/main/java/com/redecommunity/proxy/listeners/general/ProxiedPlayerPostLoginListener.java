@@ -13,7 +13,6 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.apache.commons.io.Charsets;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -51,9 +50,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
-        Collection<Integer> usersId = proxyServer.getUsersId();
-
-        usersId.add(user.getId());
+        proxyServer.getUsersId().add(user.getId());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
