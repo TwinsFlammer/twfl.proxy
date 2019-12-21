@@ -21,6 +21,8 @@ public class ProxiedPlayerServerConnectListener implements Listener {
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
+        if (proxiedPlayer.getServer() == null) return;
+
         ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
 
         String name = serverInfo.getName();
