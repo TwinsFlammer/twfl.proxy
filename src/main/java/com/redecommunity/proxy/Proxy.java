@@ -5,6 +5,7 @@ import com.redecommunity.proxy.configuration.ProxyConfiguration;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.manager.StartManager;
 import lombok.Getter;
+import net.md_5.bungee.api.ProxyServer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,5 +72,9 @@ public class Proxy extends CommunityPlugin {
                 return null;
             }
         }
+    }
+
+    public static ProxyServer getProxyServer() {
+        return ProxyServer.getInstance();
     }
 }
