@@ -23,6 +23,8 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
 
         String hostString = proxiedPlayer.getPendingConnection().getVirtualHost().getHostString();
 
+        System.out.println(hostString);
+
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
         if (proxiedPlayer.getServer() == null) return;
