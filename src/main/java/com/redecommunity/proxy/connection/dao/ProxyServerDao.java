@@ -58,6 +58,8 @@ public class ProxyServerDao {
             value.forEach((key, value1) -> {
                 ProxyServer proxy = this.findOne(value1);
 
+                System.out.println(proxy.toJSONString());
+
                 proxies.add((T) proxy);
             });
             return proxies;
