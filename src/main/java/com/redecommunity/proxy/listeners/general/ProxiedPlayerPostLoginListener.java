@@ -50,6 +50,8 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
+        System.out.println(proxyServer == null);
+
         proxyServer.getUsersId().add(user.getId());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
