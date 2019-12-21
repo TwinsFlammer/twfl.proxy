@@ -1,11 +1,14 @@
 package com.redecommunity.proxy;
 
 import com.redecommunity.api.bungeecord.CommunityPlugin;
+import com.redecommunity.common.shared.server.data.Server;
+import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.manager.StartManager;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.config.ServerInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,5 +79,22 @@ public class Proxy extends CommunityPlugin {
 
     public static ProxyServer getProxyServer() {
         return ProxyServer.getInstance();
+    }
+
+    public static Server getLobby() {
+        return ServerManager.getLobbies()
+                .stream()
+                .filter(Server::isOnline)
+                .min((server1, server2) -> server2.getPlayerCount().compareTo(server1.getPlayerCount()))
+                .orElse(null);
+    }
+
+    public static ServerInfo constructServerInfo(Server server) {
+        return Proxy.getProxyServer().constructServerInfo(
+                server.getName(),
+                server.getInetSocketAddress(),
+                server.getDisplayName(),
+                false
+        );
     }
 }
