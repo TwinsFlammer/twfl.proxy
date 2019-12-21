@@ -15,8 +15,14 @@ public class ProxyServerRefreshRunnable implements Runnable {
         proxyServerDao.findAll().forEach(proxyServer -> {
             ProxyServer proxyServer1 = ProxyServerManager.getProxyServer(proxyServer.getId());
 
-            if (proxyServer1 != null) proxyServer1.setUsersId(proxyServer.getUsersId());
-            else ProxyServerManager.addProxyServer(proxyServer);
+            if (proxyServer1 != null) {
+                proxyServer1.setUsersId(proxyServer.getUsersId());
+                System.out.println("Atualizado jogadores");
+            } else {
+                ProxyServerManager.addProxyServer(proxyServer);
+
+                System.out.println("Adicionado aos proxies");
+            }
         });
     }
 }
