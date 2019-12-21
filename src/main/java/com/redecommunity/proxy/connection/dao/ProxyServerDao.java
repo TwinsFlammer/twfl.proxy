@@ -59,7 +59,7 @@ public class ProxyServerDao {
                 System.out.println(key);
                 System.out.println(value1);
 
-                ProxyServer proxy = this.findOne(value1);
+                ProxyServer proxy = this.findOne(key);
 
                 System.out.println(proxy.toJSONString());
 
