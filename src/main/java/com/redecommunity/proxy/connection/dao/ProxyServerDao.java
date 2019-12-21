@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.redis.data.Redis;
 import com.redecommunity.proxy.connection.data.ProxyServer;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import redis.clients.jedis.Jedis;
@@ -33,11 +34,11 @@ public class ProxyServerDao {
             Integer proxyId = ((Long) jsonObject.get("proxy_id")).intValue();
             String name = (String) jsonObject.get("name");
 
-//            JSONArray playersId = (JSONArray) object.get("players_id");
+            JSONArray playersId = (JSONArray) jsonObject.get("players_id");
 
             List<Integer> users = Lists.newArrayList();
-//
-//            playersId.forEach(o -> users.add((Integer) o));
+
+            playersId.forEach(o -> users.add((Integer) o));
 
             Boolean online = (Boolean) jsonObject.get("status");
 
