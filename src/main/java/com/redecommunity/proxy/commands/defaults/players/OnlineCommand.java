@@ -12,7 +12,7 @@ import com.redecommunity.proxy.Proxy;
  */
 public class OnlineCommand extends CustomCommand {
     public OnlineCommand() {
-        super("online", CommandRestriction.ALL, null);
+        super("online", CommandRestriction.ALL, "default");
     }
 
     @Override
