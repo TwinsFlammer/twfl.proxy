@@ -7,8 +7,6 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
@@ -19,14 +17,7 @@ public class DirectMessageManager {
     private static HashMap<Integer, Integer> directMessages = Maps.newHashMap();
 
     public static Integer getDirectMessageId(Integer id) {
-        return DirectMessageManager.directMessages
-                .entrySet()
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(entry -> entry.getValue().equals(id))
-                .findFirst()
-                .map(Map.Entry::getValue)
-                .orElse(null);
+        return DirectMessageManager.directMessages.get(id);
     }
 
     public static Integer setDirectMessageId(Integer userId, Integer targetId) {
