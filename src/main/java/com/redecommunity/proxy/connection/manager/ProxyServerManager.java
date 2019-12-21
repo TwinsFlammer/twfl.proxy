@@ -59,7 +59,7 @@ public class ProxyServerManager {
     }
 
     public static ProxyServer getCurrentProxy() {
-        System.out.println(ProxyServerManager.proxies);
+        ProxyServerManager.proxies.forEach(proxyServer -> System.out.println(proxyServer.toJSONString()));
 
         return ProxyServerManager.proxies
                 .stream()
