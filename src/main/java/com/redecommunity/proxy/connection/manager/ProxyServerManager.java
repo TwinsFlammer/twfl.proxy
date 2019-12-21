@@ -2,8 +2,10 @@ package com.redecommunity.proxy.connection.manager;
 
 import com.google.common.collect.Lists;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +14,19 @@ import java.util.Objects;
  */
 public class ProxyServerManager {
     private static List<ProxyServer> proxies = Lists.newArrayList();
+
+    public ProxyServerManager() {
+        ProxyServerDao proxyServerDao = new ProxyServerDao();
+
+        ProxyServer proxyServer = new ProxyServer(
+                Proxy.getInstance().getId(),
+                Proxy.getInstance().getName(),
+                false,
+                Collections.emptyList()
+        );
+
+        proxyServerDao.insert(proxyServer);
+    }
 
     public static ProxyServer getProxyServer(Integer id) {
         return ProxyServerManager.proxies
@@ -45,7 +60,7 @@ public class ProxyServerManager {
         return ProxyServerManager.proxies
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(proxyServer -> proxyServer.getId() == Proxy.getInstance().getId())
+                .filter(proxyServer -> proxyServer.getId().equals(Proxy.getInstance().getId()))
                 .findFirst()
                 .orElse(null);
     }
