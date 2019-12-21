@@ -8,24 +8,21 @@ import com.redecommunity.proxy.Proxy;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerConnectEvent;
+import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 /**
  * Created by @SrGutyerrez
  */
-public class ProxiedPlayerServerConnectListener implements Listener {
+public class ProxiedPlayerServerSwitchListener implements Listener {
     @EventHandler
-    public void onConnect(ServerConnectEvent event) {
-        System.out.println("Chamou o evento");
-
+    public void onConnect(ServerSwitchEvent event) {
         ProxiedPlayer proxiedPlayer = event.getPlayer();
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
         if (proxiedPlayer.getServer() == null) return;
-
-        System.out.println("Não tem servidor...");
 
         ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
 
