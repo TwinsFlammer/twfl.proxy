@@ -6,6 +6,7 @@ import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.connection.runnable.ProxyServerRefreshRunnable;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -20,6 +21,10 @@ public class StartManager {
         new DaoManager();
         new ListenerManager();
         new CommandManager();
+
+        new DataManager();
+
+        new RunnableManager();
     }
 }
 
@@ -74,6 +79,12 @@ class CommandManager {
                 }
             }
         });
+    }
+}
+
+class DataManager {
+    DataManager() {
+        new ProxyServerManager();
     }
 }
 
