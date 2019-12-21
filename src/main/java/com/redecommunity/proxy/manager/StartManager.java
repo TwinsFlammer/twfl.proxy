@@ -26,6 +26,8 @@ public class StartManager {
         new RunnableManager();
 
         new ChannelManager();
+
+        new JedisMessageListenerManager();
     }
 }
 
