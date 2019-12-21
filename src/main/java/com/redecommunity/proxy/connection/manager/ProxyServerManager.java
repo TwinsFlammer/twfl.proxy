@@ -59,8 +59,6 @@ public class ProxyServerManager {
     }
 
     public static ProxyServer getCurrentProxy() {
-        ProxyServerManager.proxies.forEach(proxyServer -> System.out.println(proxyServer.toJSONString()));
-
         return ProxyServerManager.proxies
                 .stream()
                 .filter(Objects::nonNull)
