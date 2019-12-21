@@ -59,6 +59,8 @@ public class ProxyServerManager {
     }
 
     public static ProxyServer getCurrentProxy() {
+        System.out.println(ProxyServerManager.proxies);
+
         return ProxyServerManager.proxies
                 .stream()
                 .filter(Objects::nonNull)
