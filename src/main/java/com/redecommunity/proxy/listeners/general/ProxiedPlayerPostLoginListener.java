@@ -3,11 +3,10 @@ package com.redecommunity.proxy.listeners.general;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
-import com.redecommunity.common.shared.server.data.Server;
-import com.redecommunity.common.shared.server.manager.ServerManager;
-import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.dao.ProxyServerDao;
+import com.redecommunity.proxy.connection.data.ProxyServer;
+import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.util.Messages;
-import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -48,6 +47,14 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             proxiedPlayer.disconnect(Messages.INVALID_USER);
             return;
         }
+
+        ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
+
+        proxyServer.getUsersId().add(user.getId());
+
+        ProxyServerDao proxyServerDao = new ProxyServerDao();
+
+        proxyServerDao.update(proxyServer);
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
