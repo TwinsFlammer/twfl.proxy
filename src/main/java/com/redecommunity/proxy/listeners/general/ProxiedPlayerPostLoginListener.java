@@ -55,6 +55,8 @@ public class ProxiedPlayerPostLoginListener implements Listener {
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
         proxyServerDao.update(proxyServer);
+
+        System.out.println(proxiedPlayer.getServer());
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
