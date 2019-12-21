@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by @SrGutyerrez
@@ -22,7 +22,7 @@ public class ProxyServer {
     private Boolean status;
     @Getter
     @Setter
-    private Collection<Integer> usersId;
+    private List<Integer> usersId;
 
     public Boolean isOnline() {
         return this.status;
