@@ -32,6 +32,13 @@ public class DirectMessageCommand extends CustomCommand {
 
         User user1 = UserManager.getUser(args[0]);
 
+        if (user.isSimilar(user1)) {
+            user.sendMessage(
+                    language.getMessage("tell.messages.cant_send_to_yourself")
+            );
+            return;
+        }
+
         DirectMessageManager.sendMessage(
                 user,
                 user1,
