@@ -5,6 +5,7 @@ import com.redecommunity.api.bungeecord.commands.registry.CommandRegistry;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
+import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
@@ -90,6 +91,22 @@ class ChannelManager {
                     Channel channel = (Channel) clazz.newInstance();
 
                     Common.getInstance().getChannelManager().register(channel);
+                } catch (InstantiationException | IllegalAccessException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+}
+
+class JedisMessageListenerManager {
+    JedisMessageListenerManager() {
+        ClassGetter.getClassesForPackage(Proxy.class).forEach(clazz -> {
+            if (JedisMessageListener.class.isAssignableFrom(clazz)) {
+                try {
+                    JedisMessageListener jedisMessageListener = (JedisMessageListener) clazz.newInstance();
+
+                    Common.getInstance().getJedisMessageManager().registerListener(jedisMessageListener);
                 } catch (InstantiationException | IllegalAccessException exception) {
                     exception.printStackTrace();
                 }
