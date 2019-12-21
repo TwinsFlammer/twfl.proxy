@@ -36,9 +36,11 @@ public class ProxyServerDao {
 
             JSONArray playersId = (JSONArray) jsonObject.get("players_id");
 
+            System.out.println(playersId);
+
             List<Integer> users = Lists.newArrayList();
 
-            playersId.forEach(o -> users.add((Integer) o));
+//            playersId.forEach(o -> users.add((Integer) o));
 
             Boolean online = (Boolean) jsonObject.get("status");
 
