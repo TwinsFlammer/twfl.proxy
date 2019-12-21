@@ -44,7 +44,8 @@ public class ReplyDirectMessageCommand extends CustomCommand {
         DirectMessageManager.sendMessage(
                 user,
                 user1,
-                args
+                args,
+                DirectMessageManager.MessageType.REPLY_MESSAGE
         );
     }
 }
