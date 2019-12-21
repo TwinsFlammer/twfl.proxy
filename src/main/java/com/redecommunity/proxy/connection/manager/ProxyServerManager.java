@@ -31,7 +31,7 @@ public class ProxyServerManager {
 
         ProxyServerManager.proxies.add(proxyServer);
 
-        Common.getInstance().getScheduler().scheduleWithFixedDelay(
+        Common.getInstance().getScheduler().scheduleAtFixedRate(
                 new ProxyServerRefreshRunnable(),
                 0,
                 1,
