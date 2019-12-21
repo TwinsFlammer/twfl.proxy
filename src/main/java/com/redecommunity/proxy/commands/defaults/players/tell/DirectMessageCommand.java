@@ -12,7 +12,7 @@ import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMess
  */
 public class DirectMessageCommand extends CustomCommand {
     public DirectMessageCommand() {
-        super("tell", CommandRestriction.IN_GAME, null);
+        super("tell", CommandRestriction.IN_GAME, "default");
     }
 
     @Override
