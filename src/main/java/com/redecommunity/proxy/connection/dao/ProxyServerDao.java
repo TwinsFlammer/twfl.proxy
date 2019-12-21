@@ -5,13 +5,12 @@ import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.redis.data.Redis;
 import com.redecommunity.proxy.connection.data.ProxyServer;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisDataException;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,18 +28,18 @@ public class ProxyServerDao {
         try (Jedis jedis = this.redis.getJedisPool().getResource()) {
             String value = jedis.hget("proxies", field);
 
-            JSONObject object = (JSONObject) JSONValue.parse(value);
+            JSONObject jsonObject = (JSONObject) JSONValue.parse(value);
 
-            Integer proxyId = ((Long) object.get("proxy_id")).intValue();
-            String name = (String) object.get("name");
+            Integer proxyId = ((Long) jsonObject.get("proxy_id")).intValue();
+            String name = (String) jsonObject.get("name");
 
-            JSONArray playersId = (JSONArray) object.get("players_id");
+//            JSONArray playersId = (JSONArray) object.get("players_id");
 
-            Collection<Integer> users = Lists.newArrayList();
+            List<Integer> users = Lists.newArrayList();
+//
+//            playersId.forEach(o -> users.add((Integer) o));
 
-            playersId.forEach(o -> users.add((Integer) o));
-
-            Boolean online = (Boolean) object.get("status");
+            Boolean online = (Boolean) jsonObject.get("status");
 
             return (T) new ProxyServer(proxyId, name, online, users);
         } catch (JedisDataException exception) {
