@@ -9,7 +9,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
  */
 public class LobbyCommand extends CustomCommand {
     public LobbyCommand() {
-        super("lobby", CommandRestriction.IN_GAME, null);
+        super("lobby", CommandRestriction.IN_GAME, "default");
     }
 
     @Override
