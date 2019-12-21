@@ -8,11 +8,8 @@ import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
-import com.redecommunity.proxy.connection.runnable.ProxyServerRefreshRunnable;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by @SrGutyerrez
