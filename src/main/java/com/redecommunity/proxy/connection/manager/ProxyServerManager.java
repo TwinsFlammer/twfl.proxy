@@ -26,6 +26,8 @@ public class ProxyServerManager {
         );
 
         proxyServerDao.insert(proxyServer);
+
+        ProxyServerManager.proxies.add(proxyServer);
     }
 
     public static ProxyServer getProxyServer(Integer id) {
