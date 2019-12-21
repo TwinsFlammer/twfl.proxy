@@ -2,11 +2,15 @@ package com.redecommunity.proxy.manager;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.registry.CommandRegistry;
+import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.runnable.ProxyServerRefreshRunnable;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by @SrGutyerrez
@@ -70,5 +74,16 @@ class CommandManager {
                 }
             }
         });
+    }
+}
+
+class RunnableManager {
+    RunnableManager() {
+        Common.getInstance().getScheduler().scheduleWithFixedDelay(
+                new ProxyServerRefreshRunnable(),
+                0,
+                1,
+                TimeUnit.SECONDS
+        );
     }
 }
