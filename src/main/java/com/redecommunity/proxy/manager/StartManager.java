@@ -4,6 +4,7 @@ import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.registry.CommandRegistry;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
+import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
@@ -25,6 +26,8 @@ public class StartManager {
         new DataManager();
 
         new RunnableManager();
+
+        new ChannelManager();
     }
 }
 
@@ -82,6 +85,22 @@ class CommandManager {
     }
 }
 
+class ChannelManager {
+    ChannelManager() {
+        ClassGetter.getClassesForPackage(Proxy.class).forEach(clazz -> {
+            if (Channel.class.isAssignableFrom(clazz)) {
+                try {
+                    Channel channel = (Channel) clazz.newInstance();
+
+                    Common.getInstance().getChannelManager().register(channel);
+                } catch (InstantiationException | IllegalAccessException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+}
+
 class DataManager {
     DataManager() {
         new ProxyServerManager();
@@ -90,11 +109,6 @@ class DataManager {
 
 class RunnableManager {
     RunnableManager() {
-        Common.getInstance().getScheduler().scheduleWithFixedDelay(
-                new ProxyServerRefreshRunnable(),
-                0,
-                1,
-                TimeUnit.SECONDS
-        );
+
     }
 }
