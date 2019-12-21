@@ -4,6 +4,9 @@ import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.proxy.connection.dao.ProxyServerDao;
+import com.redecommunity.proxy.connection.data.ProxyServer;
+import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -32,5 +35,13 @@ public class ProxiedPlayerDisconnectListener implements Listener {
         keys.put("last_address", user.getLastAddress());
 
         userDao.update(keys, "id", user.getId());
+
+        ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
+
+        proxyServer.getUsersId().remove(user.getId());
+
+        ProxyServerDao proxyServerDao = new ProxyServerDao();
+
+        proxyServerDao.update(proxyServer);
     }
 }
