@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * Created by @SrGutyerrez
  */
-public class ProxyDao {
+public class ProxyServerDao {
     private Redis redis = Common.getInstance().getDatabaseManager().getRedisManager().getDatabase("general");
 
     public <T extends ProxyServer> T findOne(Integer id) {
