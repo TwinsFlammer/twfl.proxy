@@ -48,18 +48,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             proxiedPlayer.disconnect(Messages.INVALID_USER);
             return;
         }
-
-        ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
-
-        String name = serverInfo.getName();
-
-        Server server = ServerManager.getServer(name);
-
-        user.setServer(
-                Proxy.getInstance().getId(),
-                "none",
-                server
-        );
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
