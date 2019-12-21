@@ -8,6 +8,7 @@ import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -120,6 +121,7 @@ class JedisMessageListenerManager {
 class DataManager {
     DataManager() {
         new ProxyServerManager();
+        new DirectMessageManager();
     }
 }
 
