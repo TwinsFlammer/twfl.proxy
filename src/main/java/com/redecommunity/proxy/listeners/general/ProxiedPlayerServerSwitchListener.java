@@ -5,6 +5,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -36,7 +37,7 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
             Language language = user.getLanguage();
 
             proxiedPlayer.disconnect(
-                    language.getMessage("errors.invalid_server")
+                    Helper.colorize(language.getMessage("errors.invalid_server"))
             );
             return;
         }
