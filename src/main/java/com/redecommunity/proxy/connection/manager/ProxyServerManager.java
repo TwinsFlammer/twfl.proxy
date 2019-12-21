@@ -64,7 +64,7 @@ public class ProxyServerManager {
         return ProxyServerManager.proxies
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(proxyServer -> proxyServer.getId().equals(Proxy.getInstance().getId()))
+                .filter(proxyServer -> proxyServer.getId() == Proxy.getInstance().getId())
                 .findFirst()
                 .orElse(null);
     }
