@@ -17,11 +17,15 @@ import net.md_5.bungee.event.EventHandler;
 public class ProxiedPlayerServerConnectListener implements Listener {
     @EventHandler
     public void onConnect(ServerConnectEvent event) {
+        System.out.println("Chamou o evento");
+
         ProxiedPlayer proxiedPlayer = event.getPlayer();
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
         if (proxiedPlayer.getServer() == null) return;
+
+        System.out.println("Não tem servidor...");
 
         ServerInfo serverInfo = proxiedPlayer.getServer().getInfo();
 
