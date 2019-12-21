@@ -43,5 +43,7 @@ public class ProxiedPlayerDisconnectListener implements Listener {
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
         proxyServerDao.update(proxyServer);
+
+        user.setOffline();
     }
 }
