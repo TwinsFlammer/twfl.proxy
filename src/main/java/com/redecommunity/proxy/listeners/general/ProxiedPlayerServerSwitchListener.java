@@ -7,7 +7,6 @@ import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.Proxy;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
@@ -19,6 +18,10 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
     @EventHandler
     public void onConnect(ServerSwitchEvent event) {
         ProxiedPlayer proxiedPlayer = event.getPlayer();
+
+        String hostString = proxiedPlayer.getPendingConnection().getVirtualHost().getHostString();
+
+        System.out.println(hostString);
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
@@ -34,7 +37,7 @@ public class ProxiedPlayerServerSwitchListener implements Listener {
 
         user.setServer(
                 Proxy.getInstance().getId(),
-                "none",
+                hostString,
                 server
         );
     }
