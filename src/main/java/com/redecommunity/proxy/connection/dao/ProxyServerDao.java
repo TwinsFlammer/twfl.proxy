@@ -40,7 +40,7 @@ public class ProxyServerDao {
 
             List<Integer> users = Lists.newArrayList();
 
-//            playersId.forEach(o -> users.add((Integer) o));
+            playersId.forEach(o -> users.add((Integer) o));
 
             Boolean online = (Boolean) jsonObject.get("status");
 
