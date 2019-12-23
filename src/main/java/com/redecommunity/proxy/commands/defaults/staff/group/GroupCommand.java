@@ -31,7 +31,7 @@ public class GroupCommand extends CustomCommand {
         Language language = user.getLanguage();
 
         user.sendMessage(
-            language.getMessage("messages.defaults_commands.groups.help_message")
+            language.getMessage("messages.default_commands.groups.help_message")
         );
     }
 }
