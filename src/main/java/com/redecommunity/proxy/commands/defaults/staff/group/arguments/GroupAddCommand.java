@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class GroupAddCommand extends CustomArgumentCommand {
     public GroupAddCommand() {
-        super("adicionar");
+        super(0, "adicionar");
     }
 
     @Override
