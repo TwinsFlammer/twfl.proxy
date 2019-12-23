@@ -6,6 +6,7 @@ import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
+import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
@@ -87,9 +88,26 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
+        UserGroup userGroup = user1.getGroups()
+                .stream()
+                .filter(userGroup1 -> userGroup1.getGroup().getId().equals(group.getId()))
+                .filter(userGroup1 -> userGroup1.getServer().getId().equals(server.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (userGroup == null) {
+            user.sendMessage(
+                    language.getMessage("messages.default_commands.groups.hasn\'t_that_group")
+            );
+            return;
+        }
+
         UserGroupDao userGroupDao = new UserGroupDao();
 
-//        userGroupDao.delete("`server_id`=%d,`group_id`=%d,`server_id`=%d", user1.getId() + "," + group.getId() + "," + server.getId());
+        userGroupDao.delete(
+                user1,
+                userGroup
+        );
 
         user.sendMessage(
                 language.getMessage("messages.default_commands.groups.user_added_to_group")
