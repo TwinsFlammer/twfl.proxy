@@ -11,7 +11,7 @@ import com.redecommunity.proxy.commands.defaults.staff.group.arguments.GroupRemo
  * Created by @SrGutyerrez
  */
 public class GroupCommand extends CustomCommand {
-    public static final String COMMAND_NAME = "group";
+    public static final String COMMAND_NAME = "grupo";
 
     public GroupCommand() {
         super(GroupCommand.COMMAND_NAME, CommandRestriction.ALL, "Manager");
