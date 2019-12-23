@@ -13,6 +13,9 @@ import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.commands.defaults.staff.group.GroupCommand;
 
+import java.util.Objects;
+import java.util.Set;
+
 /**
  * Created by @SrGutyerrez
  */
@@ -81,8 +84,20 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
+        UserGroupDao userGroupDao = new UserGroupDao();
+
+        if (user1.getGroups().isEmpty()) {
+            Set<UserGroup> userGroups = userGroupDao.findAll(
+                    user1.getId(),
+                    "`server_id`=" + (server == null ? 0 : server.getId())
+            );
+
+            user1.getGroups().addAll(userGroups);
+        }
+
         UserGroup userGroup = user1.getGroups()
                 .stream()
+                .filter(Objects::nonNull)
                 .filter(userGroup1 -> userGroup1.getGroup().getId().equals(group.getId()))
                 .filter(userGroup1 -> userGroup1.getServer().getId().equals(server.getId()))
                 .findFirst()
@@ -95,7 +110,6 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
-        UserGroupDao userGroupDao = new UserGroupDao();
 
         userGroupDao.delete(
                 user1,
@@ -103,7 +117,11 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
         );
 
         user.sendMessage(
-                language.getMessage("messages.default_commands.groups.user_added_to_group")
+                String.format(
+                        language.getMessage("messages.default_commands.groups.user_removed_from_group"),
+                        user1.getDisplayName(),
+                        group.getName()
+                )
         );
     }
 
