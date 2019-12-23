@@ -89,7 +89,12 @@ public class GroupAddCommand extends CustomArgumentCommand {
         UserGroupDao userGroupDao = new UserGroupDao();
 
         user.sendMessage(
-                language.getMessage("messages.default_commands.groups.user_added_to_group")
+                String.format(
+                        language.getMessage("messages.default_commands.groups.user_added_to_group"),
+                        user1.getDisplayName(),
+                        group.getName(),
+                        targetPreTime
+                )
         );
 
         UserGroup userGroup = new UserGroup(
