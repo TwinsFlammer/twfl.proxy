@@ -12,7 +12,6 @@ import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.commands.defaults.staff.group.GroupCommand;
-import org.json.simple.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -96,15 +95,6 @@ public class GroupAddCommand extends CustomArgumentCommand {
 
         UserGroupDao userGroupDao = new UserGroupDao();
 
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("user_id", user1.getId());
-        jsonObject.put("group_id", group.getId());
-        jsonObject.put("server_id", server == null ? 0 : server.getId());
-        jsonObject.put("duration", duration);
-
-//        userGroupDao.insert(jsonObject);
-
         user.sendMessage(
                 language.getMessage("messages.default_commands.groups.user_added_to_group")
         );
@@ -113,6 +103,11 @@ public class GroupAddCommand extends CustomArgumentCommand {
                 group,
                 server,
                 duration
+        );
+
+        userGroupDao.insert(
+                user1,
+                userGroup
         );
 
         if (user.isOnline()) user.getGroups().add(userGroup);
