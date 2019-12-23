@@ -62,6 +62,20 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
 
         Group group = GroupManager.getGroup(targetGroupName);
 
+        if (group == null) {
+            user.sendMessage(
+                    language.getMessage("messages.default_commands.groups.unknown_group")
+            );
+            return;
+        }
+
+        if (!user.hasGroup(group)) {
+            user.sendMessage(
+                    language.getMessage("messages.default_commands.groups.insufficient_group")
+            );
+            return;
+        }
+
         Integer serverId = Integer.parseInt(targetServerPreId);
 
         Server server = ServerManager.getServer(serverId);
