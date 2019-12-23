@@ -46,13 +46,6 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
-        if (!user1.isOnline()) {
-            user.sendMessage(
-                    language.getMessage("messages.player.player_offline")
-            );
-            return;
-        }
-
         if (!Helper.isInteger(targetServerPreId)) {
             this.sendUsage(
                     language,
