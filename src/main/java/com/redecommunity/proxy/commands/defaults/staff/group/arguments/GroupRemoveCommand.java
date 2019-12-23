@@ -74,7 +74,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
 
         Server server = ServerManager.getServer(serverId);
 
-        if (server == null) {
+        if (server == null && serverId != 0) {
             user.sendMessage(
                     language.getMessage("messages.default_commands.groups.invalid_server")
             );
