@@ -100,7 +100,7 @@ public class GroupAddCommand extends CustomArgumentCommand {
 
         jsonObject.put("user_id", user1.getId());
         jsonObject.put("group_id", group.getId());
-        jsonObject.put("server_id", server.getId());
+        jsonObject.put("server_id", server == null ? 0 : server.getId());
         jsonObject.put("duration", duration);
 
 //        userGroupDao.insert(jsonObject);
