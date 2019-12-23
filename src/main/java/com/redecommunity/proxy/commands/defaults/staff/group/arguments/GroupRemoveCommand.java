@@ -17,7 +17,7 @@ import com.redecommunity.proxy.commands.defaults.staff.group.GroupCommand;
  */
 public class GroupRemoveCommand extends CustomArgumentCommand {
     public GroupRemoveCommand() {
-        super("remover");
+        super(0, "remover");
     }
 
     @Override
