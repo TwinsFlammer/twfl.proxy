@@ -89,7 +89,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
         if (user1.getGroups().isEmpty()) {
             Set<UserGroup> userGroups = userGroupDao.findAll(
                     user1.getId(),
-                    "`server_id`=" + (server == null ? 0 : server.getId())
+                    "AND `server_id`=" + (server == null ? 0 : server.getId())
             );
 
             user1.getGroups().addAll(userGroups);
