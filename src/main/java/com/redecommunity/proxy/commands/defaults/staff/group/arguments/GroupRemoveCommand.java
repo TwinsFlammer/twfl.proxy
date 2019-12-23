@@ -99,7 +99,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(userGroup1 -> userGroup1.getGroup().getId().equals(group.getId()))
-                .filter(userGroup1 -> userGroup1.getServer().getId().equals(server.getId()))
+                .filter(userGroup1 -> serverId == 0 ? userGroup1.getServer() == null : userGroup1.getServer().getId().equals(server.getId()))
                 .findFirst()
                 .orElse(null);
 
