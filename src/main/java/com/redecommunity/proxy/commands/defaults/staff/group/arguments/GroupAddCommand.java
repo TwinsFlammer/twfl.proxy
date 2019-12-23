@@ -84,7 +84,7 @@ public class GroupAddCommand extends CustomArgumentCommand {
             return;
         }
 
-        Long duration = TimeUnit.DAYS.toMillis(Long.parseLong(targetPreTime));
+        Long duration = Integer.parseInt(targetPreTime) == -1 ? -1 : TimeUnit.DAYS.toMillis(Long.parseLong(targetPreTime));
 
         UserGroupDao userGroupDao = new UserGroupDao();
 
@@ -93,7 +93,7 @@ public class GroupAddCommand extends CustomArgumentCommand {
                         language.getMessage("messages.default_commands.groups.user_added_to_group"),
                         user1.getDisplayName(),
                         group.getName(),
-                        targetPreTime
+                        duration == -1 ? "infinitos" : targetPreTime
                 )
         );
 
