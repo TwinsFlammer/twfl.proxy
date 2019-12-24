@@ -69,6 +69,7 @@ public class SendCommand extends CustomCommand {
             user.sendMessage(
                     language.getMessage("messages.default_commands.server.offline_server")
             );
+            return;
         }
 
         if (!server.isAccessible() && !user.hasGroup("manager")) {
