@@ -28,7 +28,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
-        if (args.length != 4) {
+        if (args.length != 3) {
             this.sendUsage(
                     language,
                     user
