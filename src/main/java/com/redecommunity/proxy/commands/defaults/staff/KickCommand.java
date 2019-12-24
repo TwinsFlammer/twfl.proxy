@@ -48,7 +48,7 @@ public class KickCommand extends CustomCommand {
             return;
         }
 
-        String message = Helper.toMessage(Helper.removeFirst(args));
+        String message = args.length == 1 ? "" : Helper.toMessage(Helper.removeFirst(args));
 
         if (message.equalsIgnoreCase("")) message = "Nenhum informado";
 
