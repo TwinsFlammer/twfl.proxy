@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.listeners.general;
 
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
@@ -51,6 +52,15 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
+        if (user.isConsole()) {
+            Language language = user.getLanguage();
+
+            proxiedPlayer.disconnect(
+                    language.getMessage("errors.console_player")
+            );
+            return;
+        }
+
         UserGroupDao userGroupDao = new UserGroupDao();
 
         Set<UserGroup> userGroups = userGroupDao.findAll(
@@ -62,7 +72,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
-        proxyServer.getUsersId().add(user.getId());
+        proxyServer.getUsers().add(user);
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
