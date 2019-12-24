@@ -41,11 +41,13 @@ public class ServerCommand extends CustomCommand {
                     .text(server.inMaintenance() ? "[Man.]" : "")
                     .next()
                     .text(server.getStatusColor() + server.getDisplayName() + " ")
-                    .hoverText(
-                            "§fJogadores online: §7" + server.getPlayerCount() +
+                    .hoverText("§fJogadores online: §7" + server.getPlayerCount() +
                             "\n" +
-                            "§fDescrição: §7" + server.getDescription()
-                    )
+                            "§fEstado atual: " + server.getStatus() +
+                            "\n" +
+                            "§fMáximo de jogadores: §7" + server.getSlots() +
+                            "\n" +
+                            "§fDescrição: §7" + server.getDescription())
                     .next()
                     .text("§7[Clique para conectar]")
                     .clickRunCommand("/server conectar " + server.getName());
