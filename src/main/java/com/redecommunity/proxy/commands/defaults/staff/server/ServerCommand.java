@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.commands.defaults.staff;
+package com.redecommunity.proxy.commands.defaults.staff.server;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
