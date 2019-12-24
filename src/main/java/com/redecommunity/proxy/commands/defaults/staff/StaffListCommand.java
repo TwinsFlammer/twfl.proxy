@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 /**
  * Created by @SrGutyerrez
  */
-public class StaffCommand extends CustomCommand {
-    public StaffCommand() {
+public class StaffListCommand extends CustomCommand {
+    public StaffListCommand() {
         super("staff", CommandRestriction.ALL, "ajudante");
     }
 
