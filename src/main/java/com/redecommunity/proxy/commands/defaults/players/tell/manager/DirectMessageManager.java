@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.databases.redis.data.Redis;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.util.Helper;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
@@ -45,15 +46,13 @@ public class DirectMessageManager {
 
         JSONObject jsonObject = new JSONObject();
 
-        StringBuilder message = new StringBuilder();
+        String[] arguments = (messageType == MessageType.DIRECT_MESSAGE ? Helper.removeFirst(args) : args);
 
-        for (int i = (messageType == MessageType.DIRECT_MESSAGE ? 1 : 0); i < args.length; i++)
-            message.append(args[i])
-                    .append(" ");
+        String message = Helper.toMessage(arguments);
 
         jsonObject.put("target_id", user1.getId());
         jsonObject.put("sender_id", user.getId());
-        jsonObject.put("subject", message.toString());
+        jsonObject.put("subject", message);
 
         redis.sendMessage(
                 DirectMessageManager.CHANNEL_NAME,
