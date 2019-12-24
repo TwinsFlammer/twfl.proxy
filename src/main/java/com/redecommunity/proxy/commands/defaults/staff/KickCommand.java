@@ -45,6 +45,7 @@ public class KickCommand extends CustomCommand {
             user.sendMessage(
                     language.getMessage("messages.player.player_offline")
             );
+            return;
         }
 
         String message = Helper.toMessage(Helper.removeFirst(args));
