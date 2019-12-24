@@ -61,19 +61,19 @@ public class ServerConnectCommand extends CustomArgumentCommand {
             return;
         }
 
-        user.sendMessage(
-                String.format(
-                        language.getMessage("messages.default_commands.server.connecting_to"),
-                        server.getName()
-                )
-        );
-
         if (user.getServer().isSimilar(server)) {
             user.sendMessage(
                     language.getMessage("messages.default_commands.server.already_connected")
             );
             return;
         }
+
+        user.sendMessage(
+                String.format(
+                        language.getMessage("messages.default_commands.server.connecting_to"),
+                        server.getName()
+                )
+        );
 
         try {
             wait(2L);
