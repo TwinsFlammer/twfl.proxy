@@ -10,6 +10,7 @@ import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
+import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
 
@@ -23,8 +24,6 @@ public class StartManager {
         new CommandManager();
 
         new DataManager();
-
-        new RunnableManager();
 
         new ChannelManager();
 
@@ -122,11 +121,6 @@ class DataManager {
     DataManager() {
         new ProxyServerManager();
         new DirectMessageManager();
-    }
-}
-
-class RunnableManager {
-    RunnableManager() {
-
+        new TabListManager();
     }
 }
