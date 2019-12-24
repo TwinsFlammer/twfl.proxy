@@ -36,7 +36,7 @@ public class ServerCommand extends CustomCommand {
                     .next()
                     .text("  §f- ")
                     .next()
-                    .text(server.getStatusColor() + "")
+                    .text(server.getStatusColor())
                     .next()
                     .text(server.inMaintenance() ? "[Man.]" : "")
                     .next()
