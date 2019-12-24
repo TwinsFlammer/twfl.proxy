@@ -2,6 +2,7 @@ package com.redecommunity.proxy.connection.manager;
 
 import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.Common;
+import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
@@ -23,7 +24,7 @@ public class ProxyServerManager {
         ProxyServer proxyServer = new ProxyServer(
                 Proxy.getInstance().getId(),
                 Proxy.getInstance().getName(),
-                false,
+                true,
                 Lists.newArrayList()
         );
 
@@ -37,6 +38,17 @@ public class ProxyServerManager {
                 1,
                 TimeUnit.SECONDS
         );
+    }
+
+    public static void setOffline() {
+        ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
+
+        proxyServer.setStatus(false);
+        proxyServer.setUsers(Lists.newArrayList());
+
+        ProxyServerDao proxyServerDao = new ProxyServerDao();
+
+        proxyServerDao.update(proxyServer);
     }
 
     public static ProxyServer getProxyServer(Integer id) {
@@ -59,10 +71,10 @@ public class ProxyServerManager {
         return ProxyServerManager.proxies.add(proxyServer);
     }
 
-    public static List<Integer> getUsers() {
-        List<Integer> users = Lists.newArrayList();
+    public static List<User> getUsers() {
+        List<User> users = Lists.newArrayList();
 
-        ProxyServerManager.proxies.forEach(proxyServer -> users.addAll(proxyServer.getUsersId()));
+        ProxyServerManager.proxies.forEach(proxyServer -> users.addAll(proxyServer.getUsers()));
 
         return users;
     }
