@@ -24,7 +24,7 @@ public class ServerConnectCommand extends CustomArgumentCommand {
                     String.format(
                             language.getMessage("messages.default_commands.invalid_usage"),
                             ServerCommand.COMMAND_NAME,
-                            "conectar <name>"
+                            "conectar <servidor>"
                     )
             );
             return;
@@ -71,15 +71,10 @@ public class ServerConnectCommand extends CustomArgumentCommand {
         user.sendMessage(
                 String.format(
                         language.getMessage("messages.default_commands.server.connecting_to"),
-                        server.getName()
+                        server.getDisplayName()
                 )
         );
 
-        try {
-            wait(2L);
-            user.connect(server);
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
-        }
+        user.connect(server);
     }
 }
