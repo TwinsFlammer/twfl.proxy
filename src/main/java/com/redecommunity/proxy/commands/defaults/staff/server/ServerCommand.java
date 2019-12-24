@@ -5,6 +5,7 @@ import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.proxy.commands.defaults.staff.server.arguments.ServerConnectCommand;
 
 /**
  * Created by @SrGutyerrez
@@ -12,6 +13,10 @@ import com.redecommunity.common.shared.server.manager.ServerManager;
 public class ServerCommand extends CustomCommand {
     public ServerCommand() {
         super("server", CommandRestriction.IN_GAME, "helper");
+
+        this.setArgument(
+                new ServerConnectCommand()
+        );
     }
 
     @Override
@@ -38,10 +43,12 @@ public class ServerCommand extends CustomCommand {
                     .text(server.getDisplayName() + " ")
                     .hoverText(
                             "§fJogadores online: §7" + server.getPlayerCount() +
+                            "\n" +
                             "§fDescrição: §7" + server.getDescription()
                     )
                     .next()
-                    .text("§7[Clique para conectar]");
+                    .text("§7[Clique para conectar]")
+                    .clickRunCommand("/server conectar " + server.getName());
         });
 
         jsonText.next()
