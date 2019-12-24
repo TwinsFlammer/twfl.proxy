@@ -36,11 +36,9 @@ public class ServerCommand extends CustomCommand {
                     .next()
                     .text("  §f- ")
                     .next()
-                    .text(server.getStatusColor())
-                    .next()
                     .text(server.inMaintenance() ? "[Man.]" : "")
                     .next()
-                    .text(server.getDisplayName() + " ")
+                    .text(server.getStatusColor() + server.getDisplayName() + " ")
                     .hoverText(
                             "§fJogadores online: §7" + server.getPlayerCount() +
                             "\n" +
