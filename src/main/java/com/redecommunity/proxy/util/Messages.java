@@ -25,4 +25,27 @@ public class Messages {
             "§cCaso queira obter mais informações, utilize o código a cima" +
             "\n" +
             "§cpara conversar com algum membro de nossa equipe.";
+
+    public static final String INVALID_USERNAME = "\n" +
+            "§c§lREDE COMMUNITY" +
+            "\n" +
+            "\n" +
+            "§cOcorreu um erro ao carregar seu usuário de nosso banco de dados" +
+            "\n" +
+            "§cCódigo do erro: §aM4YSQL1" +
+            "\n" +
+            "§cCaso queira obter mais informações, utilize o código a cima" +
+            "\n" +
+            "§cpara conversar com algum membro de nossa equipe.";
+
+    public static final String DONT_HAVE_LOBBY = "\n" +
+            "§c§lREDE COMMUNITY" +
+            "\n" +
+            "\n" +
+            "§cVocê foi desconectado do servidor!" +
+            "\n" +
+            "§cMotivo: Não foi possível localizar um saguão disponível." +
+            "\n" +
+            "\n" +
+            "§cTente novamente mais tarde.";
 }
