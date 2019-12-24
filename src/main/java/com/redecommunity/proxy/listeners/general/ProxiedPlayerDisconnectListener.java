@@ -38,7 +38,7 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
-        proxyServer.getUsersId().remove(user.getId());
+        proxyServer.getUsers().remove(user);
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
