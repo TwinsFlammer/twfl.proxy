@@ -44,6 +44,7 @@ public class FindCommand extends CustomCommand {
             user.sendMessage(
                     language.getMessage("messages.player.player_offline")
             );
+            return;
         }
 
         user.sendMessage(
