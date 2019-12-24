@@ -45,6 +45,7 @@ public class BtpCommand extends CustomCommand {
             user.sendMessage(
                     language.getMessage("messages.player.player_offline")
             );
+            return;
         }
 
         Server server = user1.getServer();
