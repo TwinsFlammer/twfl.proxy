@@ -5,6 +5,7 @@ import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.proxy.commands.defaults.staff.server.ServerCommand;
 
 /**
  * Created by @SrGutyerrez
@@ -22,8 +23,8 @@ public class ServerConnectCommand extends CustomArgumentCommand {
             user.sendMessage(
                     String.format(
                             language.getMessage("messages.default_commands.invalid_usage"),
-                            this.getName(),
-                            "<name>"
+                            ServerCommand.COMMAND_NAME,
+                            "conectar <name>"
                     )
             );
             return;
@@ -66,6 +67,13 @@ public class ServerConnectCommand extends CustomArgumentCommand {
                         server.getName()
                 )
         );
+
+        if (user.getServer().isSimilar(server)) {
+            user.sendMessage(
+                    language.getMessage("messages.default_commands.server.already_connected")
+            );
+            return;
+        }
 
         try {
             wait(2L);
