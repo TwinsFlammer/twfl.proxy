@@ -1,6 +1,7 @@
 package com.redecommunity.proxy;
 
 import com.redecommunity.api.bungeecord.CommunityPlugin;
+import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
@@ -45,14 +46,14 @@ public class Proxy extends CommunityPlugin {
 
     @Override
     public void onDisablePlugin() {
-
+        ProxyServerManager.setOffline();
     }
 
     public static Proxy getInstance() {
         return Proxy.instance;
     }
 
-    public static Collection<Integer> getUsers() {
+    public static Collection<User> getUsers() {
         return ProxyServerManager.getUsers();
     }
 
