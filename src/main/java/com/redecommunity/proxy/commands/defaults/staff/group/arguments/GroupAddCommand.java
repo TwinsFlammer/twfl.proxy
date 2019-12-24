@@ -27,7 +27,7 @@ public class GroupAddCommand extends CustomArgumentCommand {
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
-        if (args.length != 5) {
+        if (args.length != 4) {
             this.sendUsage(
                     language,
                     user
