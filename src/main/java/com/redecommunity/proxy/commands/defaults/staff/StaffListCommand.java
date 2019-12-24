@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class StaffListCommand extends CustomCommand {
     public StaffListCommand() {
-        super("staff", CommandRestriction.ALL, "ajudante");
+        super("staff", CommandRestriction.ALL, "helper");
     }
 
     @Override
