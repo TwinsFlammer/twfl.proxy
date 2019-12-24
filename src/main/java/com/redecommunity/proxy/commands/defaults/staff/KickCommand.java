@@ -54,7 +54,7 @@ public class KickCommand extends CustomCommand {
 
         user.sendMessage(
                 String.format(
-                        language.getMessage(""),
+                        language.getMessage("kick.kicked"),
                         user1.getDisplayName(),
                         message
                 )
