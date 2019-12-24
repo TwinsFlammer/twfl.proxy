@@ -4,8 +4,8 @@ import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
+import com.redecommunity.proxy.Proxy;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class StaffListCommand extends CustomCommand {
     public void onCommand(User user, String[] strings) {
         JSONText jsonText = new JSONText();
 
-        List<User> users = UserManager.getOnlineUsers()
+        List<User> users = Proxy.getUsers()
                         .stream()
                         .filter(Objects::nonNull)
                         .filter(user1 -> user1.hasGroup("Helper"))
@@ -53,7 +53,7 @@ public class StaffListCommand extends CustomCommand {
                             "\n" +
                             "§e* Clique para conectar a este servidor!"
                     )
-                    .clickRunCommand("/server " + server.getDisplayName());
+                    .clickRunCommand("/server conectar " + server.getDisplayName());
         });
 
         jsonText.next()
