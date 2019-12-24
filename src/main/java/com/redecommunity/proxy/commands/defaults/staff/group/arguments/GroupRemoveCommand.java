@@ -36,9 +36,9 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
-        String targetName = args[1];
-        String targetGroupName = args[2];
-        String targetServerPreId = args[3];
+        String targetName = args[0];
+        String targetGroupName = args[1];
+        String targetServerPreId = args[2];
 
         User user1 = UserManager.getUser(targetName);
 
