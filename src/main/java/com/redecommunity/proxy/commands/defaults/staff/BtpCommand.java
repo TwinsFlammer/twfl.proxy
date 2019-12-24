@@ -48,11 +48,18 @@ public class BtpCommand extends CustomCommand {
             return;
         }
 
+        if (user.isSimilar(user1)) {
+            user.sendMessage(
+                    language.getMessage("btp.can\'t_teleport_to_youself")
+            );
+            return;
+        }
+
         Server server = user1.getServer();
 
         user.sendMessage(
                 String.format(
-                        language.getMessage("btp"),
+                        language.getMessage("btp.teletransporting"),
                         user1.getDisplayName()
                 )
         );
