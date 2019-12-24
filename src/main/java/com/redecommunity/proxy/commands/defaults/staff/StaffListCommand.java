@@ -43,7 +43,7 @@ public class StaffListCommand extends CustomCommand {
             jsonText.next()
                     .text("\n")
                     .next()
-                    .text("  §f- " + (user1.getId().equals(user.getId()) ? "*" : "") + user1.getPrefix() + user1.getDisplayName() + " ")
+                    .text((user1.getId().equals(user.getId()) ? "  §f* " : "  §f- ") + user1.getPrefix() + user1.getDisplayName() + " ")
                     .next()
                     .text(" ")
                     .next()
