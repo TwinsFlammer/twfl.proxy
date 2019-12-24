@@ -9,7 +9,10 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
+import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
+import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.util.Messages;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -29,6 +32,11 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         if (!this.isValidUUID(proxiedPlayer.getUniqueId(), proxiedPlayer.getName())) {
             proxiedPlayer.disconnect(Messages.INVALID_UUID_MESSAGE);
+            return;
+        }
+
+        if (!proxiedPlayer.getName().matches("[a-zA-Z0-9-_]*")) {
+            proxiedPlayer.disconnect(Messages.INVALID_USERNAME);
             return;
         }
 
@@ -77,6 +85,16 @@ public class ProxiedPlayerPostLoginListener implements Listener {
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
         proxyServerDao.update(proxyServer);
+
+        TabList tabList = user.hasGroup("manager") ? TabListManager.getStaffTalist(user) : TabListManager.getCurrentTablist(user);
+
+        if (tabList != null)
+            proxiedPlayer.setTabHeader(
+                    new TextComponent(tabList.getHeader()),
+                    new TextComponent(tabList.getFooter())
+            );
+
+
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
