@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.listeners.general.channel;
+package com.redecommunity.proxy.listeners.general.listeners;
 
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.databases.redis.handler.annonation.ChannelName;
