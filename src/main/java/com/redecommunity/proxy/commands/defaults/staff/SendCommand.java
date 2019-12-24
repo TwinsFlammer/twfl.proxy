@@ -81,7 +81,10 @@ public class SendCommand extends CustomCommand {
 
         if (user1.getServer().isSimilar(server)) {
             user.sendMessage(
-                    language.getMessage("messages.default_commands.server.already_connected")
+                    String.format(
+                            language.getMessage("messages.default_commands.server.user_already_connected"),
+                            user1.getDisplayName()
+                    )
             );
             return;
         }
