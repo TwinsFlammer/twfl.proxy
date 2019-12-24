@@ -38,7 +38,7 @@ public class ServerCommand extends CustomCommand {
                     .next()
                     .text(server.getStatusColor() + "")
                     .next()
-                    .text(server.getStatus() == 3 ? "[Man.]" : "")
+                    .text(server.inMaintenance() ? "[Man.]" : "")
                     .next()
                     .text(server.getDisplayName() + " ")
                     .hoverText(
