@@ -11,8 +11,10 @@ import com.redecommunity.proxy.commands.defaults.staff.server.arguments.ServerCo
  * Created by @SrGutyerrez
  */
 public class ServerCommand extends CustomCommand {
+    public static final String COMMAND_NAME = "server";
+
     public ServerCommand() {
-        super("server", CommandRestriction.IN_GAME, "helper");
+        super(ServerCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "helper");
 
         this.setArgument(
                 new ServerConnectCommand()
@@ -51,6 +53,7 @@ public class ServerCommand extends CustomCommand {
 
         jsonText.next()
                 .text("\n")
+                .next()
                 .send(user);
     }
 }
