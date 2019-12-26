@@ -143,11 +143,9 @@ public class AccountCommand extends CustomCommand {
                     .stream()
                     .filter(userGroup -> server == null ? userGroup.getServer() == null : userGroup.getServer().isSimilar(server))
                     .map(UserGroup::getGroup)
-                    .collect(Collectors.toList())
-                    .forEach(group1 -> jsonText.text(group1.getColor() + group1.getName()));
+                    .forEach(group1 -> jsonText.text(group1.getColor() + group1.getName()).next());
 
-            jsonText.next()
-                    .text("\n");
+            jsonText.text("\n");
         }
 
         jsonText.next()
