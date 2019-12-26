@@ -130,6 +130,7 @@ public class AccountCommand extends CustomCommand {
         user1.getGroups()
                 .stream()
                 .map(UserGroup::getServer)
+                .distinct()
                 .forEach(server -> {
                     jsonText.next()
                             .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
