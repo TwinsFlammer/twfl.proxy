@@ -1,6 +1,7 @@
 package com.redecommunity.proxy.listeners.general.broadcast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.databases.redis.handler.annonation.ChannelName;
@@ -31,7 +32,7 @@ public class BroadcastJedisMessageListener implements JedisMessageListener {
         Integer groupId = ((Long) jsonObject.get("group_id")).intValue();
         String serializedJsonText = (String) jsonObject.get("message");
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         JSONText jsonText = gson.fromJson(serializedJsonText, JSONText.class);
 
