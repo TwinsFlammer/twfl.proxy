@@ -88,7 +88,7 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("§eInformações avançadas:")
                 .next()
-                .text("  Endereço conectado: §7" + (user1.isOnline() ? "Indisponível" : user1.getConnectedAddress()))
+                .text("  Endereço conectado: §7" + (user1.isOnline() ? user1.getConnectedAddress() : "Indisponível"))
                 .next()
                 .text("\n")
                 .next()
