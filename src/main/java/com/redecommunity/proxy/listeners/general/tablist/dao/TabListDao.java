@@ -37,7 +37,8 @@ public class TabListDao extends Table {
                                 "`group_id` INTEGER NOT NULL," +
                                 "`time` LONG NOT NULL," +
                                 "`active` BOOLEAN NOT NULL" +
-                                ");"
+                                ");",
+                        this.getTableName()
                 )
         );
     }
