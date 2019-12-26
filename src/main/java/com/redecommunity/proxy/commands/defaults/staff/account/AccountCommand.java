@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by @SrGutyerrez
@@ -126,29 +127,30 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n\n");
 
-        List<Server> servers = user1.getGroups()
+        user1.getGroups()
                 .stream()
                 .map(UserGroup::getServer)
-                .collect(Collectors.toList());
+                .forEach(server -> {
+                    jsonText.next()
+                            .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
+                            .next();
 
-        for (int i = 0; i < servers.size(); i++) {
-            Server server = servers.get(i);
+                    List<Group> groups = user1.getGroups()
+                            .stream()
+                            .filter(userGroup -> server == null ? userGroup.getServer() == null : userGroup.getServer().isSimilar(server))
+                            .map(UserGroup::getGroup)
+                            .sorted((group1, group2) -> group2.getPriority().compareTo(group1.getPriority()))
+                            .collect(Collectors.toList());
 
-            if (i == 0) jsonText.next()
-                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
-                    .next();
-            else jsonText.next()
-                    .text("§f, ")
-                    .next();
+                    IntStream.range(0, groups.size())
+                            .forEach(i -> {
+                                Group group1 = groups.get(i);
 
-            user1.getGroups()
-                    .stream()
-                    .filter(userGroup -> server == null ? userGroup.getServer() == null : userGroup.getServer().isSimilar(server))
-                    .map(UserGroup::getGroup)
-                    .forEach(group1 -> jsonText.text(group1.getColor() + group1.getName()).next());
+                                jsonText.text(group1.getColor() + group1.getName()).next().text((i == groups.size() ? "" : ", "));
+                            });
 
-            jsonText.text("\n");
-        }
+                    jsonText.text("\n");
+                });
 
         jsonText.next()
                 .text("\n")
