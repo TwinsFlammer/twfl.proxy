@@ -136,9 +136,13 @@ public class AccountCommand extends CustomCommand {
                     .next()
                     .text(group1.getColor() + group1.getName());
 
-            if (!servers.isEmpty() && servers.get(0) == null
-                    && server == null || !servers.get(0).isSimilar(server)) jsonText.next()
-                    .text("\n");
+            if (!servers.isEmpty()) {
+                Server server1 = servers.get(0);
+
+                if (server1 == null && server != null
+                        || server != null && server1 != null && server.isSimilar(server1)) jsonText.next()
+                        .text("\n");
+            }
 
             servers.set(0, server);
         });
