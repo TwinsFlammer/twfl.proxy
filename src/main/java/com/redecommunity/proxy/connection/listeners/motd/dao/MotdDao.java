@@ -2,11 +2,14 @@ package com.redecommunity.proxy.connection.listeners.motd.dao;
 
 import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
+import com.redecommunity.proxy.connection.listeners.motd.data.Motd;
+import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -33,14 +36,37 @@ public class MotdDao extends Table {
                                 "`first_line` VARCHAR(255) NOT NULL," +
                                 "`second_line` VARCHAR(255) NOT NULL," +
                                 "`active` BOOLEAN NOT NULL" +
-                                ");"
+                                ");",
+                        this.getTableName()
                 )
         );
     }
 
     @Override
+    public <K, V, U, I> void update(HashMap<K, V> keys, U key, I value) {
+        String where = this.generateWhere(keys);
+
+        String query = String.format(
+                "UPDATE %s SET %s WHERE `%s`=%s",
+                this.getTableName(),
+                where,
+                key,
+                value
+        );
+
+        try (
+                Connection connection = this.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    @Override
     public <T> Set<T> findAll() {
-        Set<T> motd = Sets.newConcurrentHashSet();
+        Set<T> motds = Sets.newConcurrentHashSet();
 
         String query = String.format(
                 "SELECT * FROM %s",
@@ -53,12 +79,14 @@ public class MotdDao extends Table {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             while (resultSet.next()) {
+                Motd motd = MotdManager.toMotd(resultSet);
 
+                motds.add((T) motd);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
 
-        return motd;
+        return motds;
     }
 }
