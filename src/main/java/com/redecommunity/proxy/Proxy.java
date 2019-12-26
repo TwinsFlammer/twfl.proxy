@@ -91,7 +91,7 @@ public class Proxy extends CommunityPlugin {
 
         Gson gson = new Gson();
 
-        String json = gson.toJson(jsonObject);
+        String json = gson.toJson(jsonText);
 
         jsonObject.put("message", json);
 
