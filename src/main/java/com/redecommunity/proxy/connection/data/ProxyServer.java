@@ -33,10 +33,6 @@ public class ProxyServer {
         return this.users.size();
     }
 
-    public void broadcastMessage(String message) {
-        // TODO not implemented yet
-    }
-
     public String toJSONString() {
         JSONObject object = new JSONObject();
 
@@ -44,9 +40,9 @@ public class ProxyServer {
 
         JSONArray players = new JSONArray();
 
-        this.users.forEach(user -> players.add(user.getId()));
+        players.addAll(this.users);
 
-        object.put("players_id", players);
+        object.put("users", players);
         object.put("name", this.name);
         object.put("status", this.status);
 
