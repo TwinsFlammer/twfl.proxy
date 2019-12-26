@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.commands.defaults.staff.account;
 
+import com.google.common.collect.Lists;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
@@ -10,6 +11,7 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by @SrGutyerrez
@@ -50,9 +52,7 @@ public class AccountCommand extends CustomCommand {
         JSONText jsonText = new JSONText();
 
         jsonText.next()
-                .text("\n")
-                .next()
-                .text("\n")
+                .text("\n\n")
                 .next()
                 .text("§eInformações sobre o usuário ")
                 .next()
@@ -123,6 +123,8 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n\n");
 
+        List<Server> servers = Lists.newArrayList();
+
         user1.getGroups().forEach(userGroup -> {
             Group group1 = userGroup.getGroup();
             Server server = userGroup.getServer();
@@ -132,13 +134,17 @@ public class AccountCommand extends CustomCommand {
                     .next()
                     .text(": §7")
                     .next()
-                    .text(group1.getColor() + group1.getName())
-                    .next()
+                    .text(group1.getColor() + group1.getName());
+
+            if (!servers.isEmpty() && servers.get(0) == null
+                    && server == null || !servers.get(0).isSimilar(server)) jsonText.next()
                     .text("\n");
+
+            servers.set(0, server);
         });
 
         jsonText.next()
-                .text("\n\n")
+                .text("\n")
                 .next()
                 .text("§eConexão:")
                 .next()
