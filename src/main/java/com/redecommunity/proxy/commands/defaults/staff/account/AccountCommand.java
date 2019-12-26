@@ -45,13 +45,6 @@ public class AccountCommand extends CustomCommand {
             return;
         }
 
-        if (!user1.isOnline()) {
-            user.sendMessage(
-                    language.getMessage("messages.player.player_offline")
-            );
-            return;
-        }
-
         Group group = user1.getHighestGroup();
 
         JSONText jsonText = new JSONText();
