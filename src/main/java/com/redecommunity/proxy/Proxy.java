@@ -1,6 +1,7 @@
 package com.redecommunity.proxy;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.Common;
@@ -89,7 +90,7 @@ public class Proxy extends CommunityPlugin {
         jsonObject.put("group_id", group.getId());
 //        jsonObject.put("message", jsonText);
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         String json = gson.toJson(jsonText);
 
