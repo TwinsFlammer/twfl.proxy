@@ -1,6 +1,8 @@
 package com.redecommunity.proxy.connection.listeners.players;
 
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.listeners.motd.data.Motd;
+import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -19,5 +21,11 @@ public class ProxyServerPingListener implements Listener {
         players.setOnline(Proxy.getUsers().size());
 
         event.setResponse(serverPing);
+
+        Motd motd = MotdManager.getCurrentMotd();
+
+        if (motd == null) return;
+
+        serverPing.setDescription(motd.getLine1() + "\n" + motd.getLine2());
     }
 }
