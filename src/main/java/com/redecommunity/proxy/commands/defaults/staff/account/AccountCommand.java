@@ -129,22 +129,24 @@ public class AccountCommand extends CustomCommand {
             Group group1 = userGroup.getGroup();
             Server server = userGroup.getServer();
 
-            jsonText.next()
-                    .text("  " + (server == null ? "Rede" : server.getDisplayName()))
-                    .next()
-                    .text(": §7")
-                    .next()
-                    .text(group1.getColor() + group1.getName());
+            Boolean newLine = false;
 
             if (!servers.isEmpty()) {
                 Server server1 = servers.get(0);
 
-                if (server1 == null && server != null
-                        || server != null && server1 != null && server.isSimilar(server1)) jsonText.next()
-                        .text("\n");
-            } else if (servers.isEmpty()) servers.add(server);
+                if (server1 == null && server != null || server != null && server.isSimilar(server1)) newLine = true;
+            } else servers.add(server);
+
+            jsonText.next()
+                    .text(newLine ? "  " + (server == null ? "Rede" : server.getDisplayName()) + ": " : "§f, ")
+                    .next()
+                    .text(group1.getColor() + group1.getName());
+
 
             servers.set(0, server);
+
+            if (newLine) jsonText.next()
+                    .text("\n");
         });
 
         jsonText.next()
