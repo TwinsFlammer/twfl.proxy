@@ -1,5 +1,6 @@
 package com.redecommunity.proxy;
 
+import com.google.gson.Gson;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.Common;
@@ -86,7 +87,13 @@ public class Proxy extends CommunityPlugin {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("group_id", group.getId());
-        jsonObject.put("message", jsonText);
+//        jsonObject.put("message", jsonText);
+
+        Gson gson = new Gson();
+
+        String json = gson.toJson(jsonObject);
+
+        jsonObject.put("message", json);
 
         Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
                 .forEach(redis -> redis.sendMessage(
