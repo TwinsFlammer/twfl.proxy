@@ -148,7 +148,7 @@ public class AccountCommand extends CustomCommand {
 
                                 jsonText.text(group1.getColor() + group1.getName())
                                         .next()
-                                        .text((i == groups.size() ? "" : ", "))
+                                        .text((i+1 == groups.size() ? "" : ", "))
                                         .next();
                             });
 
