@@ -13,6 +13,14 @@ import java.util.List;
 public class MotdManager {
     private static List<Motd> motds = Lists.newArrayList();
 
+    public static Motd getCurrentMotd() {
+        return MotdManager.motds
+                .stream()
+                .filter(Motd::isActive)
+                .findFirst()
+                .orElse(null);
+    }
+
     public static Motd toMotd(ResultSet resultSet) throws SQLException {
         return new Motd(
                 resultSet.getInt("id"),
