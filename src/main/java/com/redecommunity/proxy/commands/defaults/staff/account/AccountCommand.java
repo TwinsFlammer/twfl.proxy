@@ -134,10 +134,8 @@ public class AccountCommand extends CustomCommand {
             Server server = servers.get(i);
 
             if (i == 0) jsonText.next()
-                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
-                    .next();
-
-            jsonText.next()
+                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "));
+            else jsonText.next()
                     .text("§f, ")
                     .next();
 
