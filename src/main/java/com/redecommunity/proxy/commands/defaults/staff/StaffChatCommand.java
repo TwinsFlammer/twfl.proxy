@@ -2,12 +2,11 @@ package com.redecommunity.proxy.commands.defaults.staff;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
+import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
-
-import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
@@ -34,21 +33,21 @@ public class StaffChatCommand extends CustomCommand {
 
         String message = Helper.toMessage(args);
 
-        Proxy.getUsers()
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(user1 -> user1.hasGroup("helper"))
-                .forEach(user1 -> {
-                    Language language1 = user.getLanguage();
+        JSONText jsonText = new JSONText();
 
-                    user1.sendMessage(
-                            String.format(
-                                    language1.getMessage("staff_chat.format"),
-                                    user1.getServer().getDisplayName(),
-                                    user1.getPrefix() + user1.getDisplayName(),
-                                    message
-                            )
-                    );
-                });
+        String format = String.format(
+                language.getMessage("staff_chat.format"),
+                user.getServer().getDisplayName(),
+                user.getPrefix() + user.getDisplayName(),
+                message
+        );
+
+        jsonText.text(format)
+                .next();
+
+        Proxy.getInstance().broadcastMessage(
+                this.getGroup(),
+                jsonText
+        );
     }
 }
