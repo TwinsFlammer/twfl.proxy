@@ -7,11 +7,13 @@ import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by @SrGutyerrez
@@ -123,31 +125,32 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n\n");
 
-        List<Server> servers = Lists.newArrayList();
+        List<Server> servers = user1.getGroups()
+                .stream()
+                .map(UserGroup::getServer)
+                .collect(Collectors.toList());
 
-        user1.getGroups().forEach(userGroup -> {
-            Group group1 = userGroup.getGroup();
-            Server server = userGroup.getServer();
+        for (int i = 0; i < servers.size(); i++) {
+            Server server = servers.get(i);
 
-            Boolean newLine = false;
-
-            if (!servers.isEmpty()) {
-                Server server1 = servers.get(0);
-
-                if (server1 == null && server != null || server != null && server.isSimilar(server1)) newLine = true;
-            } else servers.add(server);
+            if (i == 0) jsonText.next()
+                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
+                    .next();
 
             jsonText.next()
-                    .text(newLine ? "  " + (server == null ? "Rede" : server.getDisplayName()) + ": " : "§f, ")
-                    .next()
-                    .text(group1.getColor() + group1.getName());
+                    .text("§f, ")
+                    .next();
 
+            user1.getGroups()
+                    .stream()
+                    .filter(userGroup -> server == null ? userGroup.getServer() == null : userGroup.getServer().isSimilar(server))
+                    .map(UserGroup::getGroup)
+                    .collect(Collectors.toList())
+                    .forEach(group1 -> jsonText.text(group1.getColor() + group1.getName()));
 
-            servers.set(0, server);
-
-            if (newLine) jsonText.next()
+            jsonText.next()
                     .text("\n");
-        });
+        }
 
         jsonText.next()
                 .text("\n")
