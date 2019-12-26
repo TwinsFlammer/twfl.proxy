@@ -157,7 +157,9 @@ public class AccountCommand extends CustomCommand {
                 });
 
         if (user1.getGroups().isEmpty()) jsonText.next()
-                .text("   --/--");
+                .text("   --/--")
+                .next()
+                .text("\n");
 
         jsonText.next()
                 .text("\n")
