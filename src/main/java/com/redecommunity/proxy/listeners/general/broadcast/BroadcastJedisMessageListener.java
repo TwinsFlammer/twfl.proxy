@@ -15,6 +15,10 @@ import net.md_5.bungee.api.ProxyServer;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
  * Created by @SrGutyerrez
  */
@@ -30,18 +34,25 @@ public class BroadcastJedisMessageListener implements JedisMessageListener {
         System.out.println(jsonObject);
 
         Integer groupId = ((Long) jsonObject.get("group_id")).intValue();
-        String serializedJsonText = (String) jsonObject.get("message");
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            byte[] bytes = (byte[]) jsonObject.get("message");
 
-        JSONText jsonText = gson.fromJson(serializedJsonText, JSONText.class);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-        Group group = GroupManager.getGroup(groupId);
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
 
-        ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
-            User user = UserManager.getUser(proxiedPlayer.getUniqueId());
+            JSONText jsonText = (JSONText) objectInputStream.readObject();
 
-            if (user.hasGroup(group)) jsonText.send(user);
-        });
+            Group group = GroupManager.getGroup(groupId);
+
+            ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
+                User user = UserManager.getUser(proxiedPlayer.getUniqueId());
+
+                if (user.hasGroup(group)) jsonText.send(user);
+            });
+        } catch (IOException | ClassNotFoundException exception) {
+            exception.printStackTrace();
+        }
     }
 }
