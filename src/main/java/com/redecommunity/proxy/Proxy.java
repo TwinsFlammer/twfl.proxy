@@ -18,8 +18,10 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import org.json.simple.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
@@ -88,13 +90,22 @@ public class Proxy extends CommunityPlugin {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("group_id", group.getId());
-//        jsonObject.put("message", jsonText);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-        String json = gson.toJson(jsonText);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 
-        jsonObject.put("message", json);
+            objectOutputStream.writeObject(jsonText);
+
+            objectOutputStream.close();
+
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            jsonObject.put("message", bytes);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
         Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
                 .forEach(redis -> redis.sendMessage(
