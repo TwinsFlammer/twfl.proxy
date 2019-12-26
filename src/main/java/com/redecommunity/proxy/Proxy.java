@@ -1,15 +1,20 @@
 package com.redecommunity.proxy;
 
 import com.redecommunity.api.bungeecord.CommunityPlugin;
+import com.redecommunity.api.bungeecord.util.JSONText;
+import com.redecommunity.common.shared.Common;
+import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.common.shared.util.Constants;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.manager.StartManager;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +62,6 @@ public class Proxy extends CommunityPlugin {
         return ProxyServerManager.getUsers();
     }
 
-
     public InputStream getResource(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("Filename cannot be null");
@@ -76,6 +80,19 @@ public class Proxy extends CommunityPlugin {
                 return null;
             }
         }
+    }
+
+    public static void broadcastMessage(Group group, JSONText jsonText) {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("group_id", group.getId());
+        jsonObject.put("message", jsonText);
+
+        Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
+                .forEach(redis -> redis.sendMessage(
+                        Constants.BROADCAST_MESSAGE,
+                        jsonObject.toString()
+                ));
     }
 
     public static ProxyServer getProxyServer() {
