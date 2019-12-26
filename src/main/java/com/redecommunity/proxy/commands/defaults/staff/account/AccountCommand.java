@@ -142,7 +142,7 @@ public class AccountCommand extends CustomCommand {
                 if (server1 == null && server != null
                         || server != null && server1 != null && server.isSimilar(server1)) jsonText.next()
                         .text("\n");
-            }
+            } else if (servers.isEmpty()) servers.add(server);
 
             servers.set(0, server);
         });
