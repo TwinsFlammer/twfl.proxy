@@ -113,10 +113,10 @@ public class AccountCommand extends CustomCommand {
                 .text("  Discord: §7")
                 .next();
 
-        if (user.hasGroup("manager") && user1.getDiscordId() == null) {
+        if (user.hasGroup("manager") && user1.getDiscordId() == 0) {
             jsonText.text("Indisponível");
-        } else if (user1.getDiscordId() != null) {
-            jsonText.text("[Clique para copiar]")
+        } else if (user1.getDiscordId() != 0) {
+            jsonText.text("§8[Clique para copiar]")
                     .clickSuggest(user1.getDiscordId().toString());
         } else if (!user.hasGroup("manager")) jsonText.text("§cSem permissão");
 
