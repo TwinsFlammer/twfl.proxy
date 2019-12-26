@@ -88,6 +88,8 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("§eInformações avançadas:")
                 .next()
+                .text("\n\n")
+                .next()
                 .text("  Endereço conectado: §7" + (user1.isOnline() ? user1.getConnectedAddress() : "Indisponível"))
                 .next()
                 .text("\n")
@@ -103,6 +105,8 @@ public class AccountCommand extends CustomCommand {
                 .text("\n\n")
                 .next()
                 .text("  E-mail: §7" + (user1.getEmail() == null ? "Indisponível" : user1.getEmail()))
+                .next()
+                .text("\n")
                 .next()
                 .text("  Discord: §7")
                 .next();
@@ -130,13 +134,17 @@ public class AccountCommand extends CustomCommand {
                     .next()
                     .text(": §7")
                     .next()
-                    .text(group1.getColor() + group1.getName());
+                    .text(group1.getColor() + group1.getName())
+                    .next()
+                    .text("\n");
         });
 
         jsonText.next()
                 .text("\n\n")
                 .next()
                 .text("§eConexão:")
+                .next()
+                .text("\n")
                 .next()
                 .text("  Conectado: " + (user1.isOnline() ? "§aSim" : "§cNão"))
                 .next()
