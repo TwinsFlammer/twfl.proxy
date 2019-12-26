@@ -86,7 +86,7 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n")
                 .next()
-                .text("  Punido: §c~/~")
+                .text("  Punido: §c--/--")
                 .next()
                 .text("\n\n")
                 .next()
@@ -149,12 +149,15 @@ public class AccountCommand extends CustomCommand {
 
                                 jsonText.text(group1.getColor() + group1.getName())
                                         .next()
-                                        .text((i+1 == groups.size() ? "" : ", "))
+                                        .text((i + 1 == groups.size() ? "" : ", "))
                                         .next();
                             });
 
                     jsonText.text("\n");
                 });
+
+        if (user.getGroups().isEmpty()) jsonText.next()
+                .text("  --/--");
 
         jsonText.next()
                 .text("\n")
