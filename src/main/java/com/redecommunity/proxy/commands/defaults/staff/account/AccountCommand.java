@@ -12,6 +12,7 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -134,7 +135,8 @@ public class AccountCommand extends CustomCommand {
             Server server = servers.get(i);
 
             if (i == 0) jsonText.next()
-                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "));
+                    .text("  " + (server == null ? "Rede: " : server.getDisplayName() + ": "))
+                    .next();
             else jsonText.next()
                     .text("§f, ")
                     .next();
