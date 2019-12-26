@@ -21,6 +21,8 @@ public class BroadcastJedisMessageListener implements JedisMessageListener {
     public void onMessage(JedisMessageEvent event) {
         String message = event.getMessage();
 
+        System.out.println(message);
+
         JSONObject jsonObject = (JSONObject) JSONValue.parse(message);
 
         Integer groupId = ((Long) jsonObject.get("group_id")).intValue();
