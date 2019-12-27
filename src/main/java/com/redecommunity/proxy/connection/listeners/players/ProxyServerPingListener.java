@@ -20,12 +20,12 @@ public class ProxyServerPingListener implements Listener {
 
         players.setOnline(Proxy.getUsers().size());
 
-        event.setResponse(serverPing);
-
         Motd motd = MotdManager.getCurrentMotd();
 
         if (motd == null) return;
 
         serverPing.setDescription(motd.getLine1() + "\n" + motd.getLine2());
+
+        event.setResponse(serverPing);
     }
 }
