@@ -12,6 +12,7 @@ import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMess
 import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
+import com.redecommunity.proxy.shortener.manager.ShortedURLManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
 
@@ -124,5 +125,6 @@ class DataManager {
         new DirectMessageManager();
         new TabListManager();
         new MotdManager();
+        new ShortedURLManager();
     }
 }
