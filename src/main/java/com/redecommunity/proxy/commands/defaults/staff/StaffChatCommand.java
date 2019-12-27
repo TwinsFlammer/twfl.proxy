@@ -33,21 +33,16 @@ public class StaffChatCommand extends CustomCommand {
 
         String message = Helper.toMessage(args);
 
-        JSONText jsonText = new JSONText();
-
-        String format = String.format(
+        String broadcastMessage = String.format(
                 language.getMessage("staff_chat.format"),
                 user.getServer().getDisplayName(),
                 user.getPrefix() + user.getDisplayName(),
                 message
         );
 
-        jsonText.text(format)
-                .next();
-
-        Proxy.getInstance().broadcastMessage(
+        Proxy.broadcastMessage(
                 this.getGroup(),
-                jsonText
+                broadcastMessage
         );
     }
 }
