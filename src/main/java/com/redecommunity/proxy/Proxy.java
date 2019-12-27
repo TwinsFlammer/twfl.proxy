@@ -1,9 +1,6 @@
 package com.redecommunity.proxy;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
-import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -18,10 +15,8 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import org.json.simple.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
@@ -86,26 +81,11 @@ public class Proxy extends CommunityPlugin {
         }
     }
 
-    public static void broadcastMessage(Group group, JSONText jsonText) {
+    public static void broadcastMessage(Group group, String message) {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("group_id", group.getId());
-
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-
-            objectOutputStream.writeObject(jsonText);
-
-            objectOutputStream.close();
-
-            byte[] bytes = byteArrayOutputStream.toByteArray();
-
-            jsonObject.put("message", bytes);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+        jsonObject.put("message", message);
 
         Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
                 .forEach(redis -> redis.sendMessage(
