@@ -8,6 +8,8 @@ import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.account.manager.AttemptManager;
+import com.redecommunity.proxy.account.manager.PasswordManager;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
@@ -126,5 +128,7 @@ class DataManager {
         new TabListManager();
         new MotdManager();
         new ShortedURLManager();
+        new AttemptManager();
+        new PasswordManager();
     }
 }
