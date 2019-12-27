@@ -9,6 +9,7 @@ import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListe
 import com.redecommunity.common.shared.util.ClassGetter;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
+import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import net.md_5.bungee.api.ProxyServer;
@@ -122,5 +123,6 @@ class DataManager {
         new ProxyServerManager();
         new DirectMessageManager();
         new TabListManager();
+        new MotdManager();
     }
 }
