@@ -43,7 +43,7 @@ public class ShortCommand extends CustomCommand {
 
         String name = args.length == 2 ? args[1] : Helper.generateString(8);
 
-        if (args.length == 2) {
+        if (args.length == 2 && !user.hasGroup("manager")) {
             user.sendMessage(
                     language.getMessage("shortener.too_many_arguments")
             );
