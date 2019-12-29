@@ -1,6 +1,5 @@
 package com.redecommunity.proxy.commands.defaults.staff.account;
 
-import com.google.common.collect.Lists;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
@@ -9,10 +8,11 @@ import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
-import com.redecommunity.common.shared.server.data.Server;
+import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangeDiscordIdCommand;
+import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangeEmailCommand;
+import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangePasswordCommand;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,6 +23,12 @@ import java.util.stream.IntStream;
 public class AccountCommand extends CustomCommand {
     public AccountCommand() {
         super("account", CommandRestriction.ALL, "helper");
+
+        this.addArgument(
+                new AccountChangeDiscordIdCommand(),
+                new AccountChangeEmailCommand(),
+                new AccountChangePasswordCommand()
+        );
     }
 
     @Override
