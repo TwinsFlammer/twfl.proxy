@@ -47,6 +47,7 @@ public class SendCommand extends CustomCommand {
             user.sendMessage(
                     language.getMessage("messages.player.player_offline")
             );
+            return;
         }
 
         Server server = ServerManager.getServer(serverName);
