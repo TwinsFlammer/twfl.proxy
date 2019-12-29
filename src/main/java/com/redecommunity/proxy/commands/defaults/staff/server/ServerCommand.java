@@ -16,7 +16,7 @@ public class ServerCommand extends CustomCommand {
     public ServerCommand() {
         super(ServerCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "helper");
 
-        this.setArgument(
+        this.addArgument(
                 new ServerConnectCommand()
         );
     }
