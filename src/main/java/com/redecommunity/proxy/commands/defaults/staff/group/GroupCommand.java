@@ -16,10 +16,8 @@ public class GroupCommand extends CustomCommand {
     public GroupCommand() {
         super(GroupCommand.COMMAND_NAME, CommandRestriction.ALL, "Manager");
 
-        this.setArgument(
-                new GroupAddCommand()
-        );
-        this.setArgument(
+        this.addArgument(
+                new GroupAddCommand(),
                 new GroupRemoveCommand()
         );
     }
