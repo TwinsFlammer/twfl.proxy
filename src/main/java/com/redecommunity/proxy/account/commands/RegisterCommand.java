@@ -71,7 +71,7 @@ public class RegisterCommand extends CustomCommand {
 
         userDao.update(
                 keys,
-                "user_id",
+                "id",
                 user.getId()
         );
 
