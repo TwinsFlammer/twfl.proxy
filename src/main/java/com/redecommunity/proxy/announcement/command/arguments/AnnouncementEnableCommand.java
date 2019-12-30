@@ -68,5 +68,12 @@ public class AnnouncementEnableCommand extends CustomArgumentCommand {
                 "id",
                 id
         );
+
+        user.sendMessage(
+                String.format(
+                        language.getMessage("announcement"),
+                        user.getId()
+                )
+        );
     }
 }
