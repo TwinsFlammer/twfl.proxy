@@ -46,7 +46,7 @@ public class IgnoreListCommand extends CustomArgumentCommand {
 
         Integer pages = (int) Math.ceil(pagesNumber);
 
-        if (page < 1 || page > pages) {
+        if (page < 1 || page > pages + 1) {
             user.sendMessage(
                     language.getMessage("ignore.invalid_page")
             );
