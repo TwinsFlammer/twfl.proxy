@@ -11,7 +11,7 @@ import com.redecommunity.proxy.commands.defaults.players.friend.FriendCommand;
  */
 public class FriendRejectCommand extends CustomArgumentCommand {
     public FriendRejectCommand() {
-        super(0, "cancelar");
+        super(0, "rejeitar");
     }
 
     @Override
