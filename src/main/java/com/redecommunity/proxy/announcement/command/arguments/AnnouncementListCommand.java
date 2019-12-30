@@ -45,6 +45,11 @@ public class AnnouncementListCommand extends CustomArgumentCommand {
                     .next();
         });
 
+        if (AnnouncementManager.getAnnouncements().isEmpty()) {
+            jsonText.text("  §cNão há anúncios cadastrados")
+                    .next();
+        }
+
         jsonText.text("\n")
                 .next()
                 .send(user);
