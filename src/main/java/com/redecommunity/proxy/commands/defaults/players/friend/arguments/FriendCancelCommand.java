@@ -41,14 +41,22 @@ public class FriendCancelCommand extends CustomArgumentCommand {
         }
 
         if (!user.isFriend(user1)) {
-
+            user.sendMessage(
+                    String.format(
+                            language.getMessage("friends.not_invited_friend_to_user"),
+                            user1.getDisplayName()
+                    )
+            );
             return;
         }
 
         user.removeFriend(user1);
 
         user.sendMessage(
-                language.getMessage("friends.request_cancelled")
+                String.format(
+                        language.getMessage("friends.request_cancelled"),
+                        user1.getDisplayName()
+                )
         );
     }
 }
