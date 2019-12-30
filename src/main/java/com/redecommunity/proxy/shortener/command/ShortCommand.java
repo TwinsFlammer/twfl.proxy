@@ -5,6 +5,8 @@ import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
+import com.redecommunity.proxy.shortener.command.arguments.ShortDisableCommand;
+import com.redecommunity.proxy.shortener.command.arguments.ShortEnableCommand;
 import com.redecommunity.proxy.shortener.data.ShortedURL;
 
 /**
@@ -15,6 +17,11 @@ public class ShortCommand extends CustomCommand {
 
     public ShortCommand() {
         super(ShortCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "helper");
+
+        this.addArgument(
+                new ShortDisableCommand(),
+                new ShortEnableCommand()
+        );
     }
 
     @Override
