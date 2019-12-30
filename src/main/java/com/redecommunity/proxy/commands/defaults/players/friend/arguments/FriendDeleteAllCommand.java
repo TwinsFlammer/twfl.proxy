@@ -36,6 +36,8 @@ public class FriendDeleteAllCommand extends CustomArgumentCommand {
                 user.getId()
         );
 
+        user.getFriends().clear();
+
         user.sendMessage(
                 language.getMessage("friends.deleted_list")
         );
