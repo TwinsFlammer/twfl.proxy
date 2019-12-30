@@ -78,6 +78,8 @@ public class LoginCommand extends CustomCommand {
         user.sendMessage(
                 language.getMessage("authentication.successfully_logged")
         );
+
+        LoginCommand.sendUserToLobby(user);
     }
 
     public static void sendUserToLobby(User user) {
