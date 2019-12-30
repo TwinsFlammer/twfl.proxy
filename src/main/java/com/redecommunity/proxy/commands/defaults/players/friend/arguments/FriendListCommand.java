@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class FriendListCommand extends CustomArgumentCommand {
     public FriendListCommand() {
-        super(0, "cancelar");
+        super(0, "listar");
     }
 
     @Override
