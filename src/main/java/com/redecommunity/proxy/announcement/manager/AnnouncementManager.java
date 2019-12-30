@@ -71,6 +71,10 @@ public class AnnouncementManager {
         );
     }
 
+    public static List<Announcement> getAnnouncements() {
+        return AnnouncementManager.announcements;
+    }
+
     public static Announcement getAnnouncement(Integer id) {
         return AnnouncementManager.announcements
                 .stream()
