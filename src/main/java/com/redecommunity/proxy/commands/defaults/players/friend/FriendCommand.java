@@ -10,7 +10,7 @@ import com.redecommunity.proxy.commands.defaults.players.friend.arguments.*;
  * Created by @SrGutyerrez
  */
 public class FriendCommand extends CustomCommand {
-    public static final String COMMAND_NAME = "friend";
+    public static final String COMMAND_NAME = "amigo";
 
     public FriendCommand() {
         super(FriendCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "default");
