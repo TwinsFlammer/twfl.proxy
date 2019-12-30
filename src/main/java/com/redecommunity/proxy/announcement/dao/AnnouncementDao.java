@@ -37,7 +37,8 @@ public class AnnouncementDao extends Table {
                                 "`message` VARCHAR(255) NOT NULL," +
                                 "`url` VARCHAR(255)," +
                                 "`active` BOOLEAN NOT NULL" +
-                                ");"
+                                ");",
+                        this.getTableName()
                 )
         );
     }
