@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class IgnoreListCommand extends CustomArgumentCommand {
     public IgnoreListCommand() {
-        super(0, "cancelar");
+        super(0, "listar");
     }
 
     @Override
