@@ -43,7 +43,7 @@ public class LoginCommand extends CustomCommand {
 
         String hashedPassword = Helper.hash(password);
 
-        if (!password.equals(hashedPassword)) {
+        if (!Helper.hash(password).equals(hashedPassword)) {
             Integer passwordAttempts = AttemptManager.getPasswordAttempt(user);
 
             if (passwordAttempts == null) passwordAttempts = 4;
