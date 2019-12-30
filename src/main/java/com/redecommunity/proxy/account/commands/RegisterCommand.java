@@ -27,7 +27,7 @@ public class RegisterCommand extends CustomCommand {
                     String.format(
                             language.getMessage("messages.default_commands.invalid_usage"),
                             this.getName(),
-                            "<e-mail> <senha>"
+                            "<senha> <e-mail>"
                     )
             );
             return;
