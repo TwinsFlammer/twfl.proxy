@@ -11,8 +11,10 @@ import com.redecommunity.proxy.commands.defaults.players.ignore.arguments.Ignore
  * Created by @SrGutyerrez
  */
 public class IgnoreCommand extends CustomCommand {
+    public static final String COMMAND_NAME = "ignorar";
+
     public IgnoreCommand() {
-        super("ignorar", CommandRestriction.IN_GAME, "default");
+        super(IgnoreCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "default");
 
         this.addArgument(
                 new IgnoreAddCommand(),
