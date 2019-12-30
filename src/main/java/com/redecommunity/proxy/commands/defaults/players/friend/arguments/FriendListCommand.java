@@ -46,6 +46,9 @@ public class FriendListCommand extends CustomArgumentCommand {
 
         Integer pages = (int) Math.ceil(pagesNumber);
 
+        user.sendMessage(pages.toString());
+        user.sendMessage(page.toString());
+
         if (page < 1 || page > pages) {
             user.sendMessage(
                     language.getMessage("friends.invalid_page")
