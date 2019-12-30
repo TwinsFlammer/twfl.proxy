@@ -32,7 +32,7 @@ public class FriendCommand extends CustomCommand {
         Language language = user.getLanguage();
 
         user.sendMessage(
-                language.getMessage("friend.usage")
+                language.getMessage("friends.usage")
         );
     }
 }
