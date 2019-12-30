@@ -33,7 +33,7 @@ public class PasswordDao extends Table {
                                 "(" +
                                 "`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT," +
                                 "`user_id` INTEGER NOT NULL," +
-                                "`password` VARCHAR(255) NO NULL," +
+                                "`password` VARCHAR(255) NOT NULL," +
                                 "`time` LONG NOT NULL" +
                                 ");",
                         this.getTableName()
