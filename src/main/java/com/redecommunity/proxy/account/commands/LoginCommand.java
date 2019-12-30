@@ -55,6 +55,14 @@ public class LoginCommand extends CustomCommand {
                     passwordAttempts
             );
 
+            if (passwordAttempts <= 0) {
+                user.kick(
+                        language.getMessage("authentication.max_password_attempts_reached")
+                );
+                AttemptManager.getAttempts().remove(user.getId());
+                return;
+            }
+
             user.sendMessage(
                     String.format(
                             language.getMessage("authentication.invalid_password"),
