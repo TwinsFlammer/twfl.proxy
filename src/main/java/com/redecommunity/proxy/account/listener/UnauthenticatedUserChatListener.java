@@ -35,7 +35,7 @@ public class UnauthenticatedUserChatListener implements Listener {
         if (event.isCommand()) {
             String command = message.contains(" ") ? message.split(" ")[0] : message;
 
-            if (!Arrays.asList(this.allowedCommands).contains(command)) event.setCancelled(true);
+            if (!Arrays.asList(this.allowedCommands).contains(command.substring(1))) event.setCancelled(true);
         } else event.setCancelled(true);
 
         if (event.isCancelled())
