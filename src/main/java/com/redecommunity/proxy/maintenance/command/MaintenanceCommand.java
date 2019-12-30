@@ -67,6 +67,7 @@ public class MaintenanceCommand extends CustomCommand {
         user.sendMessage(
                 String.format(
                         language.getMessage("maintenance.server_status_changed"),
+                        server.getDisplayName(),
                         switchMode ? "ativada" : "desativada"
                 )
         );
