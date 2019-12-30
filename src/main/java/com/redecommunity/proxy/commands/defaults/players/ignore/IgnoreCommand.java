@@ -2,6 +2,7 @@ package com.redecommunity.proxy.commands.defaults.players.ignore;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.proxy.commands.defaults.players.ignore.arguments.IgnoreAddCommand;
 import com.redecommunity.proxy.commands.defaults.players.ignore.arguments.IgnoreListCommand;
@@ -25,6 +26,10 @@ public class IgnoreCommand extends CustomCommand {
 
     @Override
     public void onCommand(User user, String[] strings) {
+        Language language = user.getLanguage();
 
+        user.sendMessage(
+                language.getMessage("ignore.usage")
+        );
     }
 }
