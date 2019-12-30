@@ -35,7 +35,8 @@ public class PasswordDao extends Table {
                                 "`user_id` INTEGER NOT NULL," +
                                 "`password` VARCHAR(255) NO NULL," +
                                 "`time` LONG NOT NULL" +
-                                ");"
+                                ");",
+                        this.getTableName()
                 )
         );
     }
