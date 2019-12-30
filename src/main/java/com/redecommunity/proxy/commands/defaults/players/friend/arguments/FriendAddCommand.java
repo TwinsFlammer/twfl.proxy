@@ -40,11 +40,40 @@ public class FriendAddCommand extends CustomArgumentCommand {
             return;
         }
 
-        if (!user1.isOnline()) {
+        if (user.isFriend(user1) && user1.isFriend(user)) {
             user.sendMessage(
-                    language.getMessage("messages.player.player_offline")
+                    language.getMessage("friends.already_friend")
             );
             return;
         }
+
+        if (user.isFriend(user1) && !user1.isFriend(user)) {
+            user.sendMessage(
+                    language.getMessage("friends.already_have_invited_friend")
+            );
+            return;
+        }
+
+        if (user1.isFriend(user) && !user.isFriend(user1)) {
+            user.sendMessage(
+                    language.getMessage("friends.already_have_an_friend_request")
+            );
+            return;
+        }
+
+        user.addFriend(user1);
+
+        user.sendMessage(
+                String.format(
+                        language.getMessage("friends.friend_request_send"),
+                        user1.getDisplayName()
+                )
+        );
+        user1.sendMessage(
+                String.format(
+                        language.getMessage("friends.friend_request_received"),
+                        user.getDisplayName()
+                )
+        );
     }
 }
