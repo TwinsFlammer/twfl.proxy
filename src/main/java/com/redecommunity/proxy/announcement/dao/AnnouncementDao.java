@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -43,6 +44,27 @@ public class AnnouncementDao extends Table {
         );
     }
 
+    public <K, V, U, I extends Integer> void update(HashMap<K, V> keys, U key, I value) {
+        String where = this.generateWhere(keys);
+
+        String query = String.format(
+                "UPDATE %s SET %s WHERE `%s`=%d",
+                this.getTableName(),
+                where,
+                key,
+                value
+        );
+
+        try (
+                Connection connection = this.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
     @Override
     public <T> Set<T> findAll() {
         String query = String.format(
@@ -56,7 +78,7 @@ public class AnnouncementDao extends Table {
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                ) {
+        ) {
             while (resultSet.next()) {
                 Announcement announcement = AnnouncementManager.toAnnouncement(resultSet);
 
