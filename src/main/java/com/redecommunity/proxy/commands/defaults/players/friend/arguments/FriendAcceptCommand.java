@@ -69,7 +69,7 @@ public class FriendAcceptCommand extends CustomArgumentCommand {
         );
         user1.sendMessage(
                 String.format(
-                        language.getMessage("friends.friend_request_accepted"),
+                        language.getMessage("friends.accepted"),
                         user.getDisplayName()
                 )
         );
