@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.account.listener;
 
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -25,6 +26,7 @@ public class UnauthenticatedUserChatListener implements Listener {
         ProxiedPlayer proxiedPlayer = (ProxiedPlayer) event.getSender();
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
+        Language language = user.getLanguage();
 
         if (user.isLogged()) return;
 
@@ -33,7 +35,12 @@ public class UnauthenticatedUserChatListener implements Listener {
         if (event.isCommand()) {
             String command = message.contains(" ") ? message.split(" ")[0] : message;
 
-            if (!Arrays.asList(this.allowedCommands).contains(message.substring(1))) event.setCancelled(true);
+            if (!Arrays.asList(this.allowedCommands).contains(command)) event.setCancelled(true);
         } else event.setCancelled(true);
+
+        if (event.isCancelled())
+            user.sendMessage(
+                    language.getMessage("authentication.chat_not_allowed_unauthenticated")
+            );
     }
 }
