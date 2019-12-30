@@ -12,7 +12,7 @@ import com.redecommunity.proxy.announcement.command.arguments.AnnouncementListCo
  * Created by @SrGutyerrez
  */
 public class AnnouncementCommand extends CustomCommand {
-    public static final String COMMAND_NAME = "anuncio";
+    public static final String COMMAND_NAME = "anúncio";
 
     public AnnouncementCommand() {
         super(AnnouncementCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "manager");
