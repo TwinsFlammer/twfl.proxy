@@ -15,7 +15,7 @@ import java.util.List;
 public class TabListManager {
     private static List<TabList> tabLists = Lists.newArrayList();
 
-    public static TabList getCurrentTablist(User user) {
+    public static TabList getCurrentTabList(User user) {
         return TabListManager.tabLists
                 .stream()
                 .filter(TabList::isActive)
@@ -24,14 +24,14 @@ public class TabListManager {
                 .orElse(null);
     }
 
-    public static TabList getStaffTalist(User user) {
+    public static TabList getStaffTaList(User user) {
         return TabListManager.tabLists
                 .stream()
                 .filter(TabList::isActive)
                 .filter(tabList -> tabList.getGroup().getPriority() > 80)
                 .min((tabList1, tabList2) -> tabList2.getTime().compareTo(tabList1.getTime()))
                 .orElse(
-                        TabListManager.getCurrentTablist(user)
+                        TabListManager.getCurrentTabList(user)
                 );
     }
 
