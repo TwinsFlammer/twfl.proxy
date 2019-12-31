@@ -12,6 +12,7 @@ import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.util.Messages;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
@@ -90,11 +91,13 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         if (tabList != null)
             proxiedPlayer.setTabHeader(
-                    new TextComponent(tabList.getHeader()),
-                    new TextComponent(tabList.getFooter())
+                    new BaseComponent[]{
+                            new TextComponent(tabList.getHeader())
+                    },
+                    new BaseComponent[]{
+                            new TextComponent(tabList.getFooter())
+                    }
             );
-
-
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
