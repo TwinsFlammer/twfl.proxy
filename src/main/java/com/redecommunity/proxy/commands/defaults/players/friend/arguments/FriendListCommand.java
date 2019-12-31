@@ -58,7 +58,8 @@ public class FriendListCommand extends CustomArgumentCommand {
                 .next()
                 .text("§eLista de amigos - " + page + "/" + pages)
                 .next()
-                .text("\n\n");
+                .text("\n\n")
+                .next();
 
         if (users.size() < perPage) {
             users.forEach(user1 -> {
