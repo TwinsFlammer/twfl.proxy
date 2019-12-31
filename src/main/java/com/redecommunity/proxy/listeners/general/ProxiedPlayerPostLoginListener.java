@@ -87,7 +87,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         proxyServerDao.update(proxyServer);
 
-        TabList tabList = user.hasGroup("manager") ? TabListManager.getStaffTaList(user) : TabListManager.getCurrentTabList(user);
+        TabList tabList = user.hasGroup("manager") ? TabListManager.getStaffTabList(user) : TabListManager.getCurrentTabList(user);
 
         if (tabList != null)
             proxiedPlayer.setTabHeader(
