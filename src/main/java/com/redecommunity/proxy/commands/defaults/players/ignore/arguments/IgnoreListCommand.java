@@ -58,7 +58,8 @@ public class IgnoreListCommand extends CustomArgumentCommand {
                 .next()
                 .text("§eLista de usuários ignorados - " + page + "/" + pages)
                 .next()
-                .text("\n\n");
+                .text("\n\n")
+                .next();
 
         if (users.size() < perPage) {
             users.forEach(user1 -> {
