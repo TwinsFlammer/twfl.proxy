@@ -40,7 +40,7 @@ public class ProxyServer {
 
         JSONArray players = new JSONArray();
 
-        players.addAll(this.users);
+        this.users.forEach(user -> players.add(user.getId()));
 
         object.put("users", players);
         object.put("name", this.name);
