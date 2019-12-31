@@ -42,6 +42,8 @@ public class ProxyServerDao {
             playersId.forEach(o -> {
                 User user = (User) o;
 
+                System.out.println(user.toString());
+
                 users.add(user);
             });
 
