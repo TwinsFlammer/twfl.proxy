@@ -54,6 +54,8 @@ public class FriendRejectCommand extends CustomArgumentCommand {
             return;
         }
 
+        user1.removeFriend(user);
+
         user.sendMessage(
                 String.format(
                         language.getMessage("friends.rejected"),
