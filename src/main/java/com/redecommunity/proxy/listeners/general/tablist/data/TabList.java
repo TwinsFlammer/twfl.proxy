@@ -34,10 +34,10 @@ public class TabList {
         return StringUtils.replaceEach(
                 Helper.colorize(this.header),
                 new String[]{
-
+                        "<nl>"
                 },
                 new String[]{
-
+                        "\n"
                 }
         );
     }
@@ -49,13 +49,15 @@ public class TabList {
                         "{proxy_count}",
                         "{proxy_count_player}",
                         "{proxy_count_online}",
-                        "{proxy_count_players}"
+                        "{proxy_count_players}",
+                        "<nl>"
                 },
                 new String[] {
                         String.valueOf(ProxyServerManager.getProxyCount()),
                         String.valueOf(ProxyServerManager.getCurrentProxyPlayerCount()),
                         String.valueOf(ProxyServerManager.getProxyCountOnline()),
-                        String.valueOf(ProxyServerManager.getUsers().size())
+                        String.valueOf(ProxyServerManager.getUsers().size()),
+                        "\n"
                 }
         );
     }
