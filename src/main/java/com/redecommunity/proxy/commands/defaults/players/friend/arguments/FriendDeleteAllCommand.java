@@ -4,6 +4,7 @@ import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.common.shared.friend.database.FriendDatabase;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.commands.defaults.players.friend.FriendCommand;
 
 /**
@@ -35,6 +36,12 @@ public class FriendDeleteAllCommand extends CustomArgumentCommand {
                 "user_id",
                 user.getId()
         );
+
+        user.getFriends().forEach(userId -> {
+            User user1 = UserManager.getUser(userId);
+
+            user1.removeFriend(user);
+        });
 
         user.getFriends().clear();
 
