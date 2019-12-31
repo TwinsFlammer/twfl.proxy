@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.proxy.account.manager.AttemptManager;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
@@ -45,5 +46,7 @@ public class ProxiedPlayerDisconnectListener implements Listener {
         proxyServerDao.update(proxyServer);
 
         user.setOffline();
+
+        AttemptManager.getAttempts().remove(user.getId());
     }
 }
