@@ -61,6 +61,8 @@ public class FriendAcceptCommand extends CustomArgumentCommand {
             return;
         }
 
+        user.addFriend(user1);
+
         user.sendMessage(
                 String.format(
                         language.getMessage("friends.accepted"),
