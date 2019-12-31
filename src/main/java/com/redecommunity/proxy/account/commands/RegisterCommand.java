@@ -79,6 +79,8 @@ public class RegisterCommand extends CustomCommand {
                 language.getMessage("authentication.successfully_registered")
         );
 
+        user.setLogged(true);
+
         LoginCommand.sendUserToLobby(user);
     }
 }
