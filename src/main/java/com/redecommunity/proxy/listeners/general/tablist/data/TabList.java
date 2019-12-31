@@ -1,9 +1,13 @@
 package com.redecommunity.proxy.listeners.general.tablist.data;
 
 import com.redecommunity.common.shared.permissions.group.data.Group;
+import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.connection.data.ProxyServer;
+import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by @SrGutyerrez
@@ -12,7 +16,7 @@ import lombok.Setter;
 public class TabList {
     @Getter
     private final Integer id;
-    @Getter
+
     private final String header, footer;
     @Getter
     private final Group group;
@@ -23,5 +27,35 @@ public class TabList {
 
     public Boolean isActive() {
         return this.active;
+    }
+
+    public String getHeader() {
+        return StringUtils.replaceEach(
+                this.header,
+                new String[]{
+
+                },
+                new String[]{
+
+                }
+        );
+    }
+
+    public String getFooter() {
+        return StringUtils.replaceEach(
+                this.header,
+                new String[] {
+                        "{proxy_count}",
+                        "{proxy_count_player}",
+                        "{proxy_count_online}",
+                        "{proxy_count_players}"
+                },
+                new String[] {
+                        String.valueOf(ProxyServerManager.getProxyCount()),
+                        String.valueOf(ProxyServerManager.getCurrentProxyPlayerCount()),
+                        String.valueOf(ProxyServerManager.getProxyCountOnline()),
+                        String.valueOf(ProxyServerManager.getUsers().size())
+                }
+        );
     }
 }
