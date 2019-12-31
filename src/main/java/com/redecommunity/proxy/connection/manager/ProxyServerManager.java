@@ -40,6 +40,21 @@ public class ProxyServerManager {
         );
     }
 
+    public static Integer getProxyCount() {
+        return ProxyServerManager.proxies.size();
+    }
+
+    public static Integer getProxyCountOnline() {
+        return (int) ProxyServerManager.proxies
+                .stream()
+                .filter(ProxyServer::isOnline)
+                .count();
+    }
+
+    public static Integer getCurrentProxyPlayerCount() {
+        return ProxyServerManager.getCurrentProxy().getPlayerCount();
+    }
+
     public static void setOffline() {
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
