@@ -1,6 +1,7 @@
 package com.redecommunity.proxy.listeners.general.tablist.data;
 
 import com.redecommunity.common.shared.permissions.group.data.Group;
+import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
@@ -31,7 +32,7 @@ public class TabList {
 
     public String getHeader() {
         return StringUtils.replaceEach(
-                this.header,
+                Helper.colorize(this.header),
                 new String[]{
 
                 },
@@ -43,7 +44,7 @@ public class TabList {
 
     public String getFooter() {
         return StringUtils.replaceEach(
-                this.header,
+                Helper.colorize(this.footer),
                 new String[] {
                         "{proxy_count}",
                         "{proxy_count_player}",
