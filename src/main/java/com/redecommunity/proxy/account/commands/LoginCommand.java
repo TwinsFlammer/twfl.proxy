@@ -39,6 +39,13 @@ public class LoginCommand extends CustomCommand {
             return;
         }
 
+        if (user.isLogged()) {
+            user.sendMessage(
+                    language.getMessage("authentication.already_logged_in")
+            );
+            return;
+        }
+
         String password = args[0];
 
         String hashedPassword = Helper.hash(password);
