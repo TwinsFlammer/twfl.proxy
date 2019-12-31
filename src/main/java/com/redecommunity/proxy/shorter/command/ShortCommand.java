@@ -1,13 +1,13 @@
-package com.redecommunity.proxy.shortener.command;
+package com.redecommunity.proxy.shorter.command;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
-import com.redecommunity.proxy.shortener.command.arguments.ShortDisableCommand;
-import com.redecommunity.proxy.shortener.command.arguments.ShortEnableCommand;
-import com.redecommunity.proxy.shortener.data.ShortedURL;
+import com.redecommunity.proxy.shorter.command.arguments.ShortDisableCommand;
+import com.redecommunity.proxy.shorter.command.arguments.ShortEnableCommand;
+import com.redecommunity.proxy.shorter.data.ShortedURL;
 
 /**
  * Created by @SrGutyerrez

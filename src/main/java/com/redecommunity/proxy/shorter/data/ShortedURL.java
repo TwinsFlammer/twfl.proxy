@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.shortener.data;
+package com.redecommunity.proxy.shorter.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

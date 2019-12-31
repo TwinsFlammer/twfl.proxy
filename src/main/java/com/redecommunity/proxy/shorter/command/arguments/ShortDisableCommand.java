@@ -1,13 +1,13 @@
-package com.redecommunity.proxy.shortener.command.arguments;
+package com.redecommunity.proxy.shorter.command.arguments;
 
 import com.google.common.collect.Maps;
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.proxy.shortener.command.ShortCommand;
-import com.redecommunity.proxy.shortener.dao.ShortedURLDao;
-import com.redecommunity.proxy.shortener.data.ShortedURL;
-import com.redecommunity.proxy.shortener.manager.ShortedURLManager;
+import com.redecommunity.proxy.shorter.command.ShortCommand;
+import com.redecommunity.proxy.shorter.dao.ShortedURLDao;
+import com.redecommunity.proxy.shorter.data.ShortedURL;
+import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
 
 import java.util.HashMap;
 
