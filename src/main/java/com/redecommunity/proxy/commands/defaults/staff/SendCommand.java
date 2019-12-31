@@ -94,7 +94,7 @@ public class SendCommand extends CustomCommand {
         user.sendMessage(
                 String.format(
                         language.getMessage("messages.default_commands.server.sending_player_to_server"),
-                        user.getDisplayName(),
+                        user1.getDisplayName(),
                         server.getDisplayName()
                 )
         );
