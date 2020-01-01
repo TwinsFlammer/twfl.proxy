@@ -43,8 +43,6 @@ public class ShortCommand extends CustomCommand {
             return;
         }
 
-        System.out.println(args.length);
-
         String link = args[0];
 
         if (!Helper.isURLValid(link)) {
