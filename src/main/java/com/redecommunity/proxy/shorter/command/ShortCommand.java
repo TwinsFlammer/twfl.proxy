@@ -18,7 +18,7 @@ public class ShortCommand extends CustomCommand {
     public static final String COMMAND_NAME = "short";
 
     public ShortCommand() {
-        super(ShortCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "helper");
+        super(ShortCommand.COMMAND_NAME, CommandRestriction.ALL, "helper");
 
         this.addArgument(
                 new ShortDisableCommand(),
@@ -29,8 +29,6 @@ public class ShortCommand extends CustomCommand {
     @Override
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
-
-        System.out.println(args.length);
 
         if (args.length == 0 || args.length > 2) {
             user.sendMessage(
