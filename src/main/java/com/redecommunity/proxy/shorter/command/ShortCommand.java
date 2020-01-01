@@ -28,7 +28,7 @@ public class ShortCommand extends CustomCommand {
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
-        if (args.length != 1 && args.length != 2) {
+        if (args.length == 0 || args.length > 2) {
             user.sendMessage(
                     String.format(
                             language.getMessage("messages.default_commands.invalid_usage"),
