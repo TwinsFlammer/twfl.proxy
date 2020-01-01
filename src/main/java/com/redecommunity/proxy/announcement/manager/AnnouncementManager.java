@@ -34,6 +34,8 @@ public class AnnouncementManager {
 
         Common.getInstance().getScheduler().scheduleWithFixedDelay(
                 () -> {
+                    if (AnnouncementManager.announcements.isEmpty()) return;
+
                     JSONText jsonText = new JSONText();
 
                     jsonText.next()
