@@ -5,6 +5,7 @@ import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 
 /**
@@ -35,6 +36,13 @@ public class DirectMessageCommand extends CustomCommand {
         if (user.isSimilar(user1)) {
             user.sendMessage(
                     language.getMessage("tell.messages.cant_send_to_yourself")
+            );
+            return;
+        }
+
+        if (!user1.isToggle(Preference.PRIVATE_MESSAGE) && !user.hasGroup("manager")) {
+            user.sendMessage(
+                    language.getMessage("tell.messages.target_disabled_private_messages")
             );
             return;
         }
