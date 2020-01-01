@@ -44,7 +44,7 @@ public class ShortedURLDao extends Table {
         );
     }
 
-    public <T extends ShortedURL> void insert(T object) {
+    public <T extends ShortedURL> void insert(T shortedURL) {
         String query = String.format(
                 "INSERT INTO %s " +
                         "(" +
@@ -61,11 +61,13 @@ public class ShortedURLDao extends Table {
                         "%b" +
                         ");",
                 this.getTableName(),
-                object.getUrl(),
-                object.getUserId(),
-                object.getTime(),
-                object.isActive()
+                shortedURL.getUrl(),
+                shortedURL.getUserId(),
+                shortedURL.getTime(),
+                shortedURL.isActive()
         );
+
+        System.out.println(query);
 
         try (
                 Connection connection = this.getConnection();
@@ -73,9 +75,9 @@ public class ShortedURLDao extends Table {
         ) {
             preparedStatement.execute();
 
-            ShortedURL shortedURL = this.findOne("name", object.getName());
+            ShortedURL shortedURL1 = this.findOne("name", shortedURL.getName());
 
-            ShortedURLManager.getShortedURLS().add(shortedURL);
+            ShortedURLManager.getShortedURLS().add(shortedURL1);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
