@@ -50,7 +50,7 @@ public class ShortedURLDao extends Table {
                         "(" +
                         "`link`," +
                         "`name`," +
-                        "`user_id`" +
+                        "`user_id`," +
                         "`time`," +
                         "`active`" +
                         ")" +
@@ -70,7 +70,7 @@ public class ShortedURLDao extends Table {
                 shortedURL.isActive()
         );
 
-        System.out.println(query);
+        System.out.println(">>" + query);
 
         try (
                 Connection connection = this.getConnection();
