@@ -70,8 +70,6 @@ public class ShortedURLDao extends Table {
                 shortedURL.isActive()
         );
 
-        System.out.println(">>" + query);
-
         try (
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
