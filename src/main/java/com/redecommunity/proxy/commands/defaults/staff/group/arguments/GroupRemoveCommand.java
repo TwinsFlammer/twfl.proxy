@@ -130,7 +130,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
                 String.format(
                         language.getMessage("messages.default_commands.invalid_usage"),
                         GroupCommand.COMMAND_NAME,
-                        this.getName() + " <usuário> <grupo> <servidor> <tempo>"
+                        this.getName() + " <usuário> <grupo> <servidor>"
                 )
         );
     }
