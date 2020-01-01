@@ -65,9 +65,7 @@ public class IgnoreListCommand extends CustomArgumentCommand {
             users.forEach(user1 -> {
                 jsonText.text("  ")
                         .next()
-                        .text(user1.getPrefix())
-                        .next()
-                        .text(user1.getDisplayName())
+                        .text(user1.getPrefix() + user1.getDisplayName())
                         .next()
                         .text("\n")
                         .next();
