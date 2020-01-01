@@ -55,7 +55,7 @@ public class ShortedURLDao extends Table {
                         ")" +
                         " VALUES " +
                         "(" +
-                        "%s," +
+                        "'%s'," +
                         "%d," +
                         "%d," +
                         "%b" +
