@@ -7,6 +7,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.shorter.command.arguments.ShortDisableCommand;
 import com.redecommunity.proxy.shorter.command.arguments.ShortEnableCommand;
+import com.redecommunity.proxy.shorter.dao.ShortedURLDao;
 import com.redecommunity.proxy.shorter.data.ShortedURL;
 import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
 
@@ -78,6 +79,9 @@ public class ShortCommand extends CustomCommand {
                 true
         );
 
+        ShortedURLDao shortedURLDao = new ShortedURLDao();
+
+        shortedURLDao.insert(shortedURL);
 
         user.sendMessage(
                 String.format(
