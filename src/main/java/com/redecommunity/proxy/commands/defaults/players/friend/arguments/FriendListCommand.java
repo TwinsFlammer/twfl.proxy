@@ -85,9 +85,7 @@ public class FriendListCommand extends CustomArgumentCommand {
                     .forEach(user1 -> {
                         jsonText.text("  ")
                                 .next()
-                                .text(user1.getPrefix())
-                                .next()
-                                .text(user1.getDisplayName())
+                                .text(user1.getPrefix() + user1.getDisplayName())
                                 .next()
                                 .text("§7 - ")
                                 .next()
