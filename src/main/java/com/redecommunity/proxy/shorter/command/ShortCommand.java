@@ -8,6 +8,7 @@ import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.shorter.command.arguments.ShortDisableCommand;
 import com.redecommunity.proxy.shorter.command.arguments.ShortEnableCommand;
 import com.redecommunity.proxy.shorter.data.ShortedURL;
+import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
 
 /**
  * Created by @SrGutyerrez
@@ -28,6 +29,8 @@ public class ShortCommand extends CustomCommand {
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
+        System.out.println(args.length);
+
         if (args.length == 0 || args.length > 2) {
             user.sendMessage(
                     String.format(
@@ -38,6 +41,8 @@ public class ShortCommand extends CustomCommand {
             );
             return;
         }
+
+        System.out.println(args.length);
 
         String link = args[0];
 
@@ -53,6 +58,13 @@ public class ShortCommand extends CustomCommand {
         if (args.length == 2 && !user.hasGroup("manager")) {
             user.sendMessage(
                     language.getMessage("shortener.too_many_arguments")
+            );
+            return;
+        }
+
+        if (ShortedURLManager.getShortedURL(name) != null) {
+            user.sendMessage(
+                    language.getMessage("shortener.already_shorted_with_this_name")
             );
             return;
         }
