@@ -49,6 +49,7 @@ public class ShortedURLDao extends Table {
                 "INSERT INTO %s " +
                         "(" +
                         "`link`," +
+                        "`name`," +
                         "`user_id`" +
                         "`time`," +
                         "`active`" +
@@ -56,12 +57,14 @@ public class ShortedURLDao extends Table {
                         " VALUES " +
                         "(" +
                         "'%s'," +
+                        "'%s'," +
                         "%d," +
                         "%d," +
                         "%b" +
                         ");",
                 this.getTableName(),
                 shortedURL.getUrl(),
+                shortedURL.getName(),
                 shortedURL.getUserId(),
                 shortedURL.getTime(),
                 shortedURL.isActive()
