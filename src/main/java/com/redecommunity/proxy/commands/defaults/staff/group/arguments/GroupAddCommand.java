@@ -108,7 +108,7 @@ public class GroupAddCommand extends CustomArgumentCommand {
                 userGroup
         );
 
-        if (user.isOnline()) user.getGroups().add(userGroup);
+        if (user1.isOnline()) user1.getGroups().add(userGroup);
     }
 
     private void sendUsage(Language language, User user) {
