@@ -110,6 +110,7 @@ public class GroupRemoveCommand extends CustomArgumentCommand {
             return;
         }
 
+        if (user1.isOnline()) user1.getGroups().remove(userGroup);
 
         userGroupDao.delete(
                 user1,
