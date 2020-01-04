@@ -2,7 +2,6 @@ package com.redecommunity.proxy.commands.defaults.staff;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
-import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
@@ -42,7 +41,7 @@ public class StaffChatCommand extends CustomCommand {
 
         Proxy.broadcastMessage(
                 this.getGroup(),
-                broadcastMessage
+                Helper.colorize(broadcastMessage)
         );
     }
 }
