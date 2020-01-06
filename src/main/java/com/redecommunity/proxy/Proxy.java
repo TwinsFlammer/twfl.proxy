@@ -4,6 +4,7 @@ import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.util.Constants;
@@ -13,12 +14,14 @@ import com.redecommunity.proxy.manager.StartManager;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -82,10 +85,20 @@ public class Proxy extends CommunityPlugin {
     }
 
     public static void broadcastMessage(Group group, String message) {
+        Proxy.broadcastMessage(group, message, new Preference[] {});
+    }
+
+    public static void broadcastMessage(Group group, String message, Preference... preferences) {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("group_id", group.getId());
         jsonObject.put("message", message);
+
+        JSONArray jsonArray = new JSONArray();
+
+        Arrays.stream(preferences).forEach(preference -> jsonArray.add(preference.toString()));
+
+        jsonObject.put("preferences", jsonArray);
 
         Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
                 .forEach(redis -> redis.sendMessage(
