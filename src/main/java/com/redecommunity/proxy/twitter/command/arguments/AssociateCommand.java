@@ -57,7 +57,7 @@ public class AssociateCommand extends CustomArgumentCommand {
                         .next()
                         .text("§r")
                         .next()
-                        .text("§e para abrir o link em seu navegador padrão.")
+                        .text("§e para abrir o link em seu navegador.")
                         .next()
                         .send(user);
             } catch (TwitterException | MalformedURLException exception) {
