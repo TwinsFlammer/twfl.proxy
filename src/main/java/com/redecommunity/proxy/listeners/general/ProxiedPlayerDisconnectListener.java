@@ -51,5 +51,6 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         TwitterManager.removeRequestToken(user.getId());
         AttemptManager.removeAttempt(user.getId());
+        UserManager.removeUser(user.getId());
     }
 }
