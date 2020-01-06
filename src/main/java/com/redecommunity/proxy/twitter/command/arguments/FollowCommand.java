@@ -5,8 +5,11 @@ import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.twitter.command.TwitterCommand;
+import com.redecommunity.proxy.twitter.command.TwitterConstants;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+
+import java.util.Arrays;
 
 /**
  * Created by @SrGutyerrez
@@ -37,6 +40,28 @@ public class FollowCommand extends CustomArgumentCommand {
 
         String targetName = args[0];
 
+        Twitter userTwitter = user.getTwitter();
+
+        if (targetName.equalsIgnoreCase("equipe")) {
+            Arrays.stream(TwitterConstants.MASTER_USERS).forEach(masterUser -> {
+                try {
+                    userTwitter.createFriendship(masterUser);
+                } catch (TwitterException exception) {
+                    user.sendMessage(
+                            String.format(
+                                    language.getMessage("twitter.can\'t_follow_user"),
+                                    masterUser
+                            )
+                    );
+                }
+            });
+
+            user.sendMessage(
+                    language.getMessage("twitter.followed_masters")
+            );
+            return;
+        }
+
         User user1 = UserManager.getUser(targetName);
 
         if (!user1.isTwitterAssociated()) {
@@ -46,7 +71,6 @@ public class FollowCommand extends CustomArgumentCommand {
             return;
         }
 
-        Twitter userTwitter = user.getTwitter();
         Twitter targetTwitter = user1.getTwitter();
 
         try {
