@@ -19,7 +19,6 @@ public class TwitterCommand extends CustomCommand {
                 new AssociateCommand(),
                 new DisassociateCommand(),
                 new FollowCommand(),
-                new FollowMastersCommand(),
                 new InfoCommand(),
                 new TweetCommand()
         );
