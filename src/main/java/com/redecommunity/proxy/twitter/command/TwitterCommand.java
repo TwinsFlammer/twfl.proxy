@@ -33,4 +33,16 @@ public class TwitterCommand extends CustomCommand {
                 language.getMessage("twitter.usage")
         );
     }
+
+    public static void sendUsage(User user, String usage) {
+        Language language = user.getLanguage();
+
+        user.sendMessage(
+                String.format(
+                        language.getMessage("messages.default_commands.invalid_usage"),
+                        TwitterCommand.COMMAND_NAME,
+                        usage
+                )
+        );
+    }
 }
