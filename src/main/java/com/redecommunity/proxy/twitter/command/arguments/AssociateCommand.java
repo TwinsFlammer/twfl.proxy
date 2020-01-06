@@ -120,7 +120,7 @@ public class AssociateCommand extends CustomArgumentCommand {
 
                 twitterDatabase.delete("user_id", user.getId());
 
-
+                TwitterManager.removeRequestToken(user.getId());
             } catch (TwitterException exception) {
                 user.sendMessage(
                         language.getMessage("twitter.association_error_occurred")
