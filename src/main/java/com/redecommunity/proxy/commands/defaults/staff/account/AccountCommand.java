@@ -11,6 +11,8 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangeDiscordIdCommand;
 import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangeEmailCommand;
 import com.redecommunity.proxy.commands.defaults.staff.account.arguments.AccountChangePasswordCommand;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -125,6 +127,24 @@ public class AccountCommand extends CustomCommand {
             jsonText.text("§7[Clique para copiar]")
                     .clickSuggest(user1.getDiscordId().toString());
         } else if (!user.hasGroup("manager")) jsonText.text("§cSem permissão");
+
+        jsonText.next()
+                .text("\n")
+                .next()
+                .text("   Twitter: §7");
+
+        if (user.isTwitterAssociated()) {
+            try {
+                Twitter twitter = user.getTwitter();
+
+                jsonText.next()
+                        .text(twitter.getScreenName());
+            } catch (TwitterException exception) {
+                jsonText.next()
+                        .text("§c[Acesso revogado]");
+            }
+        } else jsonText.next()
+                .text("Indisponível");
 
         jsonText.next()
                 .text("\n\n")
