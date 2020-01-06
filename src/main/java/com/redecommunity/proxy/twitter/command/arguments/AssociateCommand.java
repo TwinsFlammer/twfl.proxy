@@ -94,6 +94,11 @@ public class AssociateCommand extends CustomArgumentCommand {
             try {
                 Twitter twitter = TwitterManager.getDefaultTwitter();
 
+                twitter.setOAuthConsumer(
+                        TwitterManager.oAuthConsumerKey,
+                        TwitterManager.oAuthConsumerSecret
+                );
+
                 RequestToken requestToken = TwitterManager.getRequestToken(user.getId());
 
                 if (requestToken == null) {
