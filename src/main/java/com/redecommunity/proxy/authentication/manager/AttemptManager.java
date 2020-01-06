@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.account.manager;
+package com.redecommunity.proxy.authentication.manager;
 
 import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.permissions.user.data.User;
