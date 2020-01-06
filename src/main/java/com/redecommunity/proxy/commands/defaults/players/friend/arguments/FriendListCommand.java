@@ -96,8 +96,12 @@ public class FriendListCommand extends CustomArgumentCommand {
                     });
         }
 
-        jsonText.text("\n")
-                .next()
-                .send(user);
+        if (users.isEmpty())
+            jsonText.text("   --/--")
+                    .next()
+                    .text("\n")
+                    .next();
+
+        jsonText.send(user);
     }
 }
