@@ -9,8 +9,6 @@ import com.redecommunity.proxy.twitter.command.TwitterConstants;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-import java.util.Arrays;
-
 /**
  * Created by @SrGutyerrez
  */
@@ -43,9 +41,13 @@ public class FollowCommand extends CustomArgumentCommand {
         Twitter userTwitter = user.getTwitter();
 
         if (targetName.equalsIgnoreCase("equipe")) {
-            Arrays.stream(TwitterConstants.MASTER_USERS).forEach(masterUser -> {
+            Integer followedUsers = 0;
+
+            for (String masterUser : TwitterConstants.MASTER_USERS) {
                 try {
                     userTwitter.createFriendship(masterUser);
+
+                    followedUsers++;
                 } catch (TwitterException exception) {
                     user.sendMessage(
                             String.format(
@@ -54,9 +56,8 @@ public class FollowCommand extends CustomArgumentCommand {
                             )
                     );
                 }
-            });
-
-            user.sendMessage(
+            }
+            if (followedUsers != 0) user.sendMessage(
                     language.getMessage("twitter.followed_masters")
             );
             return;
