@@ -88,7 +88,7 @@ public class AnnouncementManager {
     public static Announcement toAnnouncement(ResultSet resultSet) throws SQLException, IOException {
         String resultSetURL = resultSet.getString("url");
 
-        URL url = resultSetURL.isEmpty() ? null : new URL(resultSetURL);
+        URL url = resultSetURL == null || resultSetURL.isEmpty() ? null : new URL(resultSetURL);
 
         return new Announcement(
                 resultSet.getInt("id"),
