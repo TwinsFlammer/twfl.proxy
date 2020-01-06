@@ -79,6 +79,9 @@ public class AssociateCommand extends CustomArgumentCommand {
                 return;
             }
 
+            twitterDatabase.delete("user_id", user.getId());
+            TwitterManager.removeRequestToken(user.getId());
+
             try {
                 Twitter twitter = new TwitterFactory().getInstance();
 
@@ -117,10 +120,6 @@ public class AssociateCommand extends CustomArgumentCommand {
                 user.sendMessage(
                         language.getMessage("twitter.associated")
                 );
-
-                twitterDatabase.delete("user_id", user.getId());
-
-                TwitterManager.removeRequestToken(user.getId());
             } catch (TwitterException exception) {
                 user.sendMessage(
                         language.getMessage("twitter.association_error_occurred")
