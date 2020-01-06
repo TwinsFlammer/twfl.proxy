@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.account.data;
+package com.redecommunity.proxy.authentication.data;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
