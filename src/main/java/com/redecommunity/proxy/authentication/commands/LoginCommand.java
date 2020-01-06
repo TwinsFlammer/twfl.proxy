@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.account.commands;
+package com.redecommunity.proxy.authentication.commands;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
@@ -7,7 +7,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
-import com.redecommunity.proxy.account.manager.AttemptManager;
+import com.redecommunity.proxy.authentication.manager.AttemptManager;
 
 /**
  * Created by @SrGutyerrez
