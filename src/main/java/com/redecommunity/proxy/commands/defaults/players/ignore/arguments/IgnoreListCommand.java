@@ -35,7 +35,7 @@ public class IgnoreListCommand extends CustomArgumentCommand {
 
         JSONText jsonText = new JSONText();
 
-        List<User> users = user.getFriends()
+        List<User> users = user.getIgnored()
                 .stream()
                 .sorted((friendId1, friendId2) -> UserManager.getUser(friendId2).isOnline().compareTo(UserManager.getUser(friendId1).isOnline()))
                 .map(UserManager::getUser)
