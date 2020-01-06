@@ -40,6 +40,8 @@ public class ProxyServerDao {
 
             List<User> users = Lists.newArrayList();
 
+            System.out.println("Load users");
+
             usersId.forEach(o -> {
                 Integer userId = ((Long) o).intValue();
 
