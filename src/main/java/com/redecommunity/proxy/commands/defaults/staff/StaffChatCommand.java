@@ -4,6 +4,7 @@ import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
 
@@ -41,7 +42,8 @@ public class StaffChatCommand extends CustomCommand {
 
         Proxy.broadcastMessage(
                 this.getGroup(),
-                Helper.colorize(broadcastMessage)
+                Helper.colorize(broadcastMessage),
+                Preference.CHAT_STAFF
         );
     }
 }
