@@ -40,26 +40,18 @@ public class ProxyServerDao {
 
             List<User> users = Lists.newArrayList();
 
-            System.out.println("Load users");
-
             usersId.forEach(o -> {
                 Integer userId = ((Long) o).intValue();
 
-                System.out.println(userId);
-
                 User user = UserManager.getUser(userId);
 
-                if (user != null) {
-                    System.out.println(user.toString());
-
-                    users.add(user);
-                }
+                if (user != null) users.add(user);
             });
 
             Boolean online = (Boolean) jsonObject.get("status");
 
             return (T) new ProxyServer(proxyId, name, online, users);
-        } catch (Exception exception) {
+        } catch (JedisDataException exception) {
             exception.printStackTrace();
         }
         return null;
