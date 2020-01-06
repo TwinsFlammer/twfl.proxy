@@ -72,7 +72,15 @@ public class AssociateCommand extends CustomArgumentCommand {
 
             JSONObject jsonObject = twitterDatabase.findOne("user_id", user.getId());
 
+            if (jsonObject == null) {
+                user.sendMessage(
+                        language.getMessage("twitter.association_expired")
+                );
+                return;
+            }
+
             String requestCode = (String) jsonObject.get("generated_pin");
+            String oAuthVerifier = (String) jsonObject.get("oauth_verifier");
 
             if (!code.equals(requestCode)) {
                 user.sendMessage(
@@ -82,7 +90,6 @@ public class AssociateCommand extends CustomArgumentCommand {
             }
 
             twitterDatabase.delete("user_id", user.getId());
-            TwitterManager.removeRequestToken(user.getId());
 
             try {
                 Twitter twitter = TwitterManager.getDefaultTwitter();
@@ -96,7 +103,10 @@ public class AssociateCommand extends CustomArgumentCommand {
                     return;
                 }
 
-                AccessToken accessToken = twitter.getOAuthAccessToken(requestToken);
+                AccessToken accessToken = twitter.getOAuthAccessToken(
+                        requestToken,
+                        oAuthVerifier
+                );
 
                 user.setTwitterAccessToken(accessToken.getToken());
                 user.setTwitterTokenSecret(accessToken.getTokenSecret());
@@ -117,8 +127,9 @@ public class AssociateCommand extends CustomArgumentCommand {
                 user.sendMessage(
                         language.getMessage("twitter.associated")
                 );
+                TwitterManager.removeRequestToken(user.getId());
             } catch (TwitterException exception) {
-                exception.printStackTrace();
+                TwitterManager.removeRequestToken(user.getId());
                 user.sendMessage(
                         language.getMessage("twitter.association_error_occurred")
                 );
