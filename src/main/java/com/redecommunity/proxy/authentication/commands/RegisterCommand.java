@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.account.commands;
+package com.redecommunity.proxy.authentication.commands;
 
 import com.google.common.collect.Maps;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
