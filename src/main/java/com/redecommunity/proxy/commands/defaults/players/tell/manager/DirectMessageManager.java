@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.databases.redis.data.Redis;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.common.shared.util.Helper;
 import org.json.simple.JSONObject;
 
@@ -40,6 +41,21 @@ public class DirectMessageManager {
         if (!user1.isOnline()) {
             user.sendMessage(
                     language.getMessage("messages.player.player_offline")
+            );
+            return;
+        }
+
+        if (user.isSimilar(user1)) {
+            user.sendMessage(
+                    language.getMessage("tell.messages.cant_send_to_yourself")
+            );
+            return;
+        }
+
+        if (!user1.isEnabled(Preference.PRIVATE_MESSAGE) && !user.hasGroup("manager")
+                || user1.isFriend(user) && user.isFriend(user1)) {
+            user.sendMessage(
+                    language.getMessage("tell.messages.target_disabled_private_messages")
             );
             return;
         }
