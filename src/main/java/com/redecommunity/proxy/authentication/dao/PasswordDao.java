@@ -1,9 +1,9 @@
-package com.redecommunity.proxy.account.dao;
+package com.redecommunity.proxy.authentication.dao;
 
 import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.proxy.account.data.Password;
+import com.redecommunity.proxy.authentication.data.Password;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
