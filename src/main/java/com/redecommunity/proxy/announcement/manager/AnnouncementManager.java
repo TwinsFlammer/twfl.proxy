@@ -64,7 +64,7 @@ public class AnnouncementManager {
                     ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
                         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
-                        jsonText.send(user);
+                        if (user.isLogged()) jsonText.send(user);
                     });
                 },
                 0,
