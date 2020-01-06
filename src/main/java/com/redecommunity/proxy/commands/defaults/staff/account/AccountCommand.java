@@ -138,7 +138,7 @@ public class AccountCommand extends CustomCommand {
                 Twitter twitter = user.getTwitter();
 
                 jsonText.next()
-                        .text("§7" + twitter.getScreenName());
+                        .text("§7@" + twitter.getScreenName());
             } catch (TwitterException exception) {
                 jsonText.next()
                         .text("§c[Acesso revogado]");
