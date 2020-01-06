@@ -61,6 +61,13 @@ public class FriendAddCommand extends CustomArgumentCommand {
             return;
         }
 
+        if (user.isSimilar(user1)) {
+            user.sendMessage(
+                    language.getMessage("friends.can\'t_invite_friend_to_you")
+            );
+            return;
+        }
+
         user.addFriend(user1);
 
         user.sendMessage(
