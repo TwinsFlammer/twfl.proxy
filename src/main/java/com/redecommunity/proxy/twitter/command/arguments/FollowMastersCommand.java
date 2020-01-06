@@ -36,7 +36,7 @@ public class FollowMastersCommand extends CustomArgumentCommand {
             } catch (TwitterException exception) {
                 user.sendMessage(
                         String.format(
-                                language.getMessage("twitter.followed_user"),
+                                language.getMessage("twitter.can\'t_follow_user"),
                                 masterUser
                         )
                 );
