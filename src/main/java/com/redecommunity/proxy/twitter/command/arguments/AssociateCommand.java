@@ -70,7 +70,7 @@ public class AssociateCommand extends CustomArgumentCommand {
 
             JSONObject jsonObject = twitterDatabase.findOne("user_id", user.getId());
 
-            String requestCode = (String) jsonObject.get("request_code");
+            String requestCode = (String) jsonObject.get("generated_code");
 
             if (!code.equals(requestCode)) {
                 user.sendMessage(
