@@ -57,7 +57,7 @@ public class ProxyServerDao {
             Boolean online = (Boolean) jsonObject.get("status");
 
             return (T) new ProxyServer(proxyId, name, online, users);
-        } catch (JedisDataException exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         return null;
