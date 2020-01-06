@@ -26,7 +26,7 @@ public class BroadcastJedisMessageListener implements JedisMessageListener {
         ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
             User user = UserManager.getUser(proxiedPlayer.getUniqueId());
 
-            if (user.hasGroup(groupId)) proxiedPlayer.sendMessage(value);
+            if (user.hasGroup(groupId) && user.isLogged()) proxiedPlayer.sendMessage(value);
         });
     }
 }
