@@ -46,7 +46,9 @@ public class AssociateCommand extends CustomArgumentCommand {
                 JSONText jsonText = new JSONText();
 
                 jsonText.next()
-                        .text("§eNós geramos um link para que você possa associar seu twitter a sua conta.")
+                        .text("§eNós geramos um link para você associar seu perfil do twitter.")
+                        .next()
+                        .text("\n")
                         .next()
                         .text("§ePara ir até ele, clique ")
                         .next()
@@ -83,12 +85,7 @@ public class AssociateCommand extends CustomArgumentCommand {
             TwitterManager.removeRequestToken(user.getId());
 
             try {
-                Twitter twitter = new TwitterFactory().getInstance();
-
-                twitter.setOAuthConsumer(
-                        TwitterManager.oAuthConsumerKey,
-                        TwitterManager.oAuthConsumerSecret
-                );
+                Twitter twitter = TwitterManager.getDefaultTwitter();
 
                 RequestToken requestToken = TwitterManager.getRequestToken(user.getId());
 
@@ -121,6 +118,7 @@ public class AssociateCommand extends CustomArgumentCommand {
                         language.getMessage("twitter.associated")
                 );
             } catch (TwitterException exception) {
+                exception.printStackTrace();
                 user.sendMessage(
                         language.getMessage("twitter.association_error_occurred")
                 );
