@@ -50,6 +50,13 @@ public class SendCommand extends CustomCommand {
             return;
         }
 
+        if (!user1.isLogged()) {
+            user.sendMessage(
+                    language.getMessage("messages.player.player_not_logged")
+            );
+            return;
+        }
+
         Server server = ServerManager.getServer(serverName);
 
         if (server == null) {
@@ -89,7 +96,6 @@ public class SendCommand extends CustomCommand {
             );
             return;
         }
-
 
         user.sendMessage(
                 String.format(
