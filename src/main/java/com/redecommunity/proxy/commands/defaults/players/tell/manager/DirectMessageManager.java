@@ -60,6 +60,13 @@ public class DirectMessageManager {
             return;
         }
 
+        if (!user1.isLogged()) {
+            user.sendMessage(
+                    language.getMessage("messages.player.player_not_logged")
+            );
+            return;
+        }
+
         JSONObject jsonObject = new JSONObject();
 
         String[] arguments = (messageType == MessageType.DIRECT_MESSAGE ? Helper.removeFirst(args) : args);
