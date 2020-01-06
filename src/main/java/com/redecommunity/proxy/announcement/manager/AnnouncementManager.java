@@ -58,7 +58,9 @@ public class AnnouncementManager {
                         if (announcement.getUrl() != null)
                             jsonText.clickOpenURL(announcement.getUrl().toExternalForm());
 
-                        jsonText.next();
+                        jsonText.next()
+                                .text("\n")
+                                .next();
                     });
 
                     ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
