@@ -83,7 +83,7 @@ public class FriendListCommand extends CustomArgumentCommand {
 
             users.subList((page == 1 ? 0 : page * 10 - 10), (page == 1 ? 10 : size - count))
                     .forEach(user1 -> {
-                        jsonText.text("  ")
+                        jsonText.text(" - ")
                                 .next()
                                 .text(user1.getPrefix() + user1.getDisplayName())
                                 .next()
