@@ -49,9 +49,11 @@ public class ProxyServerDao {
 
                 User user = UserManager.getUser(userId);
 
-                System.out.println(user.toString());
+                if (user != null) {
+                    System.out.println(user.toString());
 
-                users.add(user);
+                    users.add(user);
+                }
             });
 
             Boolean online = (Boolean) jsonObject.get("status");
