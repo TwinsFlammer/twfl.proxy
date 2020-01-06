@@ -16,6 +16,10 @@ public class AttemptManager {
         return AttemptManager.attempts;
     }
 
+    public static Integer removeAttempt(Integer userId) {
+        return AttemptManager.attempts.remove(userId);
+    }
+
     public static Integer getPasswordAttempt(Integer id) {
         return AttemptManager.attempts
                 .entrySet()
