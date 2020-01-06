@@ -43,7 +43,11 @@ public class ProxyServerDao {
             usersId.forEach(o -> {
                 Integer userId = ((Long) o).intValue();
 
+                System.out.println(userId);
+
                 User user = UserManager.getUser(userId);
+
+                System.out.println(user.toString());
 
                 users.add(user);
             });
