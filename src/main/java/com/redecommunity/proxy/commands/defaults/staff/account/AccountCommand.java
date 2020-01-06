@@ -133,9 +133,9 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("   Twitter: §7");
 
-        if (user.isTwitterAssociated()) {
+        if (user1.isTwitterAssociated()) {
             try {
-                Twitter twitter = user.getTwitter();
+                Twitter twitter = user1.getTwitter();
 
                 jsonText.next()
                         .text("§7@" + twitter.getScreenName());
