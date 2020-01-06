@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.account.listener;
+package com.redecommunity.proxy.authentication.listener;
 
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
