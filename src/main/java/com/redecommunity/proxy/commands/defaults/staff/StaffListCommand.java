@@ -24,11 +24,12 @@ public class StaffListCommand extends CustomCommand {
         JSONText jsonText = new JSONText();
 
         List<User> users = Proxy.getUsers()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .filter(user1 -> user1.hasGroup("Helper"))
-                        .sorted((user1, user2) -> user2.getHighestGroup().getPriority().compareTo(user1.getHighestGroup().getPriority()))
-                        .collect(Collectors.toList());
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(User::isOnline)
+                .filter(user1 -> user1.hasGroup("helper"))
+                .sorted((user1, user2) -> user2.getHighestGroup().getPriority().compareTo(user1.getHighestGroup().getPriority()))
+                .collect(Collectors.toList());
 
         jsonText.next()
                 .text("\n")
