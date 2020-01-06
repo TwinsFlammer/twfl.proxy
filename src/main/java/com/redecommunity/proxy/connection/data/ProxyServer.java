@@ -34,18 +34,18 @@ public class ProxyServer {
     }
 
     public String toJSONString() {
-        JSONObject object = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
 
-        object.put("proxy_id", this.id);
+        jsonObject.put("proxy_id", this.id);
 
-        JSONArray players = new JSONArray();
+        JSONArray usersId = new JSONArray();
 
-        this.users.forEach(user -> players.add(user.getId()));
+        this.users.forEach(user -> usersId.add(user.getId()));
 
-        object.put("users", players);
-        object.put("name", this.name);
-        object.put("status", this.status);
+        jsonObject.put("users_id", usersId);
+        jsonObject.put("name", this.name);
+        jsonObject.put("status", this.status);
 
-        return object.toString();
+        return jsonObject.toString();
     }
 }
