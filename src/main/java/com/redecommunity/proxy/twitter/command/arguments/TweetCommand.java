@@ -3,6 +3,8 @@ package com.redecommunity.proxy.twitter.command.arguments;
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 /**
  * Created by @SrGutyerrez
@@ -12,12 +14,24 @@ public class TweetCommand extends CustomArgumentCommand {
         super(0, "tuitar");
     }
 
+    private final String DEFAULT_TWEET_TEXT = "Ah, slá eu me sinto meio sem sentido atualmente...";
+
     @Override
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
-        user.sendMessage(
-                language.getMessage("twitter.not_implemented")
-        );
+        Twitter twitter = user.getTwitter();
+
+        try {
+            twitter.updateStatus(this.DEFAULT_TWEET_TEXT);
+
+            user.sendMessage(
+                    language.getMessage("twitter.server_message_tweeted")
+            );
+        } catch (TwitterException exception) {
+            user.sendMessage(
+                    language.getMessage("twitter.an_internal_error_occurred")
+            );
+        }
     }
 }
