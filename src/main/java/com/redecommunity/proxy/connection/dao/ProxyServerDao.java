@@ -36,11 +36,11 @@ public class ProxyServerDao {
             Integer proxyId = ((Long) jsonObject.get("proxy_id")).intValue();
             String name = (String) jsonObject.get("name");
 
-            JSONArray playersId = (JSONArray) jsonObject.get("users");
+            JSONArray usersId = (JSONArray) jsonObject.get("users_id");
 
             List<User> users = Lists.newArrayList();
 
-            playersId.forEach(o -> {
+            usersId.forEach(o -> {
                 Integer userId = ((Long) o).intValue();
 
                 User user = UserManager.getUser(userId);
