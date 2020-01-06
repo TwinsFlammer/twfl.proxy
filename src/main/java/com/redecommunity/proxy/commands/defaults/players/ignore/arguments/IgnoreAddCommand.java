@@ -47,6 +47,13 @@ public class IgnoreAddCommand extends CustomArgumentCommand {
             return;
         }
 
+        if (user.isSimilar(user1)) {
+            user.sendMessage(
+                    language.getMessage("ignore.can\'t_ignore_you")
+            );
+            return;
+        }
+
         user.ignore(user1);
 
         user.sendMessage(
