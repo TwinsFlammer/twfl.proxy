@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Getter
-public class RevokeMotive {
+public class RevokeReason {
     private final Integer id;
     private final String name, displayName, description;
     private final Group group;
