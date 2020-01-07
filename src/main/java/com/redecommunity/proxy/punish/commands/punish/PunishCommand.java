@@ -90,8 +90,12 @@ public class PunishCommand extends CustomCommand {
                         });
 
                 jsonText.hoverText(stringBuilder.toString())
-                        .clickSuggest("/punir " + user1.getDisplayName() + " " + punishReason.getName() + " ");
+                        .clickSuggest("/punir " + user1.getDisplayName() + " " + punishReason.getName() + " ")
+                        .next()
+                        .text("\n");
             });
+
+            if (punishReasons.isEmpty()) jsonText.text("   --/--");
 
             jsonText.next()
                     .text("\n")
