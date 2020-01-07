@@ -53,7 +53,7 @@ public class PunishmentManager {
 
         List<Duration> durations = punishReason.getDurations();
 
-        Duration duration = durations.get((durations.size() < count ? durations.size() : count)-1);
+        Duration duration = durations.get(durations.size() < count ? durations.size()-1 : count);
 
         Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
 
