@@ -16,4 +16,8 @@ public class PunishReason {
     private final String name, displayName, description;
     private final Group group;
     private final List<Duration> durations;
+
+    public Boolean isSimilar(PunishReason punishReason) {
+        return punishReason.getId().equals(this.id);
+    }
 }
