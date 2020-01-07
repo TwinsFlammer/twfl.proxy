@@ -61,7 +61,11 @@ public class PunishReasonDao extends Table {
 
                 System.out.println(punishReason == null);
 
-                if (punishReason != null) PunishReasonManager.getPunishReasons().add(punishReason);
+                if (punishReason != null) {
+                    PunishReasonManager.getPunishReasons().add(punishReason);
+
+                    System.out.println("Adicionei na lista!");
+                }
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
