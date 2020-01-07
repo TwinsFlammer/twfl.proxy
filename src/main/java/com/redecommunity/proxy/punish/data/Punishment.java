@@ -26,8 +26,7 @@ public class Punishment {
     private Boolean status;
 
     @Getter
-    private final String network,
-            proof;
+    private final String proof;
 
     @Getter
     private final Long time,
