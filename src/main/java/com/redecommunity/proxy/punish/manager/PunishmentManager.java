@@ -1,17 +1,62 @@
 package com.redecommunity.proxy.punish.manager;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.proxy.punish.dao.PunishmentDao;
+import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.Punishment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
  */
 public class PunishmentManager {
+    private static HashMap<Integer, List<Punishment>> punishments = Maps.newHashMap();
+
+    public static List<Punishment> getPunishments(Integer userId) {
+        return PunishmentManager.punishments.getOrDefault(
+                userId,
+                PunishmentManager.findAll(userId)
+        );
+    }
+
+    public static List<Punishment> getPunishments(User user) {
+        return PunishmentManager.getPunishments(user.getId());
+    }
+
+    private static List<Punishment> findAll(Integer userId) {
+        PunishmentDao punishmentDao = new PunishmentDao();
+
+        HashMap<String, Integer> keys = Maps.newHashMap();
+
+        keys.put("user_id", userId);
+
+        List<Punishment> punishments = Lists.newArrayList(punishmentDao.findAll(keys));
+
+        return PunishmentManager.punishments.put(userId, punishments);
+    }
+
     public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
+        List<Punishment> punishments = PunishmentManager.getPunishments(user);
+
+        Integer count = (int) punishments.stream()
+                .filter(Objects::nonNull)
+                .filter(punishment -> punishment.getPunishReason().isSimilar(punishReason))
+                .count();
+
+        List<Duration> durations = punishReason.getDurations();
+
+        Duration duration = durations.get((durations.size() < count ? durations.size() : count)-1);
+
+        Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
+
         return new Punishment(
                 0,
                 user.getId(),
@@ -25,7 +70,7 @@ public class PunishmentManager {
                 proof,
                 System.currentTimeMillis(),
                 null,
-                null,
+                endTime,
                 null
         );
     }
