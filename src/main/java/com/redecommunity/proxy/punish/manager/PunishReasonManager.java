@@ -27,7 +27,7 @@ public class PunishReasonManager {
                 .collect(Collectors.toList());
     }
 
-    public static PunishReason getPunishMotive(String name) {
+    public static PunishReason getPunishReason(String name) {
         return PunishReasonManager.punishReasons
                 .stream()
                 .filter(punishReason -> punishReason.getName().equalsIgnoreCase(name))
@@ -35,7 +35,7 @@ public class PunishReasonManager {
                 .orElse(null);
     }
 
-    public static PunishReason getPunishMotive(Integer id) {
+    public static PunishReason getPunishReason(Integer id) {
         return PunishReasonManager.punishReasons
                 .stream()
                 .filter(punishReason -> punishReason.getId().equals(id))
@@ -43,7 +43,7 @@ public class PunishReasonManager {
                 .orElse(null);
     }
 
-    public static PunishReason toMotive(ResultSet resultSet) throws SQLException {
+    public static PunishReason toReason(ResultSet resultSet) throws SQLException {
         String name = resultSet.getString("name");
 
         Integer groupId = resultSet.getInt("group_id");
@@ -63,9 +63,9 @@ public class PunishReasonManager {
 
         durations.add(duration1);
 
-        Optional<PunishReason> similarMotive = PunishReasonManager.getSimilarPunishMotive(name);
+        Optional<PunishReason> similarMotive = PunishReasonManager.getSimilarPunishReason(name);
 
-        PunishReason punishReason = similarMotive.isPresent() ? PunishReasonManager.getPunishMotive(name) : new PunishReason(
+        PunishReason punishReason = similarMotive.isPresent() ? PunishReasonManager.getPunishReason(name) : new PunishReason(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
                 resultSet.getString("display_name"),
@@ -79,7 +79,7 @@ public class PunishReasonManager {
         return punishReason;
     }
 
-    private static Optional<PunishReason> getSimilarPunishMotive(String name) {
+    private static Optional<PunishReason> getSimilarPunishReason(String name) {
         return PunishReasonManager.punishReasons
                 .stream()
                 .filter(punishReason -> punishReason.getName().equalsIgnoreCase(name))
