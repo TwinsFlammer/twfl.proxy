@@ -112,7 +112,7 @@ public class PunishCommand extends CustomCommand {
                 return;
             }
 
-            PunishReason punishReason = PunishReasonManager.getPunishMotive(motiveName);
+            PunishReason punishReason = PunishReasonManager.getPunishReason(motiveName);
 
             if (punishReason == null) {
                 user.sendMessage(
@@ -128,15 +128,13 @@ public class PunishCommand extends CustomCommand {
                 return;
             }
 
-            PunishmentDao punishmentDao = new PunishmentDao();
-
             HashMap<String, Object> keys = Maps.newHashMap();
 
             keys.put("user_id", user1.getId());
             keys.put("reason_id", punishReason.getId());
             keys.put("status", true);
 
-            Set<Punishment> punishments = punishmentDao.findAll(keys);
+            List<Punishment> punishments = PunishmentManager.getPunishments(user);
 
             Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMicros(15);
 
@@ -160,6 +158,8 @@ public class PunishCommand extends CustomCommand {
                     proof,
                     hidden
             );
+
+            PunishmentDao punishmentDao = new PunishmentDao();
 
             punishmentDao.insert(punishment);
 
