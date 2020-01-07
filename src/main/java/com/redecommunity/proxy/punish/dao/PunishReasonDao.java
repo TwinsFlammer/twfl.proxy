@@ -57,7 +57,7 @@ public class PunishReasonDao extends Table {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             while (resultSet.next()) {
-                PunishReason punishReason = PunishReasonManager.toMotive(resultSet);
+                PunishReason punishReason = PunishReasonManager.toReason(resultSet);
 
                 if (punishReason != null) PunishReasonManager.getPunishReasons().add(punishReason);
             }
