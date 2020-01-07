@@ -9,7 +9,6 @@ import java.sql.SQLException;
  * Created by @SrGutyerrez
  */
 public class PunishmentManager {
-
     public static Punishment toPunishment(ResultSet resultSet) throws SQLException {
         return new Punishment(
                 resultSet.getInt("id"),
@@ -21,7 +20,6 @@ public class PunishmentManager {
                 resultSet.getBoolean("hidden"),
                 resultSet.getBoolean("perpetual"),
                 resultSet.getBoolean("status"),
-                resultSet.getString("network"),
                 resultSet.getString("proof"),
                 resultSet.getLong("time"),
                 resultSet.getLong("start_time"),
