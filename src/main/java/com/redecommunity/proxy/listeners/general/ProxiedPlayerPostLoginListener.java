@@ -25,6 +25,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.apache.commons.io.Charsets;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -78,12 +79,20 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         Punishment punishment = PunishmentManager.getPunishments(user)
                 .stream()
+                .filter(Objects::nonNull)
                 .filter(Punishment::isActive)
                 .filter(this.predicate(Punishment::isTemporary).negate())
                 .findFirst()
                 .orElse(null);
 
+        PunishmentManager.getPunishments(user)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(this.predicate(Punishment::isStarted).negate())
+                .forEach(Punishment::start);
+
         if (punishment != null) {
+
             Duration duration = punishment.getDuration();
             PunishType punishType = duration.getPunishType();
             PunishReason punishReason = punishment.getPunishReason();
