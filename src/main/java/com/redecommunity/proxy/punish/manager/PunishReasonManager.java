@@ -27,11 +27,16 @@ public class PunishReasonManager {
         punishReasonDao.findAll();
     }
 
-    public static List<PunishReason> getPunishReasons() {
+    public static List<PunishReason> getPunishReasons(Group group) {
         return PunishReasonManager.punishReasons
                 .stream()
                 .sorted((punishReason1, punishReason2) -> punishReason2.getName().compareTo(punishReason1.getName()))
+                .filter(punishReason -> group.getPriority() >= punishReason.getGroup().getPriority())
                 .collect(Collectors.toList());
+    }
+
+    public static List<PunishReason> getPunishReasons() {
+        return PunishReasonManager.punishReasons;
     }
 
     public static PunishReason getPunishReason(String name) {
