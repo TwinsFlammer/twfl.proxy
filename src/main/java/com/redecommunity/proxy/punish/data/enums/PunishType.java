@@ -15,8 +15,4 @@ public enum PunishType {
     MUTE("§aMute temporário", "temporariamente silenciado");
 
     private final String name, displayName;
-
-    public Boolean isTemporary() {
-        return this != BAN;
-    }
 }
