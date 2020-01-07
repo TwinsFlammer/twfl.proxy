@@ -15,6 +15,9 @@ import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMess
 import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
+import com.redecommunity.proxy.punish.manager.PunishMotiveManager;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
+import com.redecommunity.proxy.punish.manager.RevokeMotiveManager;
 import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -132,5 +135,8 @@ class DataManager {
         new AttemptManager();
         new PasswordManager();
         new AnnouncementManager();
+        new RevokeMotiveManager();
+        new PunishmentManager();
+        new PunishMotiveManager();
     }
 }
