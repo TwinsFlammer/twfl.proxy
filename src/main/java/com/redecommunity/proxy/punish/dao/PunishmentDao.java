@@ -42,7 +42,6 @@ public class PunishmentDao extends Table {
                                 "`hidden` BOOLEAN NOT NULL," +
                                 "`perpetual` BOOLEAN NOT NULL," +
                                 "`status` BOOLEAN NOT NULL," +
-                                "`network` VARCHAR(25) NOT NULL," +
                                 "`revoke_reason_id` VARCHAR(255)," +
                                 "`proof` VARCHAR(255) NOT NULL," +
                                 "`time` LONG NOT NULL," +
@@ -65,7 +64,6 @@ public class PunishmentDao extends Table {
                         "`hidden`," +
                         "`perpetual`," +
                         "`status`," +
-                        "`network`," +
                         "`proof`," +
                         "`time`" +
                         ")" +
@@ -76,10 +74,10 @@ public class PunishmentDao extends Table {
                         "%d," +
                         "%b," +
                         "%b," +
-                        "%s," +
-                        "%s," +
+                        "'%s'," +
+                        "'%s'," +
                         "%d" +
-                        ")",
+                        ");",
                 this.getTableName(),
                 object.getId(),
                 object.getStafferId(),
@@ -87,7 +85,6 @@ public class PunishmentDao extends Table {
                 object.isHidden(),
                 object.isPerpetual(),
                 object.getStatus(),
-                object.getNetwork(),
                 object.getProof(),
                 object.getTime()
         );
@@ -107,7 +104,7 @@ public class PunishmentDao extends Table {
         String where = this.generateWhere(keys);
 
         String query = String.format(
-                "UPDATE %s WHERE %s=%s SET %s",
+                "UPDATE %s SET %s WHERE `%s`='%s';",
                 this.getTableName(),
                 key,
                 value,
@@ -128,7 +125,7 @@ public class PunishmentDao extends Table {
         String where = this.generateWhere(keys);
 
         String query = String.format(
-                "SELECT * FROM %s WHERE %s",
+                "SELECT * FROM %s WHERE %s;",
                 this.getTableName(),
                 where
         );
