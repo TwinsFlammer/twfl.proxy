@@ -82,16 +82,36 @@ public class Punishment {
         return this.status;
     }
 
+    public Boolean hasValidProof() {
+        return this.proof != null && !this.proof.isEmpty();
+    }
+
     public ChatColor getColor() {
         if (this.revokeUserId != null) return ChatColor.GRAY;
         return this.startTime == null ? ChatColor.GOLD : this.status ? ChatColor.GREEN : ChatColor.RED;
+    }
+
+    public String getProof() {
+        return this.hasValidProof() ? " - " + this.proof : "";
+    }
+
+    public User getUser() {
+        return UserManager.getUser(this.userId);
+    }
+
+    public User getStaffer() {
+        return UserManager.getUser(this.stafferId);
+    }
+
+    public User getRevoker() {
+        return UserManager.getUser(this.revokeUserId);
     }
 
     public PunishReason getPunishReason() {
         return PunishReasonManager.getPunishReason(this.reasonId);
     }
 
-    private Duration getDuration() {
+    public Duration getDuration() {
         PunishReason punishReason = this.getPunishReason();
 
         List<Punishment> punishments = PunishmentManager.getPunishments(this.userId);
@@ -131,9 +151,6 @@ public class Punishment {
     }
 
     public void broadcast() {
-        User user = UserManager.getUser(this.userId),
-                staffer = UserManager.getUser(this.stafferId);
-
         PunishReason punishReason = this.getPunishReason();
         Duration duration = this.getDuration();
 
@@ -141,15 +158,15 @@ public class Punishment {
 
         stringBuilder.append("\n")
                 .append("§c * ")
-                .append(user.getDisplayName())
+                .append(this.getUser().getDisplayName())
                 .append(" foi ")
                 .append(duration.getPunishType().getDisplayName())
                 .append(" por ")
-                .append(staffer.getDisplayName())
+                .append(this.getStaffer().getDisplayName())
                 .append("\n")
                 .append("§c * Motivo: ")
                 .append(punishReason.getDisplayName())
-                .append(this.proof == null || this.proof.isEmpty() ? " - " + this.proof : "")
+                .append(this.getProof())
                 .append("\n");
 
         if (duration.isTemporary()) stringBuilder.append("§c * Duração: ")
