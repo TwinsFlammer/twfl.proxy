@@ -11,6 +11,11 @@ import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
+import com.redecommunity.proxy.punish.data.Duration;
+import com.redecommunity.proxy.punish.data.PunishReason;
+import com.redecommunity.proxy.punish.data.Punishment;
+import com.redecommunity.proxy.punish.data.enums.PunishType;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import com.redecommunity.proxy.util.Messages;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -22,6 +27,7 @@ import org.apache.commons.io.Charsets;
 
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 /**
  * Created by @SrGutyerrez
@@ -61,11 +67,36 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
-        if (user.isConsole()) {
-            Language language = user.getLanguage();
+        Language language = user.getLanguage();
 
+        if (user.isConsole()) {
             proxiedPlayer.disconnect(
                     language.getMessage("errors.console_player")
+            );
+            return;
+        }
+
+        Punishment punishment = PunishmentManager.getPunishments(user)
+                .stream()
+                .filter(Punishment::isActive)
+                .filter(this.predicate(Punishment::isTemporary).negate())
+                .findFirst()
+                .orElse(null);
+
+        if (punishment != null) {
+            Duration duration = punishment.getDuration();
+            PunishType punishType = duration.getPunishType();
+            PunishReason punishReason = punishment.getPunishReason();
+
+            proxiedPlayer.disconnect(
+                    String.format(
+                            language.getMessage("punishment.kick_message"),
+                            punishType.getDisplayName(),
+                            punishReason.getDisplayName(),
+                            punishment.getProof(),
+                            punishment.getStaffer().getDisplayName(),
+                            punishment.getId()
+                    )
             );
             return;
         }
@@ -98,6 +129,10 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                             new TextComponent(tabList.getFooter())
                     }
             );
+    }
+
+    private <T> Predicate<T> predicate(Predicate<T> predicate) {
+        return predicate;
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
