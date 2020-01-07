@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.punish.commands.punish;
 
+import com.google.common.collect.Maps;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
@@ -7,11 +8,15 @@ import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
+import com.redecommunity.proxy.punish.dao.PunishmentDao;
 import com.redecommunity.proxy.punish.data.Duration;
-import com.redecommunity.proxy.punish.data.PunishMotive;
-import com.redecommunity.proxy.punish.manager.PunishMotiveManager;
+import com.redecommunity.proxy.punish.data.PunishReason;
+import com.redecommunity.proxy.punish.data.Punishment;
+import com.redecommunity.proxy.punish.manager.PunishReasonManager;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
 
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
@@ -26,18 +31,7 @@ public class PunishCommand extends CustomCommand {
     public void onCommand(User user, String[] args) {
         Language language = user.getLanguage();
 
-        // /punir guty HACK https://prova.com -s
-
-        if (args.length == 0 || args.length > 4) {
-            user.sendMessage(
-                    String.format(
-                            language.getMessage("messages.default_commands.invalid_usage"),
-                            this.getName(),
-                            "<usuário> <motivo> <prova>"
-                    )
-            );
-            return;
-        } else if (args.length == 1) {
+        if (args.length == 1) {
             String targetName = args[0];
 
             User user1 = UserManager.getUser(targetName);
@@ -51,34 +45,34 @@ public class PunishCommand extends CustomCommand {
 
             JSONText jsonText = new JSONText();
 
-            List<PunishMotive> punishMotives = PunishMotiveManager.getPunishMotives();
+            List<PunishReason> punishReasons = PunishReasonManager.getPunishReasons();
 
             jsonText.next()
                     .text("\n")
                     .next()
-                    .text("§eLista de infração disponíveís (" + punishMotives.size() + ")")
+                    .text("§eLista de infração disponíveís (" + punishReasons.size() + ")")
                     .next()
                     .text("\n\n");
 
-            punishMotives.forEach(punishMotive -> {
+            punishReasons.forEach(punishReason -> {
                 jsonText.next()
-                        .text(" - " + punishMotive.getDisplayName());
+                        .text(" - " + punishReason.getDisplayName());
 
                 StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.append("§e")
-                        .append(punishMotive.getDisplayName())
+                        .append(punishReason.getDisplayName())
                         .append("\n\n")
                         .append("§f")
-                        .append(punishMotive.getDescription())
+                        .append(punishReason.getDescription())
                         .append("\n\n")
                         .append("§fGrupo mínimo: ")
-                        .append(punishMotive.getGroup().getFancyPrefix())
+                        .append(punishReason.getGroup().getFancyPrefix())
                         .append("\n")
                         .append("§fRedes: §7SURVIVAL")
                         .append("\n\n");
 
-                List<Duration> durations = punishMotive.getDurations();
+                List<Duration> durations = punishReason.getDurations();
 
                 IntStream.range(0, durations.size())
                         .forEach(index -> {
@@ -94,7 +88,96 @@ public class PunishCommand extends CustomCommand {
                                     .append(duration.getTimeTypeDisplayName())
                                     .append("\n");
                         });
+
+                jsonText.hoverText(stringBuilder.toString())
+                        .clickSuggest("/punir " + user1.getDisplayName() + " " + punishReason.getName() + " ");
             });
+
+            jsonText.next()
+                    .text("\n")
+                    .next()
+                    .send(user);
+        } else if (args.length >= 2) {
+            String targetName = args[0];
+            String motiveName = args[1];
+            String proof = args.length >= 3 ? args[2] : null;
+            Boolean hidden = args.length == 4 && args[3].equals("-s");
+
+            User user1 = UserManager.getUser(targetName);
+
+            if (user1 == null) {
+                user.sendMessage(
+                        language.getMessage("messages.player.invalid_player")
+                );
+                return;
+            }
+
+            PunishReason punishReason = PunishReasonManager.getPunishMotive(motiveName);
+
+            if (punishReason == null) {
+                user.sendMessage(
+                        language.getMessage("punishment.motive_does_not_exists")
+                );
+                return;
+            }
+
+            if (!user.hasGroup("manager") && !Helper.isURLValid(proof)) {
+                user.sendMessage(
+                        language.getMessage("punishment.invalid_proof_url")
+                );
+                return;
+            }
+
+            PunishmentDao punishmentDao = new PunishmentDao();
+
+            HashMap<String, Object> keys = Maps.newHashMap();
+
+            keys.put("user_id", user1.getId());
+            keys.put("reason_id", punishReason.getId());
+            keys.put("status", true);
+
+            Set<Punishment> punishments = punishmentDao.findAll(keys);
+
+            Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMicros(15);
+
+            Optional<Punishment> optionalPunishment = punishments
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .filter(punishment -> punishment.getTime() >= minTime)
+                    .findAny();
+
+            if (optionalPunishment.isPresent()) {
+                user.sendMessage(
+                        language.getMessage("punishment.user_already_punished_with_this_motive_in_moments_ago")
+                );
+                return;
+            }
+
+            Punishment punishment = PunishmentManager.generatePunishment(
+                    user,
+                    user1,
+                    punishReason,
+                    proof,
+                    hidden
+            );
+
+            punishmentDao.insert(punishment);
+
+            punishment.broadcast();
+
+            user.sendMessage(
+                    language.getMessage("punishment.punishment_applied")
+            );
+            return;
+        } else {
+            user.sendMessage(
+                    String.format(
+                            language.getMessage("messages.default_commands.invalid_usage"),
+                            this.getName(),
+                            "<usuário> <motivo> <prova>"
+                    )
+            );
+            return;
         }
     }
 }
