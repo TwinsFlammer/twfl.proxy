@@ -43,7 +43,7 @@ public class PunishmentManager {
         return PunishmentManager.punishments.put(userId, punishments);
     }
 
-    public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
+    public static Duration getDuration(User user, PunishReason punishReason) {
         List<Punishment> punishments = PunishmentManager.getPunishments(user);
 
         Integer count = (int) punishments.stream()
@@ -53,8 +53,11 @@ public class PunishmentManager {
 
         List<Duration> durations = punishReason.getDurations();
 
-        Duration duration = durations.get(durations.size() < count ? durations.size()-1 : count);
+        return durations.get(durations.size() < count ? durations.size()- 1 : count);
+    }
 
+    public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
+        Duration duration = PunishmentManager.getDuration(user, punishReason);
         Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
 
         return new Punishment(
