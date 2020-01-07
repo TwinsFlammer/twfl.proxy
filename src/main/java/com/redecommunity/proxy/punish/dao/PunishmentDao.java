@@ -73,7 +73,7 @@ public class PunishmentDao extends Table {
                         "%d," +
                         "%b," +
                         "%b," +
-                        "'%s'," +
+                        "%b," +
                         "'%s'," +
                         "%d" +
                         ");",
