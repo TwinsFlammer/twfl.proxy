@@ -95,12 +95,13 @@ public class PunishCommand extends CustomCommand {
                         .text("\n");
             });
 
-            if (punishReasons.isEmpty()) jsonText.text("   --/--");
-
-            jsonText.next()
-                    .text("\n")
+            if (punishReasons.isEmpty()) jsonText.text("   --/--")
                     .next()
-                    .send(user);
+                    .text("\n")
+                    .next();
+
+            jsonText.send(user);
+            return;
         } else if (args.length >= 2) {
             String targetName = args[0];
             String motiveName = args[1];
