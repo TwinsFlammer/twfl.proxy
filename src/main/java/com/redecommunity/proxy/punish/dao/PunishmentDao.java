@@ -45,7 +45,7 @@ public class PunishmentDao extends Table {
                                 "`proof` VARCHAR(255)," +
                                 "`time` LONG NOT NULL," +
                                 "`start_time` LONG," +
-                                "`end_time` LONG NOT NULL," +
+                                "`end_time` LONG," +
                                 "`revoke_time` LONG" +
                                 ");",
                         this.getTableName()
