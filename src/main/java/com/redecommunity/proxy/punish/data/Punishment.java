@@ -15,8 +15,6 @@ import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
@@ -112,20 +110,7 @@ public class Punishment {
     }
 
     public Duration getDuration() {
-        PunishReason punishReason = this.getPunishReason();
-
-        List<Punishment> punishments = PunishmentManager.getPunishments(this.userId);
-
-        Integer count = (int) punishments.stream()
-                .filter(Objects::nonNull)
-                .filter(punishment -> punishment.getPunishReason().isSimilar(punishReason))
-                .count();
-
-        List<Duration> durations = punishReason.getDurations();
-
-        Duration duration = durations.get((durations.size() < count ? durations.size() : count) - 1);
-
-        return duration;
+        return PunishmentManager.getDuration(this.getUser(), this.getPunishReason());
     }
 
     public void revoke(User user, RevokeReason revokeReason) {
