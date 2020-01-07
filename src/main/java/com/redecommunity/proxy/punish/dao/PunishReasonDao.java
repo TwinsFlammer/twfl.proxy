@@ -1,8 +1,8 @@
 package com.redecommunity.proxy.punish.dao;
 
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
-import com.redecommunity.proxy.punish.data.PunishMotive;
-import com.redecommunity.proxy.punish.manager.PunishMotiveManager;
+import com.redecommunity.proxy.punish.data.PunishReason;
+import com.redecommunity.proxy.punish.manager.PunishReasonManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Created by @SrGutyerrez
  */
-public class MotiveDao extends Table {
+public class PunishReasonDao extends Table {
     @Override
     public String getDatabaseName() {
         return "general";
@@ -21,7 +21,7 @@ public class MotiveDao extends Table {
 
     @Override
     public String getTableName() {
-        return "server_motives";
+        return "server_punish_reasons";
     }
 
     @Override
@@ -57,9 +57,9 @@ public class MotiveDao extends Table {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             while (resultSet.next()) {
-                PunishMotive punishMotive = PunishMotiveManager.toMotive(resultSet);
+                PunishReason punishReason = PunishReasonManager.toMotive(resultSet);
 
-                if (punishMotive != null) PunishMotiveManager.getPunishMotives().add(punishMotive);
+                if (punishReason != null) PunishReasonManager.getPunishReasons().add(punishReason);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
