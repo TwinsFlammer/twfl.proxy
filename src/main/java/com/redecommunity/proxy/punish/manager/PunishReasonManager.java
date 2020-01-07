@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
 import com.redecommunity.proxy.punish.data.Duration;
-import com.redecommunity.proxy.punish.data.PunishMotive;
+import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.enums.PunishType;
 
 import java.sql.ResultSet;
@@ -17,25 +17,33 @@ import java.util.stream.Collectors;
 /**
  * Created by @SrGutyerrez
  */
-public class PunishMotiveManager {
-    private static List<PunishMotive> punishMotives = Lists.newArrayList();
+public class PunishReasonManager {
+    private static List<PunishReason> punishReasons = Lists.newArrayList();
 
-    public static List<PunishMotive> getPunishMotives() {
-        return PunishMotiveManager.punishMotives
+    public static List<PunishReason> getPunishReasons() {
+        return PunishReasonManager.punishReasons
                 .stream()
-                .sorted((punishMotive1, punishMotive2) -> punishMotive2.getName().compareTo(punishMotive1.getName()))
+                .sorted((punishReason1, punishReason2) -> punishReason2.getName().compareTo(punishReason1.getName()))
                 .collect(Collectors.toList());
     }
 
-    public static PunishMotive getPunishMotive(String name) {
-        return PunishMotiveManager.punishMotives
+    public static PunishReason getPunishMotive(String name) {
+        return PunishReasonManager.punishReasons
                 .stream()
-                .filter(punishMotive -> punishMotive.getName().equalsIgnoreCase(name))
+                .filter(punishReason -> punishReason.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
 
-    public static PunishMotive toMotive(ResultSet resultSet) throws SQLException {
+    public static PunishReason getPunishMotive(Integer id) {
+        return PunishReasonManager.punishReasons
+                .stream()
+                .filter(punishReason -> punishReason.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static PunishReason toMotive(ResultSet resultSet) throws SQLException {
         String name = resultSet.getString("name");
 
         Integer groupId = resultSet.getInt("group_id");
@@ -55,9 +63,9 @@ public class PunishMotiveManager {
 
         durations.add(duration1);
 
-        Optional<PunishMotive> similarMotive = PunishMotiveManager.getSimilarPunishMotive(name);
+        Optional<PunishReason> similarMotive = PunishReasonManager.getSimilarPunishMotive(name);
 
-        PunishMotive punishMotive = similarMotive.isPresent() ? PunishMotiveManager.getPunishMotive(name) : new PunishMotive(
+        PunishReason punishReason = similarMotive.isPresent() ? PunishReasonManager.getPunishMotive(name) : new PunishReason(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
                 resultSet.getString("display_name"),
@@ -66,15 +74,15 @@ public class PunishMotiveManager {
                 durations
         );
 
-        if (similarMotive.isPresent()) punishMotive.getDurations().add(duration1);
+        if (similarMotive.isPresent()) punishReason.getDurations().add(duration1);
 
-        return punishMotive;
+        return punishReason;
     }
 
-    private static Optional<PunishMotive> getSimilarPunishMotive(String name) {
-        return PunishMotiveManager.punishMotives
+    private static Optional<PunishReason> getSimilarPunishMotive(String name) {
+        return PunishReasonManager.punishReasons
                 .stream()
-                .filter(punishMotive -> punishMotive.getName().equalsIgnoreCase(name))
+                .filter(punishReason -> punishReason.getName().equalsIgnoreCase(name))
                 .findFirst();
     }
 }
