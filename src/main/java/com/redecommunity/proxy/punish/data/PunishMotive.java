@@ -11,7 +11,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Getter
-public class Motive {
+public class PunishMotive {
     private final Integer id;
     private final String name, displayName, description;
     private final Group group;
