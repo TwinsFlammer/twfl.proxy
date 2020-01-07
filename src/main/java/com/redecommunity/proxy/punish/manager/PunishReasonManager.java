@@ -11,7 +11,6 @@ import com.redecommunity.proxy.punish.data.enums.PunishType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -25,9 +24,7 @@ public class PunishReasonManager {
     public PunishReasonManager() {
         PunishReasonDao punishReasonDao = new PunishReasonDao();
 
-        Set<PunishReason> punishReasons = punishReasonDao.findAll();
-    
-        PunishReasonManager.punishReasons.addAll(punishReasons);
+        punishReasonDao.findAll();
     }
 
     public static List<PunishReason> getPunishReasons() {
