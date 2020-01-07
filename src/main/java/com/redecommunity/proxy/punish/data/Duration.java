@@ -15,4 +15,17 @@ public class Duration {
     private final Integer duration;
     private final TimeUnit timeType;
     private final PunishType punishType;
+
+    public String getTimeTypeDisplayName() {
+        switch (this.timeType) {
+            case DAYS:
+                return "dias";
+            case HOURS:
+                return "horas";
+            case MINUTES:
+                return "minutos";
+            default:
+                return "indefinido";
+        }
+    }
 }
