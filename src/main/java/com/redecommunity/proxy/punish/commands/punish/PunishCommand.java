@@ -126,6 +126,16 @@ public class PunishCommand extends CustomCommand {
                 return;
             }
 
+            if (user.getHighestGroup().getPriority() < punishReason.getGroup().getPriority()) {
+                user.sendMessage(
+                        String.format(
+                                language.getMessage("messages.default_commands.invalid_group"),
+                                punishReason.getGroup().getFancyPrefix()
+                        )
+                );
+                return;
+            }
+
             if (!user.hasGroup("manager") && !Helper.isURLValid(proof)) {
                 user.sendMessage(
                         language.getMessage("punishment.invalid_proof_url")
@@ -139,7 +149,7 @@ public class PunishCommand extends CustomCommand {
             keys.put("reason_id", punishReason.getId());
             keys.put("status", true);
 
-            List<Punishment> punishments = PunishmentManager.getPunishments(user);
+            List<Punishment> punishments = PunishmentManager.getPunishments(user1);
 
             Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMicros(15);
 
@@ -171,7 +181,10 @@ public class PunishCommand extends CustomCommand {
             punishment.broadcast();
 
             user.sendMessage(
-                    language.getMessage("punishment.punishment_applied")
+                    String.format(
+                            language.getMessage("punishment.punishment_applied"),
+                            user1.getDisplayName()
+                    )
             );
             return;
         } else {
