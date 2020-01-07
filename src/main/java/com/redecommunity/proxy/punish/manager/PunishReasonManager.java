@@ -3,6 +3,7 @@ package com.redecommunity.proxy.punish.manager;
 import com.google.common.collect.Lists;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
+import com.redecommunity.proxy.punish.dao.PunishReasonDao;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.enums.PunishType;
@@ -19,6 +20,14 @@ import java.util.stream.Collectors;
  */
 public class PunishReasonManager {
     private static List<PunishReason> punishReasons = Lists.newArrayList();
+
+    public PunishReasonManager() {
+        PunishReasonDao punishReasonDao = new PunishReasonDao();
+
+        Set<PunishReason> punishReasons = punishReasonDao.findAll();
+    
+        PunishReasonManager.punishReasons.addAll(punishReasons);
+    }
 
     public static List<PunishReason> getPunishReasons() {
         return PunishReasonManager.punishReasons
