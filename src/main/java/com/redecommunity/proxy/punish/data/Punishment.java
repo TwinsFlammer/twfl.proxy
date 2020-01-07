@@ -80,6 +80,10 @@ public class Punishment {
         return this.status;
     }
 
+    public Boolean isStarted() {
+        return this.startTime != null;
+    }
+
     public Boolean hasValidProof() {
         return this.proof != null && !this.proof.isEmpty();
     }
@@ -163,6 +167,20 @@ public class Punishment {
         Proxy.broadcastMessage(
                 group,
                 stringBuilder.toString()
+        );
+    }
+
+    public void start() {
+        HashMap<String, Object> keys = Maps.newHashMap();
+
+        keys.put("start_time", System.currentTimeMillis());
+
+        PunishmentDao punishmentDao = new PunishmentDao();
+
+        punishmentDao.update(
+                keys,
+                "id",
+                this.id
         );
     }
 }
