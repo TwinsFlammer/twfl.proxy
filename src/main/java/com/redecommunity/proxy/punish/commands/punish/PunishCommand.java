@@ -45,7 +45,7 @@ public class PunishCommand extends CustomCommand {
 
             JSONText jsonText = new JSONText();
 
-            List<PunishReason> punishReasons = PunishReasonManager.getPunishReasons();
+            List<PunishReason> punishReasons = PunishReasonManager.getPunishReasons(user.getHighestGroup());
 
             jsonText.next()
                     .text("\n")
