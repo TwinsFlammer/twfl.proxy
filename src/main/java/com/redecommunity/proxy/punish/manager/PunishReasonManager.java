@@ -86,6 +86,8 @@ public class PunishReasonManager {
                 durations
         );
 
+        System.out.println(similarMotive.isPresent());
+
         if (similarMotive.isPresent()) punishReason.getDurations().add(duration1);
 
         return punishReason;
