@@ -37,7 +37,7 @@ public class PunishmentDao extends Table {
                                 "`user_id` INTEGER NOT NULL," +
                                 "`staffer_id` INTEGER NOT NULL," +
                                 "`reason_id` INTEGER NOT NULL," +
-                                "`revoker_id` INTEGER," +
+                                "`revoke_user_id` INTEGER," +
                                 "`revoke_motive_id` INTEGER," +
                                 "`hidden` BOOLEAN NOT NULL," +
                                 "`perpetual` BOOLEAN NOT NULL," +
