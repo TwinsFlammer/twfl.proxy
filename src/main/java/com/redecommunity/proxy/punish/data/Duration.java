@@ -28,4 +28,12 @@ public class Duration {
                 return "indefinido";
         }
     }
+
+    public Long getEndTime() {
+        return System.currentTimeMillis() + timeType.toMillis(this.duration);
+    }
+
+    public Boolean isTemporary() {
+        return this.punishType != PunishType.BAN;
+    }
 }
