@@ -36,14 +36,13 @@ public class PunishmentDao extends Table {
                                 "`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT," +
                                 "`user_id` INTEGER NOT NULL," +
                                 "`staffer_id` INTEGER NOT NULL," +
-                                "`motive_id` INTEGER NOT NULL," +
+                                "`reason_id` INTEGER NOT NULL," +
                                 "`revoker_id` INTEGER," +
-                                "`revoker_motive_id` INTEGER," +
+                                "`revoke_motive_id` INTEGER," +
                                 "`hidden` BOOLEAN NOT NULL," +
                                 "`perpetual` BOOLEAN NOT NULL," +
                                 "`status` BOOLEAN NOT NULL," +
-                                "`revoke_reason_id` VARCHAR(255)," +
-                                "`proof` VARCHAR(255) NOT NULL," +
+                                "`proof` VARCHAR(255)," +
                                 "`time` LONG NOT NULL," +
                                 "`start_time` LONG," +
                                 "`end_time` LONG NOT NULL," +
@@ -60,7 +59,7 @@ public class PunishmentDao extends Table {
                         "(" +
                         "`user_id`," +
                         "`staffer_id`," +
-                        "`motive_id`," +
+                        "`reason_id`," +
                         "`hidden`," +
                         "`perpetual`," +
                         "`status`," +
@@ -81,7 +80,7 @@ public class PunishmentDao extends Table {
                 this.getTableName(),
                 object.getId(),
                 object.getStafferId(),
-                object.getMotiveId(),
+                object.getReasonId(),
                 object.isHidden(),
                 object.isPerpetual(),
                 object.getStatus(),
@@ -93,22 +92,21 @@ public class PunishmentDao extends Table {
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
-            preparedStatement.executeQuery();
+            preparedStatement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
     }
 
-    @Override
-    public <K, V, U, I> void update(HashMap<K, V> keys, U key, I value) {
+    public <K, V, U, I extends Integer> void update(HashMap<K, V> keys, U key, I value) {
         String where = this.generateWhere(keys);
 
         String query = String.format(
-                "UPDATE %s SET %s WHERE `%s`='%s';",
+                "UPDATE %s SET %s WHERE `%s`=%d;",
                 this.getTableName(),
+                where,
                 key,
-                value,
-                where
+                value
         );
 
         try (
