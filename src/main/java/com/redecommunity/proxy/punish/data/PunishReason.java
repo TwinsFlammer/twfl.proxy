@@ -18,6 +18,6 @@ public class PunishReason {
     private final List<Duration> durations;
 
     public Boolean isSimilar(PunishReason punishReason) {
-        return punishReason.getId().equals(this.id);
+        return punishReason.getName().equalsIgnoreCase(this.name);
     }
 }
