@@ -66,9 +66,7 @@ public class Punishment {
     public Boolean isBan() {
         Duration duration = this.getDuration();
 
-        Boolean isBan = duration.getPunishType() != PunishType.MUTE;
-
-        return !isBan;
+        return duration.getPunishType() != PunishType.MUTE;
     }
 
     public Boolean isActive() {
