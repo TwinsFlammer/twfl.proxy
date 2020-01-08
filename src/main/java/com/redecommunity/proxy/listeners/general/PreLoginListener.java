@@ -3,6 +3,8 @@ package com.redecommunity.proxy.listeners.general;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
+import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
@@ -21,6 +23,7 @@ import net.md_5.bungee.event.EventPriority;
 import org.apache.commons.io.Charsets;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -58,6 +61,15 @@ public class PreLoginListener implements Listener {
             event.setCancelled(true);
             return;
         }
+
+        UserGroupDao userGroupDao = new UserGroupDao();
+
+        Set<UserGroup> userGroups = userGroupDao.findAll(
+                user.getId(),
+                ""
+        );
+
+        user.getGroups().addAll(userGroups);
 
         Punishment punishment = PunishmentManager.getPunishments(user)
                 .stream()
