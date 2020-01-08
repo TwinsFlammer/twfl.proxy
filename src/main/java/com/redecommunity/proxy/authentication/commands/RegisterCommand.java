@@ -57,6 +57,17 @@ public class RegisterCommand extends CustomCommand {
             return;
         }
 
+        UserDao userDao = new UserDao();
+
+        User user1 = userDao.findOne("email", email);
+
+        if (user1 != null) {
+            user.sendMessage(
+                    language.getMessage("authentication.email_already_in_use")
+            );
+            return;
+        }
+
         String hashedPassword = Helper.hash(password);
 
         user.setPassword(hashedPassword);
@@ -66,8 +77,6 @@ public class RegisterCommand extends CustomCommand {
 
         keys.put("password", hashedPassword);
         keys.put("email", email);
-
-        UserDao userDao = new UserDao();
 
         userDao.update(
                 keys,
