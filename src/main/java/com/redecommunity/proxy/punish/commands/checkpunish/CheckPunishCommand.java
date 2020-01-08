@@ -59,14 +59,14 @@ public class CheckPunishCommand extends CustomCommand {
                 .next()
                 .text("§e" + squareSymbol + " Pendente §a" + squareSymbol + " Ativo §c" + squareSymbol + " Finalizado §7" + squareSymbol + " Revogado")
                 .next()
-                .text("\n\n")
-                .next();
+                .text("\n\n");
 
         punishments.forEach(punishment -> {
             User staffer = punishment.getStaffer();
             Duration duration = punishment.getDuration();
 
-            jsonText.text(" - ")
+            jsonText.next()
+                    .text(" - ")
                     .next()
                     .text(punishment.getColor() + "[" + punishment.getDate() + "] [" + punishment.getPunishReason().getDisplayName() + "]")
                     .hoverText(
@@ -98,9 +98,9 @@ public class CheckPunishCommand extends CustomCommand {
 
         if (punishments.isEmpty()) jsonText.text("   --/--")
                 .next()
-                .text("\n")
-                .next();
+                .text("\n");
 
-        jsonText.send(user);
+        jsonText.next()
+                .send(user);
     }
 }
