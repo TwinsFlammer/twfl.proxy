@@ -10,9 +10,7 @@ import com.redecommunity.proxy.punish.data.Punishment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by @SrGutyerrez
@@ -28,12 +26,30 @@ public class PunishmentManager {
         return PunishmentManager.getPunishments(user.getId());
     }
 
+    public static Punishment getPunishment(Integer id) {
+        for (List<Punishment> punishments : PunishmentManager.punishments.values())
+            for (Punishment punishment : punishments)
+                if (punishment != null && punishment.getId().equals(id)) return punishment;
+
+        return PunishmentManager.findOne(id);
+    }
+
     public static List<Punishment> clearPunishments(Integer userId) {
         return PunishmentManager.punishments.remove(userId);
     }
 
     public static List<Punishment> clearPunishments(User user) {
         return PunishmentManager.clearPunishments(user.getId());
+    }
+
+    private static Punishment findOne(Integer id) {
+        PunishmentDao punishmentDao = new PunishmentDao();
+
+        HashMap<String, Integer> keys = Maps.newHashMap();
+
+        keys.put("id", id);
+
+        return punishmentDao.findOne(keys);
     }
 
     private static List<Punishment> findAll(Integer userId) {
@@ -53,7 +69,7 @@ public class PunishmentManager {
     public static Duration getDuration(Integer punishCount, PunishReason punishReason) {
         List<Duration> durations = punishReason.getDurations();
 
-        return durations.size() <= punishCount ? durations.get(durations.size()-1) : durations.get(punishCount);
+        return durations.size() <= punishCount ? durations.get(durations.size() - 1) : durations.get(punishCount);
     }
 
     public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
@@ -62,7 +78,7 @@ public class PunishmentManager {
         Integer count = (int) punishments.stream()
                 .filter(Objects::nonNull)
                 .filter(punishment -> punishment.getPunishReason().isSimilar(punishReason))
-                .count()+1;
+                .count() + 1;
 
         Duration duration = PunishmentManager.getDuration(count, punishReason);
         Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
