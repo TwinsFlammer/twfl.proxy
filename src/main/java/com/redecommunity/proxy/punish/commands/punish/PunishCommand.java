@@ -129,7 +129,7 @@ public class PunishCommand extends CustomCommand {
                 return;
             }
 
-            if (user.hasGroup(punishReason.getGroup())) {
+            if (!user.hasGroup(punishReason.getGroup())) {
                 user.sendMessage(
                         String.format(
                                 language.getMessage("messages.default_commands.invalid_group"),
