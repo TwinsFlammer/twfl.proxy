@@ -78,11 +78,12 @@ public class PunishCommand extends CustomCommand {
                         .forEach(index -> {
                             Duration duration = durations.get(index);
 
-                            stringBuilder.append(index + 1)
+                            stringBuilder.append("§e")
+                                    .append(index + 1)
                                     .append("º: ")
                                     .append("§f[")
                                     .append(duration.getPunishType().toString())
-                                    .append("] ")
+                                    .append("] §f")
                                     .append(duration.getDuration())
                                     .append(" ")
                                     .append(duration.getTimeTypeDisplayName())
