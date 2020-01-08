@@ -60,7 +60,7 @@ public class PunishmentManager {
 
         List<Duration> durations = punishReason.getDurations();
 
-        return durations.get(durations.size() < count ? durations.size() - 1 : count);
+        return durations.get(durations.size()+1 < count ? durations.size() - 1 : count);
     }
 
     public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
