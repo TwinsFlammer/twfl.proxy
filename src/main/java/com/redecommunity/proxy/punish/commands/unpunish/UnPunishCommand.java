@@ -78,11 +78,11 @@ public class UnPunishCommand extends CustomCommand {
             });
 
             if (revokeReasons.isEmpty()) jsonText.text("   --/--")
+                    .next()
+                    .text("\n")
                     .next();
 
-            jsonText.text("\n")
-                    .next()
-                    .send(user);
+            jsonText.send(user);
             return;
         } else if (args.length == 2) {
             String preId = args[0];
