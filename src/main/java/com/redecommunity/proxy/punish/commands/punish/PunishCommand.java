@@ -86,7 +86,7 @@ public class PunishCommand extends CustomCommand {
                                     .append(duration.getDuration())
                                     .append(" ")
                                     .append(duration.getTimeTypeDisplayName())
-                                    .append(index > durations.size() ? "\n" : "");
+                                    .append(index+1 > durations.size() ? "" : "\n");
                         });
 
                 jsonText.hoverText(stringBuilder.toString())
