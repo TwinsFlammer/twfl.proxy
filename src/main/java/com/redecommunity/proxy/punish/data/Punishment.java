@@ -107,8 +107,8 @@ public class Punishment {
     }
 
     public ChatColor getColor() {
-        if (this.revokeUserId != null) return ChatColor.GRAY;
-        return this.startTime == null ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
+        if (this.revokeUserId != null && this.revokeUserId != 0) return ChatColor.GRAY;
+        return this.startTime == null || this.startTime == 0 ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
     }
 
     public String getProof() {
