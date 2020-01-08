@@ -115,7 +115,7 @@ public class UnPunishCommand extends CustomCommand {
                 return;
             }
 
-            if (punishment.isRevoked()) {
+            if (!punishment.isActive()) {
                 user.sendMessage(
                         language.getMessage("punishment.already_revoked")
                 );
