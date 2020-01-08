@@ -128,6 +128,8 @@ public class PunishmentDao extends Table {
                 where
         );
 
+        System.out.println(query);
+
         Set<T> punishments = Sets.newConcurrentHashSet();
 
         try (
