@@ -61,6 +61,7 @@ public class PunishmentDao extends Table {
                         "`user_id`," +
                         "`staffer_id`," +
                         "`reason_id`," +
+                        "`count`," +
                         "`hidden`," +
                         "`perpetual`," +
                         "`status`," +
@@ -69,6 +70,7 @@ public class PunishmentDao extends Table {
                         ")" +
                         " VALUES " +
                         "(" +
+                        "%d," +
                         "%d," +
                         "%d," +
                         "%d," +
@@ -82,6 +84,7 @@ public class PunishmentDao extends Table {
                 object.getUserId(),
                 object.getStafferId(),
                 object.getReasonId(),
+                object.getCount(),
                 object.isHidden(),
                 object.isPerpetual(),
                 object.getStatus(),
