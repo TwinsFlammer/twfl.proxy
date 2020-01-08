@@ -4,13 +4,17 @@ import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.common.shared.util.Constants;
+import com.redecommunity.proxy.authentication.manager.AttemptManager;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.manager.StartManager;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
@@ -126,5 +130,14 @@ public class Proxy extends CommunityPlugin {
                 server.getDisplayName(),
                 false
         );
+    }
+
+    public static void unloadUser(User user) {
+        user.setOffline();
+        user.setLogged(false);
+        TwitterManager.removeRequestToken(user.getId());
+        AttemptManager.removeAttempt(user.getId());
+        UserManager.removeUser(user.getId());
+        PunishmentManager.clearPunishments(user.getId());
     }
 }
