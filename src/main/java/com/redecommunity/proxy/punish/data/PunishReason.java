@@ -27,9 +27,12 @@ public class PunishReason {
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            for (String s : descriptions)
-                stringBuilder.append(s)
-                        .append("\n");
+            for (int i = 0; i < descriptions.length; i++) {
+                String description = descriptions[i];
+
+                stringBuilder.append(description)
+                        .append(i+1 >= descriptions.length ? "" : "\n");
+            }
 
             return stringBuilder.toString();
         }
