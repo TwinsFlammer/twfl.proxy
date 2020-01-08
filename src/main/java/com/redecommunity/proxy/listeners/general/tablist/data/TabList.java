@@ -2,8 +2,6 @@ package com.redecommunity.proxy.listeners.general.tablist.data;
 
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.util.Helper;
-import com.redecommunity.proxy.Proxy;
-import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,7 +48,7 @@ public class TabList {
                         "{proxy_count_player}",
                         "{proxy_count_online}",
                         "{proxy_count_players}",
-                        "<nl>"
+                        "\\\\n"
                 },
                 new String[] {
                         String.valueOf(ProxyServerManager.getProxyCount()),
