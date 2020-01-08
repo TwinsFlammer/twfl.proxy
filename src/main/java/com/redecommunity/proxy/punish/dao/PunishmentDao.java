@@ -55,7 +55,7 @@ public class PunishmentDao<T> extends Table {
         );
     }
 
-    public <T extends Punishment, P> P insert(T object) {
+    public <T extends Punishment> T insert(T object) {
         String query = String.format(
                 "INSERT INTO %s " +
                         "(" +
@@ -99,13 +99,13 @@ public class PunishmentDao<T> extends Table {
         ) {
             Boolean isResultSet = preparedStatement.execute();
 
-            if (isResultSet) {
-                ResultSet resultSet = preparedStatement.getGeneratedKeys();
-
-                Punishment punishment = PunishmentManager.toPunishment(resultSet);
-
-                return (P) punishment;
-            }
+//            if (isResultSet) {
+//                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+//
+//                Punishment punishment = PunishmentManager.toPunishment(resultSet);
+//
+//                return (T) punishment;
+//            }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
