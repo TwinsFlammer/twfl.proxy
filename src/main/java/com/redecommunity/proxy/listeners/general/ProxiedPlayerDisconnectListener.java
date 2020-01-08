@@ -5,6 +5,7 @@ import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.twitter.manager.TwitterManager;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.authentication.manager.AttemptManager;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
@@ -47,12 +48,6 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         proxyServerDao.update(proxyServer);
 
-        user.setOffline();
-        user.setLogged(false);
-
-        TwitterManager.removeRequestToken(user.getId());
-        AttemptManager.removeAttempt(user.getId());
-        UserManager.removeUser(user.getId());
-        PunishmentManager.clearPunishments(user.getId());
+        Proxy.unloadUser(user);
     }
 }
