@@ -179,9 +179,11 @@ public class PunishCommand extends CustomCommand {
 
             PunishmentDao punishmentDao = new PunishmentDao();
 
-            punishmentDao.insert(punishment);
+            Punishment punishment1 = punishmentDao.insert(punishment);
 
-            punishment.broadcast();
+            assert punishment1 != null;
+
+            punishment1.broadcast();
 
             user.sendMessage(
                     String.format(
