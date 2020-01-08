@@ -17,7 +17,9 @@ import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
 import org.json.simple.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by @SrGutyerrez
@@ -92,13 +94,37 @@ public class Punishment {
         return this.proof != null && !this.proof.isEmpty();
     }
 
+    public Boolean canRevokeBy(User user) {
+        if (user.hasGroup("manager")) return true;
+        else if (user.hasGroup("administrator")) {
+            return (this.startTime + TimeUnit.HOURS.toMillis(14)) >= System.currentTimeMillis();
+        } else if (user.hasGroup("moderator") && this.stafferId.equals(user.getId())) {
+            return (this.startTime + TimeUnit.HOURS.toMillis(7)) >= System.currentTimeMillis();
+        } else if (user.hasGroup("helper") && this.stafferId.equals(user.getId())) {
+            return (this.startTime + TimeUnit.HOURS.toMillis(3)) >= System.currentTimeMillis();
+        }
+        return false;
+    }
+
     public ChatColor getColor() {
         if (this.revokeUserId != null) return ChatColor.GRAY;
-        return this.startTime == null ? ChatColor.GOLD : this.status ? ChatColor.GREEN : ChatColor.RED;
+        return this.startTime == null ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
     }
 
     public String getProof() {
         return this.hasValidProof() ? " - " + this.proof : "";
+    }
+
+    public String getDate() {
+        return this.getSimpleDateFormat().format(this.time);
+    }
+
+    public String getStartDate() {
+        return this.isStarted() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
+    }
+
+    private SimpleDateFormat getSimpleDateFormat() {
+        return new SimpleDateFormat("dd/MM/YYYY HH:mm");
     }
 
     public User getUser() {
@@ -128,6 +154,29 @@ public class Punishment {
         this.revokeTime = System.currentTimeMillis();
 
         this.update(UpdateType.REVOKED);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n")
+                .append("§e * ")
+                .append(this.getRevoker().getDisplayName())
+                .append(" revogou uma punição de ")
+                .append(this.getUser().getDisplayName())
+                .append(".")
+                .append("\n")
+                .append("§e * Aplicada inicialmente por: ")
+                .append(this.getStaffer().getDisplayName())
+                .append("\n")
+                .append("§e * Motivo: ")
+                .append(revokeReason.getDisplayName())
+                .append("\n");
+
+        Group group = GroupManager.getGroup("helper");
+
+        Proxy.broadcastMessage(
+                group,
+                stringBuilder.toString()
+        );
     }
 
     public void broadcast() {
