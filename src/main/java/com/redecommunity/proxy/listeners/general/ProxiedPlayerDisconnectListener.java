@@ -9,6 +9,7 @@ import com.redecommunity.proxy.authentication.manager.AttemptManager;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -52,5 +53,6 @@ public class ProxiedPlayerDisconnectListener implements Listener {
         TwitterManager.removeRequestToken(user.getId());
         AttemptManager.removeAttempt(user.getId());
         UserManager.removeUser(user.getId());
+        PunishmentManager.clearPunishments(user.getId());
     }
 }
