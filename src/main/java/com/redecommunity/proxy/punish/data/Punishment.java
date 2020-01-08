@@ -60,7 +60,7 @@ public class Punishment {
     }
 
     public Boolean isTemporary() {
-        return this.endTime != null;
+        return this.endTime != 0;
     }
 
     public Boolean isBan() {
@@ -70,7 +70,11 @@ public class Punishment {
     }
 
     public Boolean isActive() {
+        System.out.println(this.endTime);
+        System.out.println(this.isTemporary());
         if (this.isTemporary() && System.currentTimeMillis() >= this.endTime) {
+            System.out.println("Desativar punição");
+
             this.status = false;
 
             HashMap<String, Object> keys = Maps.newHashMap();
@@ -89,7 +93,11 @@ public class Punishment {
     }
 
     public Boolean isStarted() {
-        return this.startTime != null;
+        return this.startTime != 0;
+    }
+
+    public Boolean isRevoked() {
+        return this.revokeTime != 0;
     }
 
     public Boolean hasValidProof() {
