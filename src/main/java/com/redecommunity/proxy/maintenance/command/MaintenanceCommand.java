@@ -56,10 +56,12 @@ public class MaintenanceCommand extends CustomCommand {
 
         if (serverName.equalsIgnoreCase("geral")) {
             MaintenanceFactory.setMaintenance(switchMode);
-            String.format(
-                    language.getMessage("maintenance.server_status_changed"),
-                    "geral",
-                    switchMode ? "ativada" : "desativada"
+            user.sendMessage(
+                    String.format(
+                            language.getMessage("maintenance.server_status_changed"),
+                            "geral",
+                            switchMode ? "ativada" : "desativada"
+                    )
             );
             return;
         }
