@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
  * Created by @SrGutyerrez
  */
 @RequiredArgsConstructor
-public class Motd {
+public class MOTD {
     @Getter
     private final Integer id;
     @Getter
