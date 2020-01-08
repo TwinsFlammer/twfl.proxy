@@ -1,6 +1,7 @@
 package com.redecommunity.proxy.punish.data;
 
 import com.google.common.collect.Maps;
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -153,8 +154,26 @@ public class Punishment {
     }
 
     public void broadcast() {
+        User user = this.getUser();
+        Language language = user.getLanguage();
+
         PunishReason punishReason = this.getPunishReason();
         Duration duration = this.getDuration();
+
+        PunishType punishType = duration.getPunishType();
+
+        if (user.isOnline()) {
+            user.kick(
+                    String.format(
+                            language.getMessage("punishment.kick_message"),
+                            punishType.getDisplayName(),
+                            punishReason.getDisplayName(),
+                            this.proof,
+                            this.getStaffer().getDisplayName(),
+                            this.id
+                    )
+            );
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
 
