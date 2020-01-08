@@ -59,14 +59,14 @@ public class CheckPunishCommand extends CustomCommand {
                 .next()
                 .text("§e" + squareSymbol + " Pendente §a" + squareSymbol + " Ativo §c" + squareSymbol + " Finalizado §7" + squareSymbol + " Revogado")
                 .next()
-                .text("\n\n");
+                .text("\n\n")
+                .next();
 
         punishments.forEach(punishment -> {
             User staffer = punishment.getStaffer();
             Duration duration = punishment.getDuration();
 
-            jsonText.next()
-                    .text(" - ")
+            jsonText.text(" - ")
                     .next()
                     .text(punishment.getColor() + "[" + punishment.getDate() + "] [" + punishment.getPunishReason().getDisplayName() + "]")
                     .hoverText(
@@ -93,14 +93,15 @@ public class CheckPunishCommand extends CustomCommand {
                     .clickSuggest("/unpunish " + punishment.getId())
                     .hoverText("§7Clique para revogar esta punição")
                     .next()
-                    .text("\n");
+                    .text("\n")
+                    .next();
         });
 
         if (punishments.isEmpty()) jsonText.text("   --/--")
                 .next()
-                .text("\n");
+                .text("\n")
+                .next();
 
-        jsonText.next()
-                .send(user);
+        jsonText.send(user);
     }
 }
