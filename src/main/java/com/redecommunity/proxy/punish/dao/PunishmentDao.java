@@ -55,7 +55,7 @@ public class PunishmentDao<T> extends Table {
         );
     }
 
-    public <T extends Punishment> T insert(T object) {
+    public <T extends Punishment, P> P insert(T object) {
         String query = String.format(
                 "INSERT INTO %s " +
                         "(" +
@@ -104,7 +104,7 @@ public class PunishmentDao<T> extends Table {
 
                 Punishment punishment = PunishmentManager.toPunishment(resultSet);
 
-                return (T) punishment;
+                return (P) punishment;
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
