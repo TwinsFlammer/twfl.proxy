@@ -76,7 +76,7 @@ public class PunishmentManager {
                 null,
                 null,
                 hidden,
-                null,
+                false,
                 true,
                 proof,
                 System.currentTimeMillis(),
