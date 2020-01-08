@@ -168,6 +168,7 @@ public class Punishment {
                 .append("\n");
 
         if (duration.isTemporary()) stringBuilder.append("§c * Duração: ")
+                .append(duration.getDuration())
                 .append(duration.getTimeTypeDisplayName())
                 .append("\n");
 
