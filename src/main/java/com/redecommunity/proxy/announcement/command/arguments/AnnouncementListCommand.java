@@ -1,9 +1,13 @@
 package com.redecommunity.proxy.announcement.command.arguments;
 
+import com.google.common.collect.Lists;
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.proxy.announcement.manager.AnnouncementManager;
+import com.redecommunity.proxy.announcement.dao.AnnouncementDao;
+import com.redecommunity.proxy.announcement.data.Announcement;
+
+import java.util.List;
 
 /**
  * Created by @SrGutyerrez
@@ -25,7 +29,11 @@ public class AnnouncementListCommand extends CustomArgumentCommand {
                 .text("\n\n")
                 .next();
 
-        AnnouncementManager.getAnnouncements().forEach(announcement -> {
+        AnnouncementDao announcementDao = new AnnouncementDao();
+
+        List<Announcement> announcements = Lists.newArrayList(announcementDao.findAll());
+
+        announcements.forEach(announcement -> {
             jsonText.text("  ")
                     .next()
                     .text("§d#" + announcement.getId())
@@ -45,7 +53,7 @@ public class AnnouncementListCommand extends CustomArgumentCommand {
                     .next();
         });
 
-        if (AnnouncementManager.getAnnouncements().isEmpty()) {
+        if (announcements.isEmpty()) {
             jsonText.text("  §cNão há anúncios cadastrados")
                     .next();
         }
