@@ -2,7 +2,7 @@ package com.redecommunity.proxy.connection.listeners.motd.dao;
 
 import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
-import com.redecommunity.proxy.connection.listeners.motd.data.Motd;
+import com.redecommunity.proxy.connection.listeners.motd.data.MOTD;
 import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
 
 import java.sql.Connection;
@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by @SrGutyerrez
  */
-public class MotdDao extends Table {
+public class MOTDDao extends Table {
     @Override
     public String getDatabaseName() {
         return "general";
@@ -79,7 +79,7 @@ public class MotdDao extends Table {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             while (resultSet.next()) {
-                Motd motd = MotdManager.toMotd(resultSet);
+                MOTD motd = MotdManager.toMotd(resultSet);
 
                 motds.add((T) motd);
             }
