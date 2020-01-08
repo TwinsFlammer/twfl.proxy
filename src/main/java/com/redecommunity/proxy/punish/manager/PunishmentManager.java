@@ -91,7 +91,7 @@ public class PunishmentManager {
                 resultSet.getInt("user_id"),
                 resultSet.getInt("staffer_id"),
                 resultSet.getInt("reason_id"),
-                resultSet.getInt("revoker_id"),
+                resultSet.getInt("revoke_user_id"),
                 resultSet.getInt("revoke_reason_id"),
                 resultSet.getBoolean("hidden"),
                 resultSet.getBoolean("perpetual"),
@@ -100,7 +100,7 @@ public class PunishmentManager {
                 resultSet.getLong("time"),
                 resultSet.getLong("start_time"),
                 resultSet.getLong("end_time"),
-                resultSet.getLong("revoker_time")
+                resultSet.getLong("revoke_time")
         );
     }
 }
