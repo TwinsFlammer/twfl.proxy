@@ -81,7 +81,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(Punishment::isActive)
-                .filter(this.predicate(Punishment::isTemporary).negate())
+                .filter(Punishment::isBan)
                 .findFirst()
                 .orElse(null);
 
@@ -92,7 +92,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                 .forEach(Punishment::start);
 
         if (punishment != null) {
-
             Duration duration = punishment.getDuration();
             PunishType punishType = duration.getPunishType();
             PunishReason punishReason = punishment.getPunishReason();
