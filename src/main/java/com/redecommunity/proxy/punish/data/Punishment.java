@@ -240,7 +240,7 @@ public class Punishment {
             case FINALIZED: {
                 HashMap<String, Boolean> keys = Maps.newHashMap();
 
-                keys.put("status", false);
+                keys.put("status", this.status);
 
                 punishmentDao.update(
                         keys,
