@@ -5,6 +5,7 @@ import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.Punishment;
@@ -92,7 +93,7 @@ public class PreLoginListener implements Listener {
             );
             event.setCancelled(true);
 
-            PunishmentManager.clearPunishments(user);
+            Proxy.unloadUser(user);
             return;
         }
 
