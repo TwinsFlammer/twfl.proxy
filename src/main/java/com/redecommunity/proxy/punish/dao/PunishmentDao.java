@@ -67,7 +67,8 @@ public class PunishmentDao<T> extends Table {
                         "`perpetual`," +
                         "`status`," +
                         "`proof`," +
-                        "`time`" +
+                        "`time`," +
+                        "`end_time`" +
                         ")" +
                         " VALUES " +
                         "(" +
@@ -79,6 +80,7 @@ public class PunishmentDao<T> extends Table {
                         "%b," +
                         "%b," +
                         "'%s'," +
+                        "%d," +
                         "%d" +
                         ");",
                 this.getTableName(),
@@ -90,24 +92,30 @@ public class PunishmentDao<T> extends Table {
                 object.isPerpetual(),
                 object.getStatus(),
                 object.getProof(),
-                object.getTime()
+                object.getTime(),
+                object.getEndTime()
         );
 
         try (
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
-            Boolean isResultSet = preparedStatement.execute();
+            preparedStatement.execute();
 
-            System.out.println(isResultSet);
+            HashMap<Object, Object> keys = Maps.newHashMap();
 
-            if (isResultSet) {
-                ResultSet resultSet = preparedStatement.getResultSet();
+            keys.put("user_id", object.getUserId());
+            keys.put("staffer_id", object.getStafferId());
+            keys.put("reason_id", object.getReasonId());
+            keys.put("count", object.getCount());
+            keys.put("hidden", object.isHidden());
+            keys.put("perpetual", object.isPerpetual());
+            keys.put("status", object.getStatus());
+            keys.put("proof", object.getProof());
+            keys.put("time", object.getTime());
+            keys.put("end_time", object.getEndTime());
 
-                Punishment punishment = PunishmentManager.toPunishment(resultSet);
-
-                return (T) punishment;
-            }
+            return (T) this.findOne(keys);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -135,6 +143,28 @@ public class PunishmentDao<T> extends Table {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public <K, V, T extends Punishment> T findOne(HashMap<K, V> keys) {
+        String where = this.generateWhere(keys);
+
+        String query = String.format(
+                "SELECT * FROM %s WHERE %s;",
+                this.getTableName(),
+                where
+        );
+
+        try (
+                Connection connection = this.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            if (resultSet.next()) return (T) PunishmentManager.toPunishment(resultSet);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return null;
     }
 
     public <K, V, U, I, T> Set<T> findAll(HashMap<K, V> keys) {
