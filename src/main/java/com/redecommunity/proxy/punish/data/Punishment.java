@@ -68,7 +68,7 @@ public class Punishment {
 
         Boolean ban = duration.getPunishType() != PunishType.MUTE;
 
-        System.out.println(ban);
+        System.out.println("> " + ban);
 
         return ban;
     }
