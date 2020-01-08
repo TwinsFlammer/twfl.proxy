@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
+import org.json.simple.JSONObject;
 
 import java.util.HashMap;
 
@@ -189,5 +190,26 @@ public class Punishment {
                 "id",
                 this.id
         );
+    }
+
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("id", this.id);
+        jsonObject.put("user_id", this.userId);
+        jsonObject.put("staffer_id", this.stafferId);
+        jsonObject.put("reason_id", this.reasonId);
+        jsonObject.put("revoke_user_id", this.revokeUserId);
+        jsonObject.put("revoke_motive_id", this.revokeReasonId);
+        jsonObject.put("hidden", this.hidden);
+        jsonObject.put("perpetual", this.perpetual);
+        jsonObject.put("status", this.status);
+        jsonObject.put("proof", this.proof);
+        jsonObject.put("time", this.time);
+        jsonObject.put("start_time", this.startTime);
+        jsonObject.put("end_time", this.endTime);
+        jsonObject.put("revoke_time", this.revokeTime);
+
+        return jsonObject.toString();
     }
 }
