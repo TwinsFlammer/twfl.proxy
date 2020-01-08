@@ -115,6 +115,20 @@ public class UnPunishCommand extends CustomCommand {
                 return;
             }
 
+            if (punishment.isRevoked()) {
+                user.sendMessage(
+                        language.getMessage("punishment.already_revoked")
+                );
+                return;
+            }
+
+            if (!punishment.canRevokeBy(user)) {
+                user.sendMessage(
+                        language.getMessage("punishment.revoke_time_expired")
+                );
+                return;
+            }
+
             punishment.revoke(
                     user,
                     revokeReason
