@@ -27,7 +27,8 @@ public class Punishment {
     private final Integer id,
             userId,
             stafferId,
-            reasonId;
+            reasonId,
+            count;
 
     @Getter
     private Integer revokeUserId,
@@ -60,7 +61,7 @@ public class Punishment {
     }
 
     public Boolean isTemporary() {
-        return this.endTime != 0;
+        return this.endTime != null && this.endTime != 0;
     }
 
     public Boolean isBan() {
@@ -89,11 +90,11 @@ public class Punishment {
     }
 
     public Boolean isStarted() {
-        return this.startTime != 0;
+        return this.startTime != null && this.startTime != 0;
     }
 
     public Boolean isRevoked() {
-        return this.revokeTime != 0;
+        return this.revokeTime != null && this.revokeTime != 0;
     }
 
     public Boolean hasValidProof() {
@@ -126,7 +127,7 @@ public class Punishment {
     }
 
     public Duration getDuration() {
-        return PunishmentManager.getDuration(this.getUser(), this.getPunishReason());
+        return PunishmentManager.getDuration(this.count, this.getPunishReason());
     }
 
     public void revoke(User user, RevokeReason revokeReason) {
