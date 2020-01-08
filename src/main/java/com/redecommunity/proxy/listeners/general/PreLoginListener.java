@@ -29,6 +29,12 @@ public class PreLoginListener implements Listener {
     public void onLogin(PreLoginEvent event) {
         PendingConnection pendingConnection = event.getConnection();
 
+        if (!pendingConnection.getName().matches("[a-zA-Z0-9-_]*")) {
+            event.setCancelReason(Messages.INVALID_USERNAME);
+            event.setCancelled(true);
+            return;
+        }
+
         User user = UserManager.getUser(pendingConnection.getName());
 
         if (user == null) {
@@ -82,6 +88,8 @@ public class PreLoginListener implements Listener {
                     )
             );
             event.setCancelled(true);
+
+            PunishmentManager.clearPunishments(user);
             return;
         }
 
