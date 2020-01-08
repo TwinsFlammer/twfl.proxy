@@ -37,7 +37,9 @@ public class PunishmentManager {
 
         List<Punishment> punishments = Lists.newArrayList(punishmentDao.findAll(keys));
 
-        return PunishmentManager.punishments.put(userId, punishments);
+        PunishmentManager.punishments.put(userId, punishments);
+
+        return punishments;
     }
 
     public static Duration getDuration(User user, PunishReason punishReason) {
