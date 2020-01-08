@@ -184,6 +184,8 @@ public class PunishCommand extends CustomCommand {
 
             punishment1.broadcast();
 
+            punishments.add(punishment1);
+
             user.sendMessage(
                     String.format(
                             language.getMessage("punishment.punishment_applied"),
