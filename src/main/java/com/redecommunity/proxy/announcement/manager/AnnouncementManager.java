@@ -53,7 +53,8 @@ public class AnnouncementManager {
 
                                 jsonText.next()
                                         .text("\n")
-                                        .next();
+                                        .next()
+                                        .text("§7 [Ver mais]");
                             });
 
                     ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
