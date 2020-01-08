@@ -53,9 +53,9 @@ public class UnPunishCommand extends CustomCommand {
             jsonText.next()
                     .text("\n")
                     .next()
-                    .text("Motivos de revogação de punição disponíveis (" + revokeReasons.size() + ")")
+                    .text("§eMotivos de revogação de punição disponíveis (" + revokeReasons.size() + ")")
                     .next()
-                    .text("\n")
+                    .text("\n\n")
                     .next();
 
             revokeReasons.forEach(revokeReason -> {
