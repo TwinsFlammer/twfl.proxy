@@ -47,7 +47,7 @@ public class MaintenanceFactory {
     public static MOTD getMaintenanceMOTD() {
         return new MOTD(
                 0,
-                "§cRede Community &f- FACTIONS §7(1.8.*)",
+                "§cRede Community §f- FACTIONS §7(1.8.*)",
                 "§cEstamos em manutenção no momento, aguarde.",
                 true
         );
