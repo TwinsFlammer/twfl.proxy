@@ -53,6 +53,10 @@ public class PunishmentManager {
     public static Duration getDuration(Integer punishCount, PunishReason punishReason) {
         List<Duration> durations = punishReason.getDurations();
 
+        System.out.println("Durations: " + durations.size());
+        System.out.println("PunishCount: " + punishCount);
+        System.out.println("Index: " + (durations.size()-1));
+
         return durations.size() < punishCount ? durations.get(durations.size()-1) : durations.get(punishCount);
     }
 
