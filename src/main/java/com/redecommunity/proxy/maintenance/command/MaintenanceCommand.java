@@ -6,6 +6,7 @@ import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
+import com.redecommunity.proxy.maintenance.factory.MaintenanceFactory;
 
 import java.util.Arrays;
 
@@ -52,6 +53,16 @@ public class MaintenanceCommand extends CustomCommand {
         }
 
         Boolean switchMode = action.equals("on");
+
+        if (serverName.equalsIgnoreCase("geral")) {
+            MaintenanceFactory.setMaintenance(switchMode);
+            String.format(
+                    language.getMessage("maintenance.server_status_changed"),
+                    "geral",
+                    switchMode ? "ativada" : "desativada"
+            );
+            return;
+        }
 
         Server server = ServerManager.getServer(serverName);
 
