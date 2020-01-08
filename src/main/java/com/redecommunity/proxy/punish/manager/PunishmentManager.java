@@ -50,7 +50,13 @@ public class PunishmentManager {
         return punishments;
     }
 
-    public static Duration getDuration(User user, PunishReason punishReason) {
+    public static Duration getDuration(Integer punishCount, PunishReason punishReason) {
+        List<Duration> durations = punishReason.getDurations();
+
+        return durations.size() < punishCount ? durations.get(durations.size()-1) : durations.get(punishCount);
+    }
+
+    public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
         List<Punishment> punishments = PunishmentManager.getPunishments(user);
 
         Integer count = (int) punishments.stream()
@@ -58,13 +64,7 @@ public class PunishmentManager {
                 .filter(punishment -> punishment.getPunishReason().isSimilar(punishReason))
                 .count();
 
-        List<Duration> durations = punishReason.getDurations();
-
-        return durations.get(durations.size()+1 < count ? durations.size() - 1 : count);
-    }
-
-    public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
-        Duration duration = PunishmentManager.getDuration(user, punishReason);
+        Duration duration = PunishmentManager.getDuration(count+1, punishReason);
         Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
 
         return new Punishment(
@@ -72,6 +72,7 @@ public class PunishmentManager {
                 user.getId(),
                 staffer.getId(),
                 punishReason.getId(),
+                count,
                 null,
                 null,
                 hidden,
@@ -93,6 +94,7 @@ public class PunishmentManager {
                 resultSet.getInt("reason_id"),
                 resultSet.getInt("revoke_user_id"),
                 resultSet.getInt("revoke_reason_id"),
+                resultSet.getInt("count"),
                 resultSet.getBoolean("hidden"),
                 resultSet.getBoolean("perpetual"),
                 resultSet.getBoolean("status"),
