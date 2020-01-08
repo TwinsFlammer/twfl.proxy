@@ -75,17 +75,7 @@ public class Punishment {
         if (this.isTemporary() && System.currentTimeMillis() >= this.endTime) {
             this.status = false;
 
-            HashMap<String, Object> keys = Maps.newHashMap();
-
-            keys.put("status", this.status);
-
-            PunishmentDao punishmentDao = new PunishmentDao();
-
-            punishmentDao.update(
-                    keys,
-                    "id",
-                    this.id
-            );
+            this.update(UpdateType.FINALIZED);
         }
         return this.status;
     }
@@ -137,20 +127,7 @@ public class Punishment {
         this.revokeReasonId = revokeReason.getId();
         this.revokeTime = System.currentTimeMillis();
 
-        HashMap<String, Object> keys = Maps.newHashMap();
-
-        keys.put("status", this.status);
-        keys.put("revoke_user_id", this.revokeUserId);
-        keys.put("revoke_reason_id", this.revokeReasonId);
-        keys.put("revoke_time", this.revokeTime);
-
-        PunishmentDao punishmentDao = new PunishmentDao();
-
-        punishmentDao.update(
-                keys,
-                "id",
-                this.id
-        );
+        this.update(UpdateType.REVOKED);
     }
 
     public void broadcast() {
@@ -203,17 +180,53 @@ public class Punishment {
     }
 
     public void start() {
-        HashMap<String, Object> keys = Maps.newHashMap();
+        this.update(UpdateType.START);
+    }
 
-        keys.put("start_time", System.currentTimeMillis());
-
+    private void update(UpdateType updateType) {
         PunishmentDao punishmentDao = new PunishmentDao();
 
-        punishmentDao.update(
-                keys,
-                "id",
-                this.id
-        );
+        switch (updateType) {
+            case FINALIZED: {
+                HashMap<String, Boolean> keys = Maps.newHashMap();
+
+                keys.put("status", false);
+
+                punishmentDao.update(
+                        keys,
+                        "id",
+                        this.id
+                );
+                return;
+            }
+            case REVOKED: {
+                HashMap<String, Object> keys = Maps.newHashMap();
+
+                keys.put("status", this.status);
+                keys.put("revoke_user_id", this.revokeUserId);
+                keys.put("revoke_reason_id", this.revokeReasonId);
+                keys.put("revoke_time", this.revokeTime);
+
+                punishmentDao.update(
+                        keys,
+                        "id",
+                        this.id
+                );
+                return;
+            }
+            case START: {
+                HashMap<String, Object> keys = Maps.newHashMap();
+
+                keys.put("start_time", System.currentTimeMillis());
+
+                punishmentDao.update(
+                        keys,
+                        "id",
+                        this.id
+                );
+                return;
+            }
+        }
     }
 
     public String toString() {
@@ -235,5 +248,11 @@ public class Punishment {
         jsonObject.put("revoke_time", this.revokeTime);
 
         return jsonObject.toString();
+    }
+
+    enum UpdateType {
+        FINALIZED,
+        REVOKED,
+        START;
     }
 }
