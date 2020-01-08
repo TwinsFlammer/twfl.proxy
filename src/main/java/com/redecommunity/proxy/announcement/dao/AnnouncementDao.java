@@ -66,6 +66,28 @@ public class AnnouncementDao extends Table {
     }
 
     @Override
+    public <K, V, T> T findOne(K key, V value) {
+        String query = String.format(
+                "SELECT * FROM %s WHERE `%s`=%d",
+                this.getTableName(),
+                key,
+                value
+        );
+
+        try (
+                Connection connection = this.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            if (resultSet.next()) return (T) AnnouncementManager.toAnnouncement(resultSet);
+        } catch (SQLException | IOException exception) {
+            exception.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public <T> Set<T> findAll() {
         String query = String.format(
                 "SELECT * FROM %s",
