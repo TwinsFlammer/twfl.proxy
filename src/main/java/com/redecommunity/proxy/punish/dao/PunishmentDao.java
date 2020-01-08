@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.punish.dao;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.proxy.punish.data.Punishment;
@@ -15,7 +16,7 @@ import java.util.Set;
 /**
  * Created by @SrGutyerrez
  */
-public class PunishmentDao extends Table {
+public class PunishmentDao<T> extends Table {
 
     @Override
     public String getDatabaseName() {
@@ -54,7 +55,7 @@ public class PunishmentDao extends Table {
         );
     }
 
-    public <T extends Punishment> void insert(T object) {
+    public <T extends Punishment> T insert(T object) {
         String query = String.format(
                 "INSERT INTO %s " +
                         "(" +
@@ -96,10 +97,20 @@ public class PunishmentDao extends Table {
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
-            preparedStatement.execute();
+            Boolean isResultSet = preparedStatement.execute();
+
+            if (isResultSet) {
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+                Punishment punishment = PunishmentManager.toPunishment(resultSet);
+
+                return (T) punishment;
+            }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+
+        return null;
     }
 
     public <K, V, U, I extends Integer> void update(HashMap<K, V> keys, U key, I value) {
