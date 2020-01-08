@@ -66,15 +66,13 @@ public class Punishment {
     public Boolean isBan() {
         Duration duration = this.getDuration();
 
+        System.out.println(duration.getPunishType());
+
         return duration.getPunishType() != PunishType.MUTE;
     }
 
     public Boolean isActive() {
-        System.out.println(this.endTime);
-        System.out.println(this.isTemporary());
         if (this.isTemporary() && System.currentTimeMillis() >= this.endTime) {
-            System.out.println("Desativar punição");
-
             this.status = false;
 
             HashMap<String, Object> keys = Maps.newHashMap();
