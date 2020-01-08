@@ -67,9 +67,7 @@ public class UnPunishCommand extends CustomCommand {
                                 "\n\n" +
                                 "§f" + revokeReason.getDescription() +
                                 "\n\n" +
-                                "§fGrupo mínimo: " + revokeReason.getGroup().getFancyPrefix() +
-                                "\n" +
-                                "§fRede: §7SURVIVAL"
+                                "§fGrupo mínimo: " + revokeReason.getGroup().getFancyPrefix()
                         )
                         .clickSuggest("/unpunish " + id + " " + revokeReason.getName())
                         .next()
