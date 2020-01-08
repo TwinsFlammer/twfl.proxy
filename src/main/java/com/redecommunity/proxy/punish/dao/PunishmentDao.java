@@ -78,7 +78,7 @@ public class PunishmentDao extends Table {
                         "%d" +
                         ");",
                 this.getTableName(),
-                object.getId(),
+                object.getUserId(),
                 object.getStafferId(),
                 object.getReasonId(),
                 object.isHidden(),
@@ -128,8 +128,6 @@ public class PunishmentDao extends Table {
                 where
         );
 
-        System.out.println(query);
-
         Set<T> punishments = Sets.newConcurrentHashSet();
 
         try (
@@ -137,12 +135,8 @@ public class PunishmentDao extends Table {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
-            System.out.println("YEAH");
             while (resultSet.next()) {
-                System.out.println("Executei o next");
                 Punishment punishment = PunishmentManager.toPunishment(resultSet);
-
-                System.out.println(punishment.toString());
 
                 punishments.add((T) punishment);
             }
