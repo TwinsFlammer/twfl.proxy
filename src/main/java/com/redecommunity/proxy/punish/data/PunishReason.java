@@ -22,8 +22,8 @@ public class PunishReason {
     }
 
     public String getDescription() {
-        if (this.description.contains("\n")) {
-            String[] descriptions = this.description.split("\n");
+        if (this.description.contains("\\n")) {
+            String[] descriptions = this.description.split("\\\\n");
 
             StringBuilder stringBuilder = new StringBuilder();
 
