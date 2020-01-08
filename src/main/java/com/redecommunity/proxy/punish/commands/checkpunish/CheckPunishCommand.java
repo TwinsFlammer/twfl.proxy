@@ -68,7 +68,7 @@ public class CheckPunishCommand extends CustomCommand {
 
             jsonText.text(" - ")
                     .next()
-                    .text(punishment.getColor() + "[" + punishment.getDate() + "]")
+                    .text(punishment.getColor() + "[" + punishment.getDate() + "] [" + punishment.getPunishReason().getDisplayName() + "]")
                     .hoverText(
                             "Id: §b#" + punishment.getId() +
                             "\n" +
@@ -81,8 +81,6 @@ public class CheckPunishCommand extends CustomCommand {
                             "Tipo: §7[" + duration.getPunishType().toString() + "]"
                     ).next()
                     .text(" ")
-                    .next()
-                    .text(punishment.getColor() + "[" + punishment.getPunishReason().getDisplayName() + "] ")
                     .next()
                     .text("[Prova]");
 
@@ -101,11 +99,11 @@ public class CheckPunishCommand extends CustomCommand {
 
         if (punishments.isEmpty()) {
             jsonText.text("   --/--")
+                    .next()
+                    .text("\n")
                     .next();
         }
 
-        jsonText.text("\n")
-                .next()
-                .send(user);
+        jsonText.send(user);
     }
 }
