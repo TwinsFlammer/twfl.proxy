@@ -28,6 +28,14 @@ public class PunishmentManager {
         return PunishmentManager.getPunishments(user.getId());
     }
 
+    public static List<Punishment> clearPunishments(Integer userId) {
+        return PunishmentManager.punishments.remove(userId);
+    }
+
+    public static List<Punishment> clearPunishments(User user) {
+        return PunishmentManager.clearPunishments(user.getId());
+    }
+
     private static List<Punishment> findAll(Integer userId) {
         PunishmentDao punishmentDao = new PunishmentDao();
 
