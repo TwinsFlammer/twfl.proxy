@@ -154,6 +154,8 @@ public class PunishmentDao<T> extends Table {
                 where
         );
 
+        System.out.println(query);
+
         try (
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
