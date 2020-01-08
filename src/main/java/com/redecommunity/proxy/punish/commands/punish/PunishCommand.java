@@ -86,7 +86,7 @@ public class PunishCommand extends CustomCommand {
                                     .append(duration.getDuration())
                                     .append(" ")
                                     .append(duration.getTimeTypeDisplayName())
-                                    .append("\n");
+                                    .append(index > durations.size() ? "\n" : "");
                         });
 
                 jsonText.hoverText(stringBuilder.toString())
@@ -97,10 +97,10 @@ public class PunishCommand extends CustomCommand {
 
             if (punishReasons.isEmpty()) jsonText.text("   --/--")
                     .next()
-                    .text("\n")
-                    .next();
+                    .text("\n");
 
-            jsonText.send(user);
+            jsonText.next()
+                    .send(user);
             return;
         } else if (args.length >= 2) {
             String targetName = args[0];
