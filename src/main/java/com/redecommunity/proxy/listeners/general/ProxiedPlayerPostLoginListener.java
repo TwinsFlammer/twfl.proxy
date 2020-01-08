@@ -1,7 +1,6 @@
 package com.redecommunity.proxy.listeners.general;
 
 import com.redecommunity.common.shared.language.enums.Language;
-import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
 import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
@@ -11,11 +10,6 @@ import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
-import com.redecommunity.proxy.punish.data.Duration;
-import com.redecommunity.proxy.punish.data.PunishReason;
-import com.redecommunity.proxy.punish.data.Punishment;
-import com.redecommunity.proxy.punish.data.enums.PunishType;
-import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import com.redecommunity.proxy.util.Messages;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -25,10 +19,8 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.apache.commons.io.Charsets;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 /**
  * Created by @SrGutyerrez
@@ -37,6 +29,8 @@ public class ProxiedPlayerPostLoginListener implements Listener {
     @EventHandler
     public void onLoin(PostLoginEvent event) {
         ProxiedPlayer proxiedPlayer = event.getPlayer();
+
+        if (!proxiedPlayer.isConnected()) return;
 
         if (!this.isValidUUID(proxiedPlayer.getUniqueId(), proxiedPlayer.getName())) {
             proxiedPlayer.disconnect(Messages.INVALID_UUID_MESSAGE);
@@ -49,62 +43,11 @@ public class ProxiedPlayerPostLoginListener implements Listener {
         }
 
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
-
-        UserDao userDao = new UserDao();
-
-        if (user == null) {
-            user = UserManager.generateUser(
-                    proxiedPlayer.getName(),
-                    proxiedPlayer.getUniqueId()
-            );
-
-            userDao.insert(user);
-        }
-
-        user = UserManager.getUser(proxiedPlayer.getUniqueId());
-
-        if (user == null) {
-            proxiedPlayer.disconnect(Messages.INVALID_USER);
-            return;
-        }
-
         Language language = user.getLanguage();
 
         if (user.isConsole()) {
             proxiedPlayer.disconnect(
                     language.getMessage("errors.console_player")
-            );
-            return;
-        }
-
-        Punishment punishment = PunishmentManager.getPunishments(user)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(Punishment::isActive)
-                .filter(Punishment::isBan)
-                .findFirst()
-                .orElse(null);
-
-        PunishmentManager.getPunishments(user)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(this.predicate(Punishment::isStarted).negate())
-                .forEach(Punishment::start);
-
-        if (punishment != null) {
-            Duration duration = punishment.getDuration();
-            PunishType punishType = duration.getPunishType();
-            PunishReason punishReason = punishment.getPunishReason();
-
-            proxiedPlayer.disconnect(
-                    String.format(
-                            language.getMessage("punishment.kick_message"),
-                            punishType.getDisplayName(),
-                            punishReason.getDisplayName(),
-                            punishment.getProof(),
-                            punishment.getStaffer().getDisplayName(),
-                            punishment.getId()
-                    )
             );
             return;
         }
@@ -137,10 +80,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                             new TextComponent(tabList.getFooter())
                     }
             );
-    }
-
-    private <T> Predicate<T> predicate(Predicate<T> predicate) {
-        return predicate;
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
