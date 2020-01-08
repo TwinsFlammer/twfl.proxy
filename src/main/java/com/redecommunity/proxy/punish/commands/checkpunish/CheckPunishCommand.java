@@ -97,12 +97,10 @@ public class CheckPunishCommand extends CustomCommand {
                     .next();
         });
 
-        if (punishments.isEmpty()) {
-            jsonText.text("   --/--")
-                    .next()
-                    .text("\n")
-                    .next();
-        }
+        if (punishments.isEmpty()) jsonText.text("   --/--")
+                .next()
+                .text("\n")
+                .next();
 
         jsonText.send(user);
     }
