@@ -66,7 +66,11 @@ public class Punishment {
     public Boolean isBan() {
         Duration duration = this.getDuration();
 
-        return duration.getPunishType() != PunishType.MUTE;
+        Boolean ban = duration.getPunishType() != PunishType.MUTE;
+
+        System.out.println(ban);
+
+        return ban;
     }
 
     public Boolean isActive() {
@@ -85,9 +89,6 @@ public class Punishment {
                     this.id
             );
         }
-
-        System.out.println(this.status);
-
         return this.status;
     }
 
