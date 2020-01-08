@@ -154,7 +154,7 @@ public class PunishCommand extends CustomCommand {
 
             List<Punishment> punishments = PunishmentManager.getPunishments(user1);
 
-            Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMicros(15);
+            Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(15);
 
             Optional<Punishment> optionalPunishment = punishments
                     .stream()
