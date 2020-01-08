@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.punish.dao;
 
+import com.google.common.collect.Sets;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.proxy.punish.data.Punishment;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
@@ -8,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -128,7 +128,7 @@ public class PunishmentDao extends Table {
                 where
         );
 
-        Set<T> punishments = Collections.emptySet();
+        Set<T> punishments = Sets.newConcurrentHashSet();
 
         try (
                 Connection connection = this.getConnection();
