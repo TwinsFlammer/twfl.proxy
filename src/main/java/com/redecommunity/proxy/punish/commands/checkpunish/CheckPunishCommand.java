@@ -93,8 +93,7 @@ public class CheckPunishCommand extends CustomCommand {
                     .clickSuggest("/unpunish " + punishment.getId())
                     .hoverText("§7Clique para revogar esta punição")
                     .next()
-                    .text("\n")
-                    .next();
+                    .text("\n");
         });
 
         if (punishments.isEmpty()) jsonText.text("   --/--")
