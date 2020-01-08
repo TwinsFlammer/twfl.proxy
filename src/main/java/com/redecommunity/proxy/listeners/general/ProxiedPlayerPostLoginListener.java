@@ -2,8 +2,6 @@ package com.redecommunity.proxy.listeners.general;
 
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
-import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
@@ -19,7 +17,6 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.apache.commons.io.Charsets;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -46,15 +43,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             );
             return;
         }
-
-        UserGroupDao userGroupDao = new UserGroupDao();
-
-        Set<UserGroup> userGroups = userGroupDao.findAll(
-                user.getId(),
-                ""
-        );
-
-        user.getGroups().addAll(userGroups);
 
         ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
 
