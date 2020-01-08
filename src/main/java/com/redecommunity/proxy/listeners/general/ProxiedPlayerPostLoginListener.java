@@ -37,11 +37,6 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
-        if (!proxiedPlayer.getName().matches("[a-zA-Z0-9-_]*")) {
-            proxiedPlayer.disconnect(Messages.INVALID_USERNAME);
-            return;
-        }
-
         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
         Language language = user.getLanguage();
 
