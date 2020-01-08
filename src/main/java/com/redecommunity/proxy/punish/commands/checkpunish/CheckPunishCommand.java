@@ -68,7 +68,7 @@ public class CheckPunishCommand extends CustomCommand {
 
             jsonText.text(" - ")
                     .next()
-                    .text(punishment.getColor().toString())
+                    .text(punishment.getColor())
                     .next()
                     .text("[" + punishment.getDate() + "]")
                     .hoverText(
@@ -78,7 +78,7 @@ public class CheckPunishCommand extends CustomCommand {
                             "\n\n" +
                             "Data de início: §7" + punishment.getStartDate() +
                             "\n" +
-                            "Duração: §7" + duration.getDuration() + duration.getTimeTypeDisplayName() +
+                            "Duração: §7" + duration.getDuration() + " " + duration.getTimeTypeDisplayName() +
                             "\n\n" +
                             "Tipo: §7[" + duration.getPunishType().toString() + "]"
                     ).next()
@@ -93,7 +93,7 @@ public class CheckPunishCommand extends CustomCommand {
             jsonText.next()
                     .text(" ")
                     .next()
-                    .text("[Revogar]")
+                    .text("§f[Revogar]")
                     .clickSuggest("/unpunish " + punishment.getId())
                     .hoverText("§7Clique para revogar esta punição")
                     .next()
