@@ -22,7 +22,7 @@ public class ProxiedPlayerServerKickListener implements Listener {
 
         Server server = ServerManager.getServer(serverInfo.getName());
 
-        if (server == null || server.isLobby()) return;
+        if (server == null || server.isLobby() || server.isLoginServer()) return;
 
         Server server1 = Proxy.getLobby();
 
