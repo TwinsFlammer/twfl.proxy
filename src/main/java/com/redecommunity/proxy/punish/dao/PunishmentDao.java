@@ -97,15 +97,13 @@ public class PunishmentDao<T> extends Table {
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
-            preparedStatement.execute();
+            if (preparedStatement.execute()) {
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
-//            if (isResultSet) {
-//                ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//
-//                Punishment punishment = PunishmentManager.toPunishment(resultSet);
-//
-//                return (T) punishment;
-//            }
+                Punishment punishment = PunishmentManager.toPunishment(resultSet);
+
+                return (T) punishment;
+            }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -113,7 +111,8 @@ public class PunishmentDao<T> extends Table {
         return null;
     }
 
-    public <K, V, U, I extends Integer> void update(HashMap<K, V> keys, U key, I value) {
+    @Override
+    public <K, V, U, I> void update(HashMap<K, V> keys, U key, I value) {
         String where = this.generateWhere(keys);
 
         String query = String.format(
