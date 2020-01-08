@@ -20,4 +20,19 @@ public class PunishReason {
     public Boolean isSimilar(PunishReason punishReason) {
         return punishReason.getName().equalsIgnoreCase(this.name);
     }
+
+    public String getDescription() {
+        if (this.description.contains("\n")) {
+            String[] descriptions = this.description.split("\n");
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (String s : descriptions)
+                stringBuilder.append(s)
+                        .append("\n");
+
+            return stringBuilder.toString();
+        }
+        return this.description;
+    }
 }
