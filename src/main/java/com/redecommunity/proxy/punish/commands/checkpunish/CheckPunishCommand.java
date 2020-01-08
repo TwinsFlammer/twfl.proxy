@@ -68,9 +68,7 @@ public class CheckPunishCommand extends CustomCommand {
 
             jsonText.text(" - ")
                     .next()
-                    .text(punishment.getColor())
-                    .next()
-                    .text("[" + punishment.getDate() + "]")
+                    .text(punishment.getColor() + "[" + punishment.getDate() + "]")
                     .hoverText(
                             "Id: §b#" + punishment.getId() +
                             "\n" +
@@ -84,7 +82,7 @@ public class CheckPunishCommand extends CustomCommand {
                     ).next()
                     .text(" ")
                     .next()
-                    .text("[" + punishment.getPunishReason().getDisplayName() + "] ")
+                    .text(punishment.getColor() + "[" + punishment.getPunishReason().getDisplayName() + "] ")
                     .next()
                     .text("[Prova]");
 
