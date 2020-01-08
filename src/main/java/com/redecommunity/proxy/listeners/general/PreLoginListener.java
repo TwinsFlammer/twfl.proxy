@@ -6,6 +6,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.maintenance.factory.MaintenanceFactory;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.Punishment;
@@ -97,7 +98,13 @@ public class PreLoginListener implements Listener {
             return;
         }
 
+        if (MaintenanceFactory.inMaintenance() && !user.hasGroup("helper")) {
+            event.setCancelReason(Messages.IN_MAINTENANCE);
+            event.setCancelled(true);
 
+            Proxy.unloadUser(user);
+            return;
+        }
     }
 
     private <T> Predicate<T> predicate(Predicate<T> predicate) {
