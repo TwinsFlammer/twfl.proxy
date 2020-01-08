@@ -66,7 +66,7 @@ public class PunishCommand extends CustomCommand {
                         .append(punishReason.getDisplayName())
                         .append("\n\n")
                         .append("§f")
-                        .append(punishReason.getDescription().replaceAll("\\n", "\n"))
+                        .append(punishReason.getDescription().replaceAll("\n", "\n"))
                         .append("\n\n")
                         .append("§fGrupo mínimo: ")
                         .append(punishReason.getGroup().getFancyPrefix())
