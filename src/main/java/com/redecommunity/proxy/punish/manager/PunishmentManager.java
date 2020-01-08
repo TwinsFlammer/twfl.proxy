@@ -21,10 +21,7 @@ public class PunishmentManager {
     private static HashMap<Integer, List<Punishment>> punishments = Maps.newHashMap();
 
     public static List<Punishment> getPunishments(Integer userId) {
-        return PunishmentManager.punishments.getOrDefault(
-                userId,
-                PunishmentManager.findAll(userId)
-        );
+        return PunishmentManager.punishments.containsKey(userId) ? PunishmentManager.punishments.get(userId) : PunishmentManager.findAll(userId);
     }
 
     public static List<Punishment> getPunishments(User user) {
@@ -53,7 +50,7 @@ public class PunishmentManager {
 
         List<Duration> durations = punishReason.getDurations();
 
-        return durations.get(durations.size() < count ? durations.size()- 1 : count);
+        return durations.get(durations.size() < count ? durations.size() - 1 : count);
     }
 
     public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
