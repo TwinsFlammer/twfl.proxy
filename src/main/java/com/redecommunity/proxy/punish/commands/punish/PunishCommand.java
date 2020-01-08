@@ -159,6 +159,7 @@ public class PunishCommand extends CustomCommand {
             Optional<Punishment> optionalPunishment = punishments
                     .stream()
                     .filter(Objects::nonNull)
+                    .filter(punishment -> punishment.getReasonId().equals(punishReason.getId()))
                     .filter(punishment -> punishment.getTime() >= minTime)
                     .findAny();
 
