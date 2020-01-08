@@ -70,8 +70,6 @@ public class PunishCommand extends CustomCommand {
                         .append("\n\n")
                         .append("§fGrupo mínimo: ")
                         .append(punishReason.getGroup().getFancyPrefix())
-                        .append("\n")
-                        .append("§fRedes: §7SURVIVAL")
                         .append("\n\n");
 
                 List<Duration> durations = punishReason.getDurations();
