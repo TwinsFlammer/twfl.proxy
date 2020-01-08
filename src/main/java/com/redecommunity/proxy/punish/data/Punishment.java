@@ -200,7 +200,7 @@ public class Punishment {
         jsonObject.put("staffer_id", this.stafferId);
         jsonObject.put("reason_id", this.reasonId);
         jsonObject.put("revoke_user_id", this.revokeUserId);
-        jsonObject.put("revoke_motive_id", this.revokeReasonId);
+        jsonObject.put("revoke_reason_id", this.revokeReasonId);
         jsonObject.put("hidden", this.hidden);
         jsonObject.put("perpetual", this.perpetual);
         jsonObject.put("status", this.status);
