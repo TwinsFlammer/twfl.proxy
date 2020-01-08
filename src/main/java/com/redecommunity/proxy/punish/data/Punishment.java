@@ -66,8 +66,6 @@ public class Punishment {
     public Boolean isBan() {
         Duration duration = this.getDuration();
 
-        System.out.println(duration.getPunishType());
-
         return duration.getPunishType() != PunishType.MUTE;
     }
 
@@ -87,6 +85,9 @@ public class Punishment {
                     this.id
             );
         }
+
+        System.out.println(this.status);
+
         return this.status;
     }
 
