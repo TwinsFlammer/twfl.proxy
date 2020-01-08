@@ -56,7 +56,9 @@ public class PunishCommand extends CustomCommand {
 
             punishReasons.forEach(punishReason -> {
                 jsonText.next()
-                        .text(" - " + punishReason.getDisplayName());
+                        .text(" - ")
+                        .next()
+                        .text(punishReason.getDisplayName());
 
                 StringBuilder stringBuilder = new StringBuilder();
 
@@ -64,7 +66,7 @@ public class PunishCommand extends CustomCommand {
                         .append(punishReason.getDisplayName())
                         .append("\n\n")
                         .append("§f")
-                        .append(punishReason.getDescription())
+                        .append(punishReason.getDescription().replaceAll("\\n", "\n"))
                         .append("\n\n")
                         .append("§fGrupo mínimo: ")
                         .append(punishReason.getGroup().getFancyPrefix())
