@@ -97,8 +97,12 @@ public class PunishmentDao<T> extends Table {
                 Connection connection = this.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
-            if (preparedStatement.execute()) {
-                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            Boolean isResultSet = preparedStatement.execute();
+
+            System.out.println(isResultSet);
+
+            if (isResultSet) {
+                ResultSet resultSet = preparedStatement.getResultSet();
 
                 Punishment punishment = PunishmentManager.toPunishment(resultSet);
 
