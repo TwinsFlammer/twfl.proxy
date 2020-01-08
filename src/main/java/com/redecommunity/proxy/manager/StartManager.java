@@ -12,7 +12,7 @@ import com.redecommunity.proxy.authentication.manager.AttemptManager;
 import com.redecommunity.proxy.authentication.manager.PasswordManager;
 import com.redecommunity.proxy.announcement.manager.AnnouncementManager;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
-import com.redecommunity.proxy.connection.listeners.motd.manager.MotdManager;
+import com.redecommunity.proxy.connection.listeners.motd.manager.MOTDManager;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.punish.manager.PunishReasonManager;
@@ -130,7 +130,7 @@ class DataManager {
         new ProxyServerManager();
         new DirectMessageManager();
         new TabListManager();
-        new MotdManager();
+        new MOTDManager();
         new ShortedURLManager();
         new AttemptManager();
         new PasswordManager();
