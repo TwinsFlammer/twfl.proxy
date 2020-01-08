@@ -19,11 +19,13 @@ public class Duration {
     public String getTimeTypeDisplayName() {
         switch (this.timeType) {
             case DAYS:
-                return "dias";
+                return (this.duration > 1 ? "dias" : "dia");
             case HOURS:
-                return "horas";
+                return (this.duration > 1 ? "horas" : "hora");
             case MINUTES:
-                return "minutos";
+                return (this.duration > 1 ? "minutos" : "minuto");
+            case SECONDS:
+                return (this.duration > 1 ? "segundos" : "segundo");
             default:
                 return "indefinido";
         }
