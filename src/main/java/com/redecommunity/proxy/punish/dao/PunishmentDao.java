@@ -146,15 +146,13 @@ public class PunishmentDao<T> extends Table {
     }
 
     public <K, V, T extends Punishment> T findOne(HashMap<K, V> keys) {
-        String where = this.generateWhere(keys);
+        String where = this.generateWhere(keys).replaceAll(",", " AND");
 
         String query = String.format(
                 "SELECT * FROM %s WHERE %s;",
                 this.getTableName(),
                 where
         );
-
-        System.out.println(">>" + query + "<<");
 
         try (
                 Connection connection = this.getConnection();
