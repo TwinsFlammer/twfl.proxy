@@ -135,8 +135,12 @@ public class PunishmentDao extends Table {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
+            System.out.println("YEAH");
             while (resultSet.next()) {
+                System.out.println("Executei o next");
                 Punishment punishment = PunishmentManager.toPunishment(resultSet);
+
+                System.out.println(punishment.toString());
 
                 punishments.add((T) punishment);
             }
