@@ -85,11 +85,15 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                 .findFirst()
                 .orElse(null);
 
+        System.out.println(punishment == null);
+
         PunishmentManager.getPunishments(user)
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(this.predicate(Punishment::isStarted).negate())
                 .forEach(Punishment::start);
+
+        PunishmentManager.getPunishments(user).forEach(punishment1 -> System.out.println(punishment1.toString()));
 
         if (punishment != null) {
             Duration duration = punishment.getDuration();
