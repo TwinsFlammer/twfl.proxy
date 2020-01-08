@@ -1,4 +1,4 @@
-package com.redecommunity.proxy.listeners.general.listeners;
+package com.redecommunity.proxy.listeners.general.kick;
 
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.databases.redis.handler.annonation.ChannelName;
@@ -7,6 +7,8 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Constants;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.Connection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -28,6 +30,10 @@ public class KickChannelJedisMessageListener implements JedisMessageListener {
 
         ProxiedPlayer proxiedPlayer = ProxyServer.getInstance().getPlayer(user.getUniqueId());
 
-        if (proxiedPlayer != null) proxiedPlayer.disconnect(reason);
+        if (proxiedPlayer != null) {
+            Connection connection = proxiedPlayer.getPendingConnection();
+
+            connection.disconnect(new TextComponent(reason));
+        }
     }
 }
