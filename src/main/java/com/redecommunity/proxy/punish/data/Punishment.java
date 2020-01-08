@@ -7,6 +7,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.punish.dao.PunishmentDao;
+import com.redecommunity.proxy.punish.data.enums.PunishType;
 import com.redecommunity.proxy.punish.manager.PunishReasonManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import lombok.AllArgsConstructor;
@@ -59,6 +60,12 @@ public class Punishment {
 
     public Boolean isTemporary() {
         return this.endTime != null;
+    }
+
+    public Boolean isBan() {
+        Duration duration = this.getDuration();
+
+        return duration.getPunishType() != PunishType.MUTE;
     }
 
     public Boolean isActive() {
