@@ -100,9 +100,7 @@ public class ReportCommand extends CustomCommand {
 
             if (report != null) {
                 user.sendMessage(
-                        String.format(
-                                language.getMessage("report.already_report_moments_ago")
-                        )
+                        language.getMessage("report.already_report_moments_ago")
                 );
                 return;
             }
