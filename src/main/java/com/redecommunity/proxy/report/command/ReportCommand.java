@@ -11,6 +11,8 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.report.data.ReportReason;
 import com.redecommunity.common.shared.report.manager.ReportReasonManager;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.report.data.Report;
+import com.redecommunity.proxy.report.manager.ReportManager;
 
 import java.util.List;
 
@@ -87,6 +89,20 @@ public class ReportCommand extends CustomCommand {
             if (reportReason == null) {
                 user.sendMessage(
                         language.getMessage("report.invalid_reason")
+                );
+                return;
+            }
+
+            Report report = ReportManager.getLastReport(
+                    user.getId(),
+                    user1.getId()
+            );
+
+            if (report != null) {
+                user.sendMessage(
+                        String.format(
+                                language.getMessage("report.already_report_moments_ago")
+                        )
                 );
                 return;
             }
