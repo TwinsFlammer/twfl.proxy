@@ -12,6 +12,14 @@ import java.util.Objects;
 public class ReportManager {
     private static List<Report> reports = Lists.newArrayList();
 
+    public static List<Report> getReports() {
+        return ReportManager.reports;
+    }
+
+    public static void addReport(Report report) {
+        ReportManager.reports.add(report);
+    }
+
     public static Report getLastReport(Integer userId, Integer targetId) {
         ReportManager.clear();
 
