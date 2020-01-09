@@ -5,6 +5,7 @@ import com.redecommunity.proxy.report.data.Report;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Created by @SrGutyerrez
@@ -28,12 +29,16 @@ public class ReportManager {
                 .filter(Objects::nonNull)
                 .filter(report -> report.getUserId().equals(userId))
                 .filter(report -> report.getTargetId().equals(targetId))
-                .filter(Report::canReportAgain)
+                .filter(ReportManager.predicate(Report::canReportAgain).negate())
                 .findFirst()
                 .orElse(null);
     }
 
     private static void clear() {
         ReportManager.reports.removeIf(Report::canReportAgain);
+    }
+
+    private static <T> Predicate<T> predicate(Predicate<T> predicate) {
+        return predicate;
     }
 }
