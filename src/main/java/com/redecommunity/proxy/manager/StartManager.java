@@ -18,6 +18,7 @@ import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.punish.manager.PunishReasonManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import com.redecommunity.proxy.punish.manager.RevokeReasonManager;
+import com.redecommunity.proxy.report.manager.ReportManager;
 import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -138,5 +139,6 @@ class DataManager {
         new RevokeReasonManager();
         new PunishmentManager();
         new PunishReasonManager();
+        new ReportManager();
     }
 }
