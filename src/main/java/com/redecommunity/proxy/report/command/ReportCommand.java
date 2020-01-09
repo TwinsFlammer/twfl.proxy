@@ -118,6 +118,14 @@ public class ReportCommand extends CustomCommand {
                             user1.getPrefix() + user1.getDisplayName()
                     )
             );
+
+            Report report1 = new Report(
+                    user.getId(),
+                    user1.getId(),
+                    System.currentTimeMillis()
+            );
+
+            ReportManager.addReport(report1);
             return;
         } else {
             user.sendMessage(
