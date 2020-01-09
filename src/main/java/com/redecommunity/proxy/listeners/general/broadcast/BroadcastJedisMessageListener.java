@@ -7,6 +7,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.preference.Preference;
 import com.redecommunity.common.shared.util.Constants;
+import com.redecommunity.common.shared.util.Helper;
 import net.md_5.bungee.api.ProxyServer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,7 +50,7 @@ public class BroadcastJedisMessageListener implements JedisMessageListener {
                 for (Preference preference : preferences)
                     if (user.isDisabled(preference)) disabledCount++;
 
-                if (disabledCount == 0) proxiedPlayer.sendMessage(value);
+                if (disabledCount == 0) proxiedPlayer.sendMessage(Helper.colorize(value));
             }
         });
     }
