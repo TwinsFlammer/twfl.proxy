@@ -1,7 +1,7 @@
 package com.redecommunity.proxy.commands.defaults.players.friend.arguments;
 
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
-import com.redecommunity.common.shared.friend.database.FriendDatabase;
+import com.redecommunity.common.shared.friend.storage.FriendStorage;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
@@ -57,7 +57,7 @@ public class FriendClearCommand extends CustomArgumentCommand {
 
         Iterator<Integer> usersId = friends.iterator();
 
-        FriendDatabase friendDatabase = new FriendDatabase();
+        FriendStorage friendStorage = new FriendStorage();
 
         while (usersId.hasNext()) {
             Integer userId = usersId.next();
@@ -69,13 +69,13 @@ public class FriendClearCommand extends CustomArgumentCommand {
             if (user1.getLastLogin() < period) {
                 usersId.remove();
 
-                friendDatabase.delete(
+                friendStorage.delete(
                         "user_id",
                         user.getId(),
                         "friend_id",
                         userId
                 );
-                friendDatabase.delete(
+                friendStorage.delete(
                         "user_id",
                         userId,
                         "friend_id",
