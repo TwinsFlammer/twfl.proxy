@@ -6,6 +6,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.dao.UserGroupDao;
 import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.common.shared.skin.data.Skin;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.maintenance.factory.MaintenanceFactory;
@@ -14,6 +15,7 @@ import com.redecommunity.proxy.punish.data.PunishReason;
 import com.redecommunity.proxy.punish.data.Punishment;
 import com.redecommunity.proxy.punish.data.enums.PunishType;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
+import com.redecommunity.proxy.skin.factory.SkinFactory;
 import com.redecommunity.proxy.util.Messages;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.event.PreLoginEvent;
@@ -43,6 +45,8 @@ public class PreLoginListener implements Listener {
 
         User user = UserManager.getUser(pendingConnection.getName());
 
+        Boolean firstLogin = false;
+
         if (user == null) {
             UserDao userDao = new UserDao();
 
@@ -52,6 +56,8 @@ public class PreLoginListener implements Listener {
             );
 
             userDao.insert(user);
+
+            firstLogin = true;
         }
 
         user = UserManager.getUser(pendingConnection.getName());
@@ -60,6 +66,12 @@ public class PreLoginListener implements Listener {
             event.setCancelReason(Messages.INVALID_USER);
             event.setCancelled(true);
             return;
+        }
+
+        if (firstLogin) {
+            Skin skin = SkinFactory.getSkin(user.getDisplayName());
+
+            if (skin != null) user.setSkin(skin);
         }
 
         UserGroupDao userGroupDao = new UserGroupDao();
