@@ -6,7 +6,7 @@ import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
-import com.redecommunity.common.shared.twitter.database.TwitterDatabase;
+import com.redecommunity.common.shared.twitter.storage.TwitterStorage;
 import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.proxy.twitter.command.TwitterCommand;
 import org.json.simple.JSONObject;
@@ -68,9 +68,9 @@ public class AssociateCommand extends CustomArgumentCommand {
         } else if (args.length == 1) {
             String code = args[0];
 
-            TwitterDatabase twitterDatabase = new TwitterDatabase();
+            TwitterStorage twitterStorage = new TwitterStorage();
 
-            JSONObject jsonObject = twitterDatabase.findOne("user_id", user.getId());
+            JSONObject jsonObject = twitterStorage.findOne("user_id", user.getId());
 
             if (jsonObject == null) {
                 user.sendMessage(
@@ -89,7 +89,7 @@ public class AssociateCommand extends CustomArgumentCommand {
                 return;
             }
 
-            twitterDatabase.delete("user_id", user.getId());
+            twitterStorage.delete("user_id", user.getId());
 
             try {
                 Twitter twitter = TwitterManager.getDefaultTwitter();
