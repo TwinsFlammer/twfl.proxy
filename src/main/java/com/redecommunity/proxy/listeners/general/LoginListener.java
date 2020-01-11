@@ -28,8 +28,6 @@ public class LoginListener implements Listener {
 
         if (skin == null) return;
 
-        System.out.println("Skin nulla.");
-
         try {
             InitialHandler initialHandler = (InitialHandler) event.getConnection();
 
@@ -52,7 +50,7 @@ public class LoginListener implements Listener {
                     "loginProfile",
                     loginResult
             );
-        } catch (NoSuchFieldException exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
