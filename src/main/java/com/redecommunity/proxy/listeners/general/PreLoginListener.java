@@ -69,6 +69,8 @@ public class PreLoginListener implements Listener {
         }
 
         if (firstLogin) {
+            System.out.println("Criar skin...");
+
             Skin skin = SkinFactory.getSkin(user.getDisplayName());
 
             if (skin != null) user.setSkin(skin);
