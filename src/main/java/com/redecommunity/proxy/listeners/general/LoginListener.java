@@ -34,8 +34,8 @@ public class LoginListener implements Listener {
             LoginResult.Property[] properties = {
                     new LoginResult.Property(
                             skin.getTexture(),
-                            skin.getValue(),
-                            skin.getSignature()
+                            skin.getSignature(),
+                            skin.getValue()
                     )
             };
 
