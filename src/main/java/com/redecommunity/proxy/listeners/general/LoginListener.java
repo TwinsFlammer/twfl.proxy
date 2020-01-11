@@ -4,6 +4,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.skin.data.Skin;
 import net.md_5.bungee.api.connection.PendingConnection;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -19,7 +20,8 @@ import java.lang.reflect.Field;
 public class LoginListener implements Listener {
     @EventHandler
     public void onLogin(PostLoginEvent event) {
-        PendingConnection pendingConnection = event.getConnection();
+        ProxiedPlayer proxiedPlayer = event.getPlayer();
+        PendingConnection pendingConnection = proxiedPlayer.getPendingConnection();
 
         User user = UserManager.getUser(pendingConnection.getName());
 
@@ -30,7 +32,7 @@ public class LoginListener implements Listener {
         if (skin == null) return;
 
         try {
-            InitialHandler initialHandler = (InitialHandler) event.getConnection();
+            InitialHandler initialHandler = (InitialHandler) pendingConnection;
 
             LoginResult.Property[] properties = {
                     new LoginResult.Property(
