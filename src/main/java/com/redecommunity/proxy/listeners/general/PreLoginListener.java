@@ -68,6 +68,8 @@ public class PreLoginListener implements Listener {
             return;
         }
 
+        System.out.println(firstLogin);
+
         if (firstLogin) {
             System.out.println("Criar skin...");
 
