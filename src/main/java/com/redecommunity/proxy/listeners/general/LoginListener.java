@@ -5,6 +5,7 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.skin.data.Skin;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.event.LoginEvent;
+import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.connection.InitialHandler;
 import net.md_5.bungee.connection.LoginResult;
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
  */
 public class LoginListener implements Listener {
     @EventHandler
-    public void onLogin(LoginEvent event) {
+    public void onLogin(PostLoginEvent event) {
         PendingConnection pendingConnection = event.getConnection();
 
         User user = UserManager.getUser(pendingConnection.getName());
