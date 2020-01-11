@@ -32,8 +32,8 @@ public class SkinFactory {
 
             return new Skin(
                     0,
-                    value,
                     signature,
+                    value,
                     System.currentTimeMillis(),
                     true,
                     username
