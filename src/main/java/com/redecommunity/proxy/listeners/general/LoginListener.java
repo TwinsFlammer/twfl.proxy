@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
  */
 public class LoginListener implements Listener {
     @EventHandler
-    public void onLogin(LoginEvent event) throws Exception {
+    public void onLogin(LoginEvent event) {
         PendingConnection pendingConnection = event.getConnection();
 
         User user = UserManager.getUser(pendingConnection.getName());
@@ -50,7 +50,7 @@ public class LoginListener implements Listener {
                     "loginProfile",
                     loginResult
             );
-        } catch (Exception exception) {
+        } catch (NoSuchFieldException | IllegalAccessException exception) {
             exception.printStackTrace();
         }
     }
