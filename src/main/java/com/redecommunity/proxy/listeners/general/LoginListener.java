@@ -28,6 +28,8 @@ public class LoginListener implements Listener {
 
         if (skin == null) return;
 
+        System.out.println("Skin nulla.");
+
         try {
             InitialHandler initialHandler = (InitialHandler) event.getConnection();
 
