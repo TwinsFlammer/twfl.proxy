@@ -57,25 +57,15 @@ public class PreLoginListener implements Listener {
 
             userDao.insert(user);
 
-            firstLogin = true;
-        }
+            user = UserManager.getUser(pendingConnection.getName());
 
-        user = UserManager.getUser(pendingConnection.getName());
-
-        if (user == null) {
-            event.setCancelReason(Messages.INVALID_USER);
-            event.setCancelled(true);
-            return;
-        }
-
-        System.out.println(firstLogin);
-
-        if (firstLogin) {
-            System.out.println("Criar skin...");
+            if (user == null) {
+                event.setCancelReason(Messages.INVALID_USER);
+                event.setCancelled(true);
+                return;
+            }
 
             Skin skin = SkinFactory.getSkin(user.getDisplayName());
-
-            System.out.println(skin == null);
 
             if (skin != null) user.setSkin(skin);
         }
