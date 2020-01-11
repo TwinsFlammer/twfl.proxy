@@ -3,14 +3,17 @@ package com.redecommunity.proxy.listeners.general;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
+import com.redecommunity.common.shared.skin.data.Skin;
 import com.redecommunity.proxy.connection.dao.ProxyServerDao;
 import com.redecommunity.proxy.connection.data.ProxyServer;
 import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
+import com.redecommunity.proxy.skin.handler.SkinHandler;
 import com.redecommunity.proxy.util.Messages;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -63,6 +66,17 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                             new TextComponent(tabList.getFooter())
                     }
             );
+
+        Skin skin = user.getSkin();
+
+        if (skin != null) {
+            PendingConnection pendingConnection = proxiedPlayer.getPendingConnection();
+
+            SkinHandler.changeLoginProperties(
+                    pendingConnection,
+                    skin
+            );
+        }
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
