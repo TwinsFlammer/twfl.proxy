@@ -3,6 +3,7 @@ package com.redecommunity.proxy.connection.listeners.listeners;
 import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redecommunity.common.shared.databases.redis.handler.annonation.ChannelName;
 import com.redecommunity.common.shared.databases.redis.handler.event.JedisMessageEvent;
+import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
@@ -31,12 +32,32 @@ public class ConnectJedisMessageListener implements JedisMessageListener {
 
         User user = UserManager.getUser(userId);
 
+        if (user == null) return;
+
+        Language language = user.getLanguage();
+
         ProxiedPlayer proxiedPlayer = ProxyServer.getInstance().getPlayer(user.getUniqueId());
 
         if (proxiedPlayer == null) return;
 
-        Server server = ServerManager.getServer(serverId);
-        ServerInfo serverInfo = Proxy.constructServerInfo(server);
+        Server currentServer = user.getServer();
+        Server connectServer = ServerManager.getServer(serverId);
+
+        if (connectServer == null) {
+            proxiedPlayer.sendMessage(
+                    language.getMessage("messages.default_commands.server.unknown_server")
+            );
+            return;
+        }
+
+        if (currentServer != null && connectServer != null && currentServer.isSimilar(connectServer)) {
+            proxiedPlayer.sendMessage(
+                    language.getMessage("messages.default_commands.server.already_connected")
+            );
+            return;
+        }
+
+        ServerInfo serverInfo = Proxy.constructServerInfo(connectServer);
 
         proxiedPlayer.connect(serverInfo);
     }
