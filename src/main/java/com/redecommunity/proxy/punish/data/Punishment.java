@@ -87,7 +87,7 @@ public class Punishment {
     }
 
     public Boolean isFinalized() {
-        return this.isTemporary() && System.currentTimeMillis() >= this.endTime;
+        return this.isTemporary() ? System.currentTimeMillis() >= this.endTime : !this.status;
     }
 
     public Boolean isRevoked() {
