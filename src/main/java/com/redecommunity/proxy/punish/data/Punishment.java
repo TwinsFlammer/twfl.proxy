@@ -83,7 +83,11 @@ public class Punishment {
     }
 
     public Boolean isStarted() {
-        return this.startTime != null && this.startTime != 0;
+        return this.startTime != null && this.startTime != 0 && !this.isFinalized();
+    }
+
+    public Boolean isFinalized() {
+        return this.isTemporary() && System.currentTimeMillis() >= this.endTime;
     }
 
     public Boolean isRevoked() {
@@ -108,7 +112,7 @@ public class Punishment {
 
     public ChatColor getColor() {
         if (this.revokeUserId != null && this.revokeUserId != 0) return ChatColor.GRAY;
-        return this.startTime == null || this.startTime == 0 ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
+        return !this.isStarted() ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
     }
 
     public String getProof() {
