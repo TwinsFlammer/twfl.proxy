@@ -48,9 +48,11 @@ public class Punishment {
     private final String proof;
 
     @Getter
-    private final Long time,
-            startTime,
-            endTime;
+    private final Long time;
+    @Getter
+    private Long startTime;
+    @Getter
+    private final Long endTime;
 
     @Getter
     private Long revokeTime;
@@ -83,11 +85,7 @@ public class Punishment {
     }
 
     public Boolean isStarted() {
-        return this.startTime != null && this.startTime != 0 && !this.isFinalized();
-    }
-
-    public Boolean isFinalized() {
-        return this.isTemporary() ? System.currentTimeMillis() >= this.endTime : !this.status;
+        return this.startTime != null && this.startTime != 0;
     }
 
     public Boolean isRevoked() {
@@ -193,6 +191,8 @@ public class Punishment {
         PunishType punishType = duration.getPunishType();
 
         if (user.isOnline()) {
+            this.startTime = System.currentTimeMillis();
+
             user.kick(
                     String.format(
                             language.getMessage("punishment.kick_message"),
