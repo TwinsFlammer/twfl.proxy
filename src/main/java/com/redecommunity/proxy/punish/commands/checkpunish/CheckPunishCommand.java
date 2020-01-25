@@ -81,7 +81,7 @@ public class CheckPunishCommand extends CustomCommand {
                                             "\n\n" +
                                             "Data de início: §7" + punishment.getStartDate() +
                                             "\n" +
-                                            "Duração: §7" + duration.getDuration() + " " + duration.getTimeTypeDisplayName() +
+                                            "Duração: §7" + duration.getTimeTypeDisplayName() +
                                             "\n\n" +
                                             "Tipo: §7[" + duration.getPunishType().toString() + "]" +
                                             (
