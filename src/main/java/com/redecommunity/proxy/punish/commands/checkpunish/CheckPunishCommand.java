@@ -64,54 +64,56 @@ public class CheckPunishCommand extends CustomCommand {
                 .text("\n\n")
                 .next();
 
-        punishments.forEach(punishment -> {
-            User revoker = punishment.getRevoker();
-            User staffer = punishment.getStaffer();
-            Duration duration = punishment.getDuration();
+        punishments.stream()
+                .sorted((punishment1, punishment2) -> punishment2.getId().compareTo(punishment1.getId()))
+                .forEach(punishment -> {
+                    User revoker = punishment.getRevoker();
+                    User staffer = punishment.getStaffer();
+                    Duration duration = punishment.getDuration();
 
-            RevokeReason revokeReason = RevokeReasonManager.getRevokeReason(punishment.getRevokeReasonId());
+                    RevokeReason revokeReason = RevokeReasonManager.getRevokeReason(punishment.getRevokeReasonId());
 
-            jsonText.text(" - ")
-                    .next()
-                    .text(punishment.getColor() + "[" + punishment.getDate() + "] [" + punishment.getPunishReason().getDisplayName() + "]")
-                    .hoverText(
-                            "Id: §b#" + punishment.getId() +
-                            "\n" +
-                            "Aplicada por: §7" + staffer.getPrefix() + staffer.getDisplayName() +
-                            "\n\n" +
-                            "Data de início: §7" + punishment.getStartDate() +
-                            "\n" +
-                            "Duração: §7" + duration.getDuration() + " " + duration.getTimeTypeDisplayName() +
-                            "\n\n" +
-                            "Tipo: §7[" + duration.getPunishType().toString() + "]" +
-                            (
-                                    punishment.isRevoked() ?
+                    jsonText.text(" - ")
+                            .next()
+                            .text(punishment.getColor() + "[" + punishment.getDate() + "] [" + punishment.getPunishReason().getDisplayName() + "]")
+                            .hoverText(
+                                    "Id: §b#" + punishment.getId() +
+                                            "\n" +
+                                            "Aplicada por: §7" + staffer.getPrefix() + staffer.getDisplayName() +
                                             "\n\n" +
-                                                    "Revogada por: " + revoker.getPrefix() + revoker.getDisplayName() +
-                                                    "\n" +
-                                                    "Revogada em: " + punishment.getRevokeDate() +
-                                                    "\n" +
-                                                    "Motivo: " + revokeReason.getDisplayName()
-                                            :
-                                            ""
-                            )
-                    ).next()
-                    .text(" ")
-                    .next()
-                    .text("[Prova]");
+                                            "Data de início: §7" + punishment.getStartDate() +
+                                            "\n" +
+                                            "Duração: §7" + duration.getDuration() + " " + duration.getTimeTypeDisplayName() +
+                                            "\n\n" +
+                                            "Tipo: §7[" + duration.getPunishType().toString() + "]" +
+                                            (
+                                                    punishment.isRevoked() ?
+                                                            "\n\n" +
+                                                                    "Revogada por: " + revoker.getPrefix() + revoker.getDisplayName() +
+                                                                    "\n" +
+                                                                    "Revogada em: " + punishment.getRevokeDate() +
+                                                                    "\n" +
+                                                                    "Motivo: " + revokeReason.getDisplayName()
+                                                            :
+                                                            ""
+                                            )
+                            ).next()
+                            .text(" ")
+                            .next()
+                            .text("[Prova]");
 
-            if (punishment.hasValidProof()) jsonText.clickOpenURL(punishment.getProof());
+                    if (punishment.hasValidProof()) jsonText.clickOpenURL(punishment.getProof());
 
-            jsonText.next()
-                    .text(" ")
-                    .next()
-                    .text("§f[Revogar]")
-                    .clickSuggest("/unpunish " + punishment.getId())
-                    .hoverText("§7Clique para revogar esta punição")
-                    .next()
-                    .text("\n")
-                    .next();
-        });
+                    jsonText.next()
+                            .text(" ")
+                            .next()
+                            .text("§f[Revogar]")
+                            .clickSuggest("/unpunish " + punishment.getId())
+                            .hoverText("§7Clique para revogar esta punição")
+                            .next()
+                            .text("\n")
+                            .next();
+                });
 
         if (punishments.isEmpty()) jsonText.text("   --/--")
                 .next()
