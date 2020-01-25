@@ -50,8 +50,6 @@ public class CheckPunishCommand extends CustomCommand {
 
         List<Punishment> punishments = PunishmentManager.getPunishments(user1);
 
-        punishments.forEach(Punishment::isActive);
-
         JSONText jsonText = new JSONText();
 
         String squareSymbol = "\u2588";
