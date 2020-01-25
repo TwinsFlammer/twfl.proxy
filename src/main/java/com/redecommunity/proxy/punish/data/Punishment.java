@@ -93,7 +93,7 @@ public class Punishment {
     }
 
     public Boolean isFinalized() {
-        return this.status && System.currentTimeMillis() >= this.endTime;
+        return !this.status && System.currentTimeMillis() >= this.endTime;
     }
 
     public Boolean hasValidProof() {
