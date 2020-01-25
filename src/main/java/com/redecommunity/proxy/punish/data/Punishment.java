@@ -82,7 +82,7 @@ public class Punishment {
 
             this.update(UpdateType.FINALIZED);
         }
-        return !this.isStarted() && this.status || this.status;
+        return this.status;
     }
 
     public Boolean isStarted() {
