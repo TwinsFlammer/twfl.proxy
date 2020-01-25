@@ -78,7 +78,7 @@ public class PunishmentManager {
         Integer count = (int) punishments.stream()
                 .filter(Objects::nonNull)
                 .filter(punishment -> punishment.getPunishReason().isSimilar(punishReason))
-                .count() + 1;
+                .count();
 
         Duration duration = PunishmentManager.getDuration(count, punishReason);
         Long endTime = duration.isTemporary() ? duration.getEndTime() : null;
@@ -88,7 +88,7 @@ public class PunishmentManager {
                 user.getId(),
                 staffer.getId(),
                 punishReason.getId(),
-                count,
+                count != 0 ? count + 1 : count,
                 null,
                 null,
                 hidden,
