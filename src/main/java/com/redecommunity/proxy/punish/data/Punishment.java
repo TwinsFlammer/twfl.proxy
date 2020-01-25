@@ -77,11 +77,16 @@ public class Punishment {
     }
 
     public Boolean isActive() {
-        if (this.isTemporary() && this.isFinalized()) {
+        System.out.println(this.endTime);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.currentTimeMillis() >= this.endTime);
+
+        if (this.isTemporary() && this.status && this.isFinalized()) {
             this.status = false;
 
             this.update(UpdateType.FINALIZED);
         }
+
         return this.status;
     }
 
