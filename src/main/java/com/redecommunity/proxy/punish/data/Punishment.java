@@ -94,7 +94,7 @@ public class Punishment {
     }
 
     public Boolean isFinalized() {
-        return this.endTime == 0 || System.currentTimeMillis() >= this.endTime;
+        return System.currentTimeMillis() >= this.endTime;
     }
 
     public Boolean hasValidProof() {
@@ -200,7 +200,7 @@ public class Punishment {
         PunishType punishType = duration.getPunishType();
 
         if (user.isOnline()) {
-            this.startTime = System.currentTimeMillis();
+            this.update(UpdateType.START);
 
             user.kick(
                     String.format(
