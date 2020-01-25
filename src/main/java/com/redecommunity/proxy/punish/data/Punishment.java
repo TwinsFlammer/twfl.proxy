@@ -273,7 +273,7 @@ public class Punishment {
             case START: {
                 HashMap<String, Object> keys = Maps.newHashMap();
 
-                keys.put("start_time", System.currentTimeMillis());
+                keys.put("start_time", this.startTime);
 
                 punishmentDao.update(
                         keys,
