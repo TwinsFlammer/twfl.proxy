@@ -127,7 +127,7 @@ public class Punishment {
     }
 
     public String getStartDate() {
-        return this.isStarted() && this.isFinalized() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
+        return this.isStarted() || this.isFinalized() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
     }
 
     public String getRevokeDate() {
