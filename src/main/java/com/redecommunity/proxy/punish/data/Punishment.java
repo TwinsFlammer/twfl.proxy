@@ -77,7 +77,7 @@ public class Punishment {
     }
 
     public Boolean isActive() {
-        if (this.isTemporary() && this.status && this.isFinalized()) {
+        if (this.isTemporary() && this.isFinalized()) {
             this.status = false;
 
             this.update(UpdateType.FINALIZED);
@@ -115,7 +115,7 @@ public class Punishment {
 
     public ChatColor getColor() {
         if (this.revokeUserId != null && this.revokeUserId != 0) return ChatColor.GRAY;
-        return !this.isStarted() ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
+        return !this.isStarted() && !this.isFinalized() ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
     }
 
     public String getProof() {
@@ -127,7 +127,7 @@ public class Punishment {
     }
 
     public String getStartDate() {
-        return this.isStarted() && this.isFinalized()  ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
+        return this.isStarted() && this.isFinalized() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
     }
 
     public String getRevokeDate() {
