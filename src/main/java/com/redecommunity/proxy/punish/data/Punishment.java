@@ -77,7 +77,7 @@ public class Punishment {
     }
 
     public Boolean isActive() {
-        if (this.isTemporary() && this.isActive() && this.isFinalized()) {
+        if (this.isTemporary() && this.status && this.isFinalized()) {
             this.status = false;
 
             this.update(UpdateType.FINALIZED);
