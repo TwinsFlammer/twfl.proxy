@@ -113,7 +113,9 @@ public class PunishmentDao<T> extends Table {
             keys.put("status", object.getStatus());
             keys.put("proof", object.getProof());
             keys.put("time", object.getTime());
-            keys.put("end_time", object.getEndTime());
+
+            if (object.isTemporary())
+                keys.put("end_time", object.getEndTime());
 
             return (T) this.findOne(keys);
         } catch (SQLException exception) {
@@ -153,8 +155,6 @@ public class PunishmentDao<T> extends Table {
                 this.getTableName(),
                 where
         );
-
-        System.out.println(query);
 
         try (
                 Connection connection = this.getConnection();
