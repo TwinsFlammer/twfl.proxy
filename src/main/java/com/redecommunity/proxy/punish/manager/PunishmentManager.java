@@ -88,7 +88,7 @@ public class PunishmentManager {
                 user.getId(),
                 staffer.getId(),
                 punishReason.getId(),
-                count != 0 ? count + 1 : count,
+                count,
                 null,
                 null,
                 hidden,
