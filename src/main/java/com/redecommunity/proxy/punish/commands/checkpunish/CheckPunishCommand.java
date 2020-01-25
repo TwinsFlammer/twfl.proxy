@@ -8,7 +8,9 @@ import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.Punishment;
+import com.redecommunity.proxy.punish.data.RevokeReason;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
+import com.redecommunity.proxy.punish.manager.RevokeReasonManager;
 
 import java.util.List;
 
@@ -63,8 +65,11 @@ public class CheckPunishCommand extends CustomCommand {
                 .next();
 
         punishments.forEach(punishment -> {
+            User revoker = punishment.getRevoker();
             User staffer = punishment.getStaffer();
             Duration duration = punishment.getDuration();
+
+            RevokeReason revokeReason = RevokeReasonManager.getRevokeReason(punishment.getRevokeReasonId());
 
             jsonText.text(" - ")
                     .next()
@@ -78,7 +83,18 @@ public class CheckPunishCommand extends CustomCommand {
                             "\n" +
                             "Duração: §7" + duration.getDuration() + " " + duration.getTimeTypeDisplayName() +
                             "\n\n" +
-                            "Tipo: §7[" + duration.getPunishType().toString() + "]"
+                            "Tipo: §7[" + duration.getPunishType().toString() + "]" +
+                            (
+                                    punishment.isRevoked() ?
+                                            "\n\n" +
+                                                    "Revogada por: " + revoker.getPrefix() + revoker.getDisplayName() +
+                                                    "\n" +
+                                                    "Revogada em: " + punishment.getRevokeDate() +
+                                                    "\n" +
+                                                    "Motivo: " + revokeReason.getDisplayName()
+                                            :
+                                            ""
+                            )
                     ).next()
                     .text(" ")
                     .next()
