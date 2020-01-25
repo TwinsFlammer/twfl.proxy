@@ -234,6 +234,8 @@ public class Punishment {
     }
 
     public void start() {
+        this.startTime = System.currentTimeMillis();
+
         this.update(UpdateType.START);
     }
 
