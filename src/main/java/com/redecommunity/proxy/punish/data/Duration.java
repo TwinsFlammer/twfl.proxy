@@ -21,13 +21,13 @@ public class Duration {
 
         switch (this.timeType) {
             case DAYS:
-                return (this.duration > 1 ? "dias" : "dia");
+                return this.duration + " " + (this.duration > 1 ? "dias" : "dia");
             case HOURS:
-                return (this.duration > 1 ? "horas" : "hora");
+                return this.duration + " " + (this.duration > 1 ? "horas" : "hora");
             case MINUTES:
-                return (this.duration > 1 ? "minutos" : "minuto");
+                return this.duration + " " + (this.duration > 1 ? "minutos" : "minuto");
             case SECONDS:
-                return (this.duration > 1 ? "segundos" : "segundo");
+                return this.duration + " " + (this.duration > 1 ? "segundos" : "segundo");
             default:
                 return "indefinido";
         }
