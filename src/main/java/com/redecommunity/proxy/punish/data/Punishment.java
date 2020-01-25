@@ -76,7 +76,7 @@ public class Punishment {
     }
 
     public Boolean isActive() {
-        if (this.isTemporary() && System.currentTimeMillis() >= this.endTime) {
+        if (this.isTemporary() && this.isFinalized()) {
             this.status = false;
 
             this.update(UpdateType.FINALIZED);
@@ -90,6 +90,10 @@ public class Punishment {
 
     public Boolean isRevoked() {
         return this.revokeTime != null && this.revokeTime != 0;
+    }
+
+    public Boolean isFinalized() {
+        return this.status && System.currentTimeMillis() >= this.endTime;
     }
 
     public Boolean hasValidProof() {
@@ -122,7 +126,7 @@ public class Punishment {
     }
 
     public String getStartDate() {
-        return this.isStarted() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
+        return this.isStarted() && !this.isFinalized() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
     }
 
     public String getRevokeDate() {
