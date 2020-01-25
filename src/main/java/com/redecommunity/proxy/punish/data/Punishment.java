@@ -2,6 +2,7 @@ package com.redecommunity.proxy.punish.data;
 
 import com.google.common.collect.Maps;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -76,7 +77,7 @@ public class Punishment {
     }
 
     public Boolean isActive() {
-        if (this.isTemporary() && this.isFinalized()) {
+        if (this.isTemporary() && this.isActive() && this.isFinalized()) {
             this.status = false;
 
             this.update(UpdateType.FINALIZED);
@@ -93,7 +94,7 @@ public class Punishment {
     }
 
     public Boolean isFinalized() {
-        return !this.status || System.currentTimeMillis() >= this.endTime;
+        return System.currentTimeMillis() >= this.endTime;
     }
 
     public Boolean hasValidProof() {
@@ -101,12 +102,12 @@ public class Punishment {
     }
 
     public Boolean canRevokeBy(User user) {
-        if (user.hasGroup("manager")) return true;
-        else if (user.hasGroup("administrator")) {
+        if (user.hasGroup(GroupNames.MANAGER)) return true;
+        else if (user.hasGroup(GroupNames.ADMINISTRATOR)) {
             return (this.startTime + TimeUnit.HOURS.toMillis(14)) >= System.currentTimeMillis();
-        } else if (user.hasGroup("moderator") && this.stafferId.equals(user.getId())) {
+        } else if (user.hasGroup(GroupNames.MODERATOR) && this.stafferId.equals(user.getId())) {
             return (this.startTime + TimeUnit.HOURS.toMillis(7)) >= System.currentTimeMillis();
-        } else if (user.hasGroup("helper") && this.stafferId.equals(user.getId())) {
+        } else if (user.hasGroup(GroupNames.HELPER) && this.stafferId.equals(user.getId())) {
             return (this.startTime + TimeUnit.HOURS.toMillis(3)) >= System.currentTimeMillis();
         }
         return false;
@@ -126,7 +127,7 @@ public class Punishment {
     }
 
     public String getStartDate() {
-        return this.isStarted() && !this.isFinalized() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
+        return this.isStarted() && this.isFinalized()  ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
     }
 
     public String getRevokeDate() {
