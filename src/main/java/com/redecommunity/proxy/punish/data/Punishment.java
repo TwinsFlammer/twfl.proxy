@@ -125,6 +125,10 @@ public class Punishment {
         return this.isStarted() ? this.getSimpleDateFormat().format(this.startTime) : "[AGUARDANDO INÍCIO]";
     }
 
+    public String getRevokeDate() {
+        return this.getSimpleDateFormat().format(this.revokeTime);
+    }
+
     private SimpleDateFormat getSimpleDateFormat() {
         return new SimpleDateFormat("dd/MM/YYYY HH:mm");
     }
