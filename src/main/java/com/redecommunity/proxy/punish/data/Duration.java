@@ -17,6 +17,8 @@ public class Duration {
     private final PunishType punishType;
 
     public String getTimeTypeDisplayName() {
+        if (this.punishType == PunishType.BAN) return "Eterno";
+
         switch (this.timeType) {
             case DAYS:
                 return (this.duration > 1 ? "dias" : "dia");
