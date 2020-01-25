@@ -84,8 +84,6 @@ public class PunishCommand extends CustomCommand {
                                     .append("§f[")
                                     .append(duration.getPunishType().toString())
                                     .append("] §f")
-                                    .append(duration.getDuration())
-                                    .append(" ")
                                     .append(duration.getTimeTypeDisplayName())
                                     .append(index + 1 >= durations.size() ? "" : "\n");
                         });
