@@ -1,6 +1,10 @@
 package com.redecommunity.proxy;
 
+import com.google.common.collect.Lists;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
+import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
+import com.redecommunity.api.shared.connection.data.ProxyServer;
+import com.redecommunity.api.shared.connection.manager.ProxyServerManager;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -12,11 +16,9 @@ import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.common.shared.util.Constants;
 import com.redecommunity.proxy.authentication.manager.AttemptManager;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
-import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.manager.StartManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import lombok.Getter;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,6 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Created by @SrGutyerrez
@@ -57,7 +60,7 @@ public class Proxy extends CommunityPlugin {
 
     @Override
     public void onDisablePlugin() {
-        ProxyServerManager.setOffline();
+        Proxy.setOffline();
     }
 
     public static Proxy getInstance() {
@@ -111,8 +114,19 @@ public class Proxy extends CommunityPlugin {
                 ));
     }
 
-    public static ProxyServer getProxyServer() {
-        return ProxyServer.getInstance();
+    public static void setOffline() {
+        ProxyServer proxyServer = Proxy.getCurrentProxy();
+
+        proxyServer.setStatus(false);
+        proxyServer.setUsers(Lists.newArrayList());
+
+        ProxyServerDao proxyServerDao = new ProxyServerDao();
+
+        proxyServerDao.update(proxyServer);
+    }
+
+    public static Integer getCurrentProxyPlayerCount() {
+        return Proxy.getCurrentProxy().getPlayerCount();
     }
 
     public static Server getLobby() {
@@ -124,12 +138,21 @@ public class Proxy extends CommunityPlugin {
     }
 
     public static ServerInfo constructServerInfo(Server server) {
-        return Proxy.getProxyServer().constructServerInfo(
+        return net.md_5.bungee.api.ProxyServer.getInstance().constructServerInfo(
                 server.getName(),
                 server.getInetSocketAddress(),
                 server.getDisplayName(),
                 false
         );
+    }
+
+    public static ProxyServer getCurrentProxy() {
+        return ProxyServerManager.getProxies()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(proxyServer -> proxyServer.getId().equals(Proxy.getInstance().getId()))
+                .findFirst()
+                .orElse(null);
     }
 
     public static void unloadUser(User user) {
