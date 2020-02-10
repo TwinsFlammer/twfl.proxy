@@ -2,6 +2,7 @@ package com.redecommunity.proxy.manager;
 
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.registry.CommandRegistry;
+import com.redecommunity.api.shared.connection.manager.ProxyServerManager;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.databases.mysql.dao.Table;
 import com.redecommunity.common.shared.databases.redis.channel.data.Channel;
@@ -13,7 +14,6 @@ import com.redecommunity.proxy.authentication.manager.PasswordManager;
 import com.redecommunity.proxy.announcement.manager.AnnouncementManager;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
 import com.redecommunity.proxy.connection.listeners.motd.manager.MOTDManager;
-import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.punish.manager.PunishReasonManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
@@ -128,7 +128,10 @@ class JedisMessageListenerManager {
 
 class DataManager {
     DataManager() {
-        new ProxyServerManager();
+        new ProxyServerManager(
+                Proxy.getInstance().getId(),
+                Proxy.getInstance().getName()
+        );
         new DirectMessageManager();
         new TabListManager();
         new MOTDManager();
