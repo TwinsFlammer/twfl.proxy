@@ -1,12 +1,12 @@
 package com.redecommunity.proxy.listeners.general;
 
+import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
+import com.redecommunity.api.shared.connection.data.ProxyServer;
 import com.redecommunity.common.shared.language.enums.Language;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.skin.data.Skin;
-import com.redecommunity.proxy.connection.dao.ProxyServerDao;
-import com.redecommunity.proxy.connection.data.ProxyServer;
-import com.redecommunity.proxy.connection.manager.ProxyServerManager;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.skin.handler.SkinHandler;
@@ -47,7 +47,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
-        ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
+        ProxyServer proxyServer = Proxy.getCurrentProxy();
 
         proxyServer.getUsers().add(user);
 
