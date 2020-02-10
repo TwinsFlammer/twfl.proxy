@@ -1,15 +1,14 @@
 package com.redecommunity.proxy.listeners.general;
 
 import com.google.common.collect.Maps;
+import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
+import com.redecommunity.api.shared.connection.data.ProxyServer;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.proxy.authentication.manager.AttemptManager;
-import com.redecommunity.proxy.connection.dao.ProxyServerDao;
-import com.redecommunity.proxy.connection.data.ProxyServer;
-import com.redecommunity.proxy.connection.manager.ProxyServerManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
@@ -40,7 +39,7 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         userDao.update(keys, "id", user.getId());
 
-        ProxyServer proxyServer = ProxyServerManager.getCurrentProxy();
+        ProxyServer proxyServer = Proxy.getCurrentProxy();
 
         proxyServer.getUsers().remove(user);
 
