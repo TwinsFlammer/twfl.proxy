@@ -25,7 +25,7 @@ public class PunishmentDao<T> extends Table {
 
     @Override
     public String getTableName() {
-        return "server_punishments";
+        return "server_punishment";
     }
 
     @Override
