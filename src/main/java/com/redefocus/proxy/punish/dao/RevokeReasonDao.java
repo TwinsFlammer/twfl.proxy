@@ -22,7 +22,7 @@ public class RevokeReasonDao extends Table {
 
     @Override
     public String getTableName() {
-        return "server_revoke_reasons";
+        return "server_revoke_reason";
     }
 
     @Override
