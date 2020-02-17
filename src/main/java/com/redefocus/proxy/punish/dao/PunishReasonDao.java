@@ -21,7 +21,7 @@ public class PunishReasonDao extends Table {
 
     @Override
     public String getTableName() {
-        return "server_punish_reasons";
+        return "server_punish_reason";
     }
 
     @Override
