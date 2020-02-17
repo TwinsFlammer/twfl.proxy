@@ -4,7 +4,7 @@ package com.redefocus.proxy.util;
  * Created by @SrGutyerrez
  */
 public class Messages {
-    private static final String PREFIX = "§c§lREDE COMMUNITY";
+    private static final String PREFIX = "§c§lREDE FOCUS";
 
     public static final String INVALID_UUID_MESSAGE = "\n" +
             PREFIX +
