@@ -85,12 +85,6 @@ public class RegisterCommand extends CustomCommand {
         );
 
         user.sendMessage(
-                "Senha: >>" + password + "<<"+
-                "\n" +
-                "Hash: >>" + hashedPassword + "<<"
-        );
-
-        user.sendMessage(
                 language.getMessage("authentication.successfully_registered")
         );
 
