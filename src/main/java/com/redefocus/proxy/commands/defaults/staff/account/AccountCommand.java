@@ -174,7 +174,7 @@ public class AccountCommand extends CustomCommand {
                             .forEach(i -> {
                                 Group group1 = groups.get(i);
 
-                                jsonText.text(group1.getColor() + group1.getName())
+                                jsonText.text(group1.getFancyPrefix())
                                         .next()
                                         .text((i + 1 == groups.size() ? "" : ", "))
                                         .next();
