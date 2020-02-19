@@ -48,7 +48,7 @@ public class LoginCommand extends CustomCommand {
 
         String password = args[0];
 
-        if (Helper.compare(password, user.getPassword())) {
+        if (!Helper.compare(password, user.getPassword())) {
             Integer passwordAttempts = AttemptManager.getPasswordAttempt(user);
 
             if (passwordAttempts == null) passwordAttempts = 4;
@@ -67,12 +67,6 @@ public class LoginCommand extends CustomCommand {
                 AttemptManager.getAttempts().remove(user.getId());
                 return;
             }
-
-            user.sendMessage(
-                    "Senha inserida: >>" + password + "<<" + "\n" +
-                    "Senha da conta: >>" + user.getPassword() + "<<" + "\n" +
-                    "Senha criptografada: >>" + Helper.hash(password) + "<<"
-            );
 
             user.sendMessage(
                     String.format(
