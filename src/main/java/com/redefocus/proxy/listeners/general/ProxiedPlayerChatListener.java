@@ -12,11 +12,19 @@ public class ProxiedPlayerChatListener implements Listener {
     public void onChat(ChatEvent event) {
         String message = event.getMessage();
 
-        event.setMessage(
-                message.replaceAll(
-                        "\\s+",
-                        ""
-                )
+        String stripped = message.replaceAll(
+                "\\s+",
+                ""
         );
+
+        event.setMessage(
+                stripped
+        );
+
+        System.out.println("Message: >" + message + "<");
+
+        System.out.println("Stripped: >" + stripped + "<");
+
+        System.out.println("FinalMessage: >" + event.getMessage() + "<");
     }
 }
