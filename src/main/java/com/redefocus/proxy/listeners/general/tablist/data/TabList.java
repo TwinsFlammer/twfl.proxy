@@ -38,7 +38,7 @@ public class TabList {
                 new String[]{
                         "\n"
                 }
-        );
+        ).replaceAll("\\\\n", "\n");
     }
 
     public String getFooter() {
@@ -58,6 +58,6 @@ public class TabList {
                         String.valueOf(ProxyServerManager.getUsers().size()),
                         "\n"
                 }
-        );
+        ).replaceAll("\\\\n", "\n");
     }
 }
