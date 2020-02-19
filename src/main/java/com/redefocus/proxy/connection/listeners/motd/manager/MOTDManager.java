@@ -1,6 +1,7 @@
 package com.redefocus.proxy.connection.listeners.motd.manager;
 
 import com.google.common.collect.Lists;
+import com.redefocus.common.shared.Common;
 import com.redefocus.proxy.connection.listeners.motd.dao.MOTDDao;
 import com.redefocus.proxy.connection.listeners.motd.data.MOTD;
 
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by @SrGutyerrez
@@ -18,9 +20,14 @@ public class MOTDManager {
     public MOTDManager() {
         MOTDDao motdDao = new MOTDDao();
 
-        Set<MOTD> MOTDS = motdDao.findAll();
-
-        MOTDManager.MOTDS.addAll(MOTDS);
+        Common.getInstance().getScheduler().scheduleAtFixedRate(
+                () -> {
+                    MOTDManager.MOTDS = Lists.newArrayList(motdDao.findAll());
+                },
+                0,
+                5,
+                TimeUnit.SECONDS
+        );
     }
 
     public static MOTD getCurrentMotd() {
