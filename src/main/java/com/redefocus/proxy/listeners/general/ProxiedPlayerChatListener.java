@@ -18,11 +18,5 @@ public class ProxiedPlayerChatListener implements Listener {
         event.setMessage(
                 stripped
         );
-
-        System.out.println("Message: >" + message + "<");
-
-        System.out.println("Stripped: >" + stripped + "<");
-
-        System.out.println("FinalMessage: >" + event.getMessage() + "<");
     }
 }
