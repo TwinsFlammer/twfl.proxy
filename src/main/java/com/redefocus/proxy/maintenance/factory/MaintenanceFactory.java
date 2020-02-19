@@ -44,10 +44,10 @@ public class MaintenanceFactory {
         }
     }
 
-    public static MOTD getMaintenanceMOTD() {
+    public static MOTD getMaintenanceMOTD(MOTD defaultMOTD) {
         return new MOTD(
                 0,
-                "§cRede Community §f- FACTIONS §7(1.8.*)",
+                defaultMOTD == null ? "" : defaultMOTD.getLine1(),
                 "§cEstamos em manutenção no momento, aguarde.",
                 true
         );
