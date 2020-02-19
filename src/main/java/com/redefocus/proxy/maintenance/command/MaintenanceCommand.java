@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class MaintenanceCommand extends CustomCommand {
     public MaintenanceCommand() {
-        super("manutenção", CommandRestriction.IN_GAME, "manager");
+        super("manutenção", CommandRestriction.ALL, "manager");
     }
 
     @Override
