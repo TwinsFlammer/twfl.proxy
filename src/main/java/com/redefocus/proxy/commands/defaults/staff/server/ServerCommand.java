@@ -41,7 +41,12 @@ public class ServerCommand extends CustomCommand {
                     .text(server.inMaintenance() ? "§c[Man.] " : "")
                     .next()
                     .text(server.getStatusColor() + server.getDisplayName() + " ")
-                    .hoverText("§fJogadores online: §7" + server.getPlayerCount() +
+                    .hoverText(
+                            "§e" + server.getDisplayName() +
+                            "\n\n" +
+                            server.getDescription() +
+                            "\n\n" +
+                            "§fJogadores online: §7" + server.getPlayerCount() +
                             "\n" +
                             "§fEstado atual: " + server.getStatus() +
                             "\n" +
