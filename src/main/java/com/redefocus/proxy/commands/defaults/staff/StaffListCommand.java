@@ -27,6 +27,7 @@ public class StaffListCommand extends CustomCommand {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(User::isOnline)
+                .filter(User::isLogged)
                 .filter(user1 -> user1.hasGroup("helper"))
                 .sorted((user1, user2) -> user2.getHighestGroup().getPriority().compareTo(user1.getHighestGroup().getPriority()))
                 .collect(Collectors.toList());
