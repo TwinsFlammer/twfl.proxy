@@ -69,6 +69,12 @@ public class LoginCommand extends CustomCommand {
             }
 
             user.sendMessage(
+                    "Senha inserida: >>" + password + "<<" + "\n" +
+                    "Senha da conta: >>" + user.getPassword() + "<<" + "\n" +
+                    "Senha criptografada: >>" + Helper.hash(password) + "<<"
+            );
+
+            user.sendMessage(
                     String.format(
                             language.getMessage("authentication.invalid_password"),
                             passwordAttempts
