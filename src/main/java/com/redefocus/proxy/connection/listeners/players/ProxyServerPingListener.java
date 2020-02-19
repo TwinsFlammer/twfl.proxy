@@ -21,7 +21,9 @@ public class ProxyServerPingListener implements Listener {
 
         players.setOnline(Proxy.getUsers().size());
 
-        MOTD motd = MaintenanceFactory.inMaintenance() ? MaintenanceFactory.getMaintenanceMOTD() : MOTDManager.getCurrentMotd();
+        MOTD currentMOTD = MOTDManager.getCurrentMotd();
+
+        MOTD motd = MaintenanceFactory.inMaintenance() ? MaintenanceFactory.getMaintenanceMOTD(currentMOTD) : currentMOTD;
 
         if (motd == null) return;
 
