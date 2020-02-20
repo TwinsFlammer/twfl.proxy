@@ -2,6 +2,7 @@ package com.redefocus.proxy.listeners.general;
 
 import com.redefocus.api.shared.connection.dao.ProxyServerDao;
 import com.redefocus.api.shared.connection.data.ProxyServer;
+import com.redefocus.common.shared.Common;
 import com.redefocus.common.shared.language.enums.Language;
 import com.redefocus.common.shared.permissions.user.data.User;
 import com.redefocus.common.shared.permissions.user.manager.UserManager;
@@ -21,6 +22,7 @@ import net.md_5.bungee.event.EventHandler;
 import org.apache.commons.io.Charsets;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by @SrGutyerrez
@@ -78,12 +80,18 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             );
         }
 
-        user.sendTitle(
-                Messages.PREFIX,
-                "§fUtilize " + (user.getPassword() != null ? "/logar <senha>" : "/registrar <senha> <e-mail>"),
-                0,
-                Integer.MAX_VALUE,
-                0
+        Common.getInstance().getScheduler().schedule(
+                () -> {
+                    user.sendTitle(
+                            Messages.PREFIX,
+                            "§fUtilize " + (user.isRegistered() ? "/logar <senha>" : "/registrar <senha> <e-mail>"),
+                            0,
+                            Integer.MAX_VALUE,
+                            0
+                    );
+                },
+                2,
+                TimeUnit.SECONDS
         );
     }
 
