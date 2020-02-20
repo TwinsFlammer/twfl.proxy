@@ -14,7 +14,7 @@ import com.redefocus.common.shared.server.data.Server;
 import com.redefocus.common.shared.server.manager.ServerManager;
 import com.redefocus.common.shared.twitter.manager.TwitterManager;
 import com.redefocus.common.shared.util.Constants;
-import com.redefocus.proxy.authentication.manager.AttemptManager;
+import com.redefocus.proxy.authentication.manager.AuthenticationManager;
 import com.redefocus.proxy.configuration.ProxyConfiguration;
 import com.redefocus.proxy.manager.StartManager;
 import com.redefocus.proxy.punish.manager.PunishmentManager;
@@ -159,7 +159,7 @@ public class Proxy extends FocusPlugin {
         user.setOffline();
         user.setLogged(false);
         TwitterManager.removeRequestToken(user.getId());
-        AttemptManager.removeAttempt(user.getId());
+        AuthenticationManager.removeAttempt(user.getId());
         UserManager.removeUser(user.getId());
         PunishmentManager.clearPunishments(user.getId());
     }
