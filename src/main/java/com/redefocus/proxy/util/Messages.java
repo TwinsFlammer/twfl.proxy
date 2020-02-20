@@ -7,16 +7,16 @@ public class Messages {
     private static final String PREFIX = "§c§lREDE FOCUS";
 
     public static final String INVALID_UUID_MESSAGE = "\n" +
-            PREFIX +
+            Messages.PREFIX +
             "\n" +
             "\n" +
             "§cVocê foi desconectado do servidor. Sua UUID está inválida." +
             "\n" +
-            "§cAcesse: §nhttps://cmty.me/uuid §r§cpara mais informações." +
+            "§cAcesse: §nhttps://rfcs.me/uuid §r§cpara mais informações." +
             "\n";
 
     public static final String INVALID_USER = "\n" +
-            "§c§lREDE COMMUNITY" +
+            Messages.PREFIX +
             "\n" +
             "\n" +
             "§cOcorreu um erro ao carregar seu usuário de nosso banco de dados" +
@@ -29,7 +29,7 @@ public class Messages {
             "\n";
 
     public static final String INVALID_USERNAME = "\n" +
-            "§c§lREDE COMMUNITY" +
+            Messages.PREFIX +
             "\n" +
             "\n" +
             "§cOcorreu um erro ao carregar seu usuário de nosso banco de dados" +
@@ -42,7 +42,7 @@ public class Messages {
             "\n";
 
     public static final String DONT_HAVE_LOBBY = "\n" +
-            "§c§lREDE COMMUNITY" +
+            Messages.PREFIX +
             "\n" +
             "\n" +
             "§cVocê foi desconectado do servidor!" +
@@ -54,7 +54,7 @@ public class Messages {
             "\n";
 
     public static final String IN_MAINTENANCE = "\n" +
-            "§c§lREDE COMMUNITY" +
+            Messages.PREFIX +
             "\n" +
             "\n" +
             "§cVocê foi desconectado do servidor!" +
