@@ -9,7 +9,7 @@ import com.redefocus.common.shared.databases.redis.channel.data.Channel;
 import com.redefocus.common.shared.databases.redis.handler.JedisMessageListener;
 import com.redefocus.common.shared.util.ClassGetter;
 import com.redefocus.proxy.Proxy;
-import com.redefocus.proxy.authentication.manager.AttemptManager;
+import com.redefocus.proxy.authentication.manager.AuthenticationManager;
 import com.redefocus.proxy.authentication.manager.PasswordManager;
 import com.redefocus.proxy.announcement.manager.AnnouncementManager;
 import com.redefocus.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
@@ -136,7 +136,7 @@ class DataManager {
         new TabListManager();
         new MOTDManager();
         new ShortedURLManager();
-        new AttemptManager();
+        new AuthenticationManager();
         new PasswordManager();
         new AnnouncementManager();
         new RevokeReasonManager();
