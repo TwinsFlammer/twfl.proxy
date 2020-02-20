@@ -90,7 +90,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                             0
                     );
                 },
-                2,
+                1,
                 TimeUnit.SECONDS
         );
     }
