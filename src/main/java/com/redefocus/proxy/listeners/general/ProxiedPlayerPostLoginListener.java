@@ -10,6 +10,7 @@ import com.redefocus.proxy.Proxy;
 import com.redefocus.proxy.listeners.general.tablist.data.TabList;
 import com.redefocus.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redefocus.proxy.skin.handler.SkinHandler;
+import com.redefocus.proxy.user.ProxyUser;
 import com.redefocus.proxy.util.Messages;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -37,10 +38,10 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
-        User user = UserManager.getUser(proxiedPlayer.getUniqueId());
-        Language language = user.getLanguage();
+        ProxyUser proxyUser = (ProxyUser) UserManager.getUser(proxiedPlayer.getUniqueId());
+        Language language = proxyUser.getLanguage();
 
-        if (user.isConsole()) {
+        if (proxyUser.isConsole()) {
             proxiedPlayer.disconnect(
                     language.getMessage("errors.console_player")
             );
@@ -49,13 +50,13 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
-        proxyServer.getUsers().add(user);
+        proxyServer.getUsers().add(proxyUser);
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
         proxyServerDao.update(proxyServer);
 
-        TabList tabList = user.hasGroup("manager") ? TabListManager.getStaffTabList(user) : TabListManager.getCurrentTabList(user);
+        TabList tabList = proxyUser.hasGroup("manager") ? TabListManager.getStaffTabList(proxyUser) : TabListManager.getCurrentTabList(proxyUser);
 
         if (tabList != null)
             proxiedPlayer.setTabHeader(
@@ -67,7 +68,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                     }
             );
 
-        Skin skin = user.getSkin();
+        Skin skin = proxyUser.getSkin();
 
         if (skin != null) {
             PendingConnection pendingConnection = proxiedPlayer.getPendingConnection();
@@ -77,6 +78,14 @@ public class ProxiedPlayerPostLoginListener implements Listener {
                     skin
             );
         }
+
+        proxyUser.sendTitle(
+                Messages.PREFIX,
+                "§fUtilize " + (proxyUser.isRegistered() ? "/logar <senha>" : "/registrar <senha> <e-mail>"),
+                0,
+                Integer.MAX_VALUE,
+                0
+        );
     }
 
     private Boolean isValidUUID(UUID uuid, String username) {
