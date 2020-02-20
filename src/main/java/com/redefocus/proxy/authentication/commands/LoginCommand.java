@@ -7,7 +7,7 @@ import com.redefocus.common.shared.permissions.user.data.User;
 import com.redefocus.common.shared.server.data.Server;
 import com.redefocus.common.shared.util.Helper;
 import com.redefocus.proxy.Proxy;
-import com.redefocus.proxy.authentication.manager.AttemptManager;
+import com.redefocus.proxy.authentication.manager.AuthenticationManager;
 
 /**
  * Created by @SrGutyerrez
@@ -49,13 +49,13 @@ public class LoginCommand extends CustomCommand {
         String password = args[0];
 
         if (!Helper.compare(password, user.getPassword())) {
-            Integer passwordAttempts = AttemptManager.getPasswordAttempt(user);
+            Integer passwordAttempts = AuthenticationManager.getPasswordAttempt(user);
 
             if (passwordAttempts == null) passwordAttempts = 4;
 
             passwordAttempts--;
 
-            AttemptManager.setPasswordAttempt(
+            AuthenticationManager.setPasswordAttempt(
                     user,
                     passwordAttempts
             );
@@ -64,7 +64,7 @@ public class LoginCommand extends CustomCommand {
                 user.kick(
                         language.getMessage("authentication.max_password_attempts_reached")
                 );
-                AttemptManager.getAttempts().remove(user.getId());
+                AuthenticationManager.getAttempts().remove(user.getId());
                 return;
             }
 
@@ -77,14 +77,15 @@ public class LoginCommand extends CustomCommand {
             return;
         }
 
-        AttemptManager.getAttempts().remove(user.getId());
+        AuthenticationManager.getAttempts().remove(user.getId());
 
-        user.setLogged(true);
         user.sendMessage(
                 language.getMessage("authentication.successfully_logged")
         );
 
-        LoginCommand.sendUserToLobby(user);
+        user.setLogged(true);
+
+        AuthenticationManager.authenticate(user);
     }
 
     public static void sendUserToLobby(User user) {
