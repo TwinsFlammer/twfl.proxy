@@ -7,6 +7,7 @@ import com.redefocus.common.shared.language.enums.Language;
 import com.redefocus.common.shared.permissions.user.dao.UserDao;
 import com.redefocus.common.shared.permissions.user.data.User;
 import com.redefocus.common.shared.util.Helper;
+import com.redefocus.proxy.authentication.manager.AuthenticationManager;
 
 import java.util.HashMap;
 
@@ -90,6 +91,6 @@ public class RegisterCommand extends CustomCommand {
 
         user.setLogged(true);
 
-        LoginCommand.sendUserToLobby(user);
+        AuthenticationManager.authenticate(user);
     }
 }
