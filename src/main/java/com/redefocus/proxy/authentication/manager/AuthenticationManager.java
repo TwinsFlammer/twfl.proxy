@@ -46,7 +46,7 @@ public class AuthenticationManager {
                 "§aAutênticado!",
                 "§fRedirecionando...",
                 0,
-                30,
+                60,
                 0
         );
 
