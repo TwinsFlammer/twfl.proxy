@@ -3,6 +3,7 @@ package com.redecommunity.proxy.authentication.commands;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.util.Helper;
@@ -14,7 +15,7 @@ import com.redecommunity.proxy.authentication.manager.AuthenticationManager;
  */
 public class LoginCommand extends CustomCommand {
     public LoginCommand() {
-        super("logar", CommandRestriction.IN_GAME, "default", "login");
+        super("logar", CommandRestriction.IN_GAME, GroupNames.DEFAULT, "login");
     }
 
     @Override
