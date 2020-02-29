@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.staff;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.group.manager.GroupManager;
 import com.redecommunity.common.shared.permissions.user.data.User;
@@ -14,7 +15,7 @@ import com.redecommunity.proxy.Proxy;
  */
 public class AnnounceCommand extends CustomCommand {
     public AnnounceCommand() {
-        super("alerta", CommandRestriction.ALL, "manager");
+        super("alerta", CommandRestriction.ALL, GroupNames.MANAGER);
     }
 
     @Override
