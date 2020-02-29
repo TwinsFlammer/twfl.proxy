@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.punish.commands.checkpunish;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.Punishment;
 import com.redecommunity.proxy.punish.data.RevokeReason;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class CheckPunishCommand extends CustomCommand {
     public CheckPunishCommand() {
-        super("checkpunir", CommandRestriction.ALL, "helper");
+        super("checkpunir", CommandRestriction.ALL, GroupNames.HELPER);
     }
 
     @Override
