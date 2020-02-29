@@ -3,6 +3,7 @@ package com.redecommunity.proxy.maintenance.command;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
@@ -15,7 +16,7 @@ import java.util.Arrays;
  */
 public class MaintenanceCommand extends CustomCommand {
     public MaintenanceCommand() {
-        super("manutenção", CommandRestriction.ALL, "manager");
+        super("manutenção", CommandRestriction.ALL, GroupNames.MANAGER);
     }
 
     @Override
