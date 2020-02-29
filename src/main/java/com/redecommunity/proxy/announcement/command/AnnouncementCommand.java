@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.announcement.command;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.announcement.command.arguments.AnnouncementDisableCommand;
 import com.redecommunity.proxy.announcement.command.arguments.AnnouncementEnableCommand;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
@@ -15,7 +16,7 @@ public class AnnouncementCommand extends CustomCommand {
     public static final String COMMAND_NAME = "anúncio";
 
     public AnnouncementCommand() {
-        super(AnnouncementCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "manager");
+        super(AnnouncementCommand.COMMAND_NAME, CommandRestriction.IN_GAME, GroupNames.MANAGER);
 
         this.addArgument(
                 new AnnouncementDisableCommand(),
