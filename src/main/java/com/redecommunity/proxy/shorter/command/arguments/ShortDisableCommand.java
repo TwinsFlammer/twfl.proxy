@@ -1,0 +1,61 @@
+package com.redecommunity.proxy.shorter.command.arguments;
+
+import com.google.common.collect.Maps;
+import com.redecommunity.proxy.shorter.command.ShortCommand;
+import com.redecommunity.proxy.shorter.dao.ShortedURLDao;
+import com.redecommunity.proxy.shorter.data.ShortedURL;
+import com.redecommunity.proxy.shorter.manager.ShortedURLManager;
+import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
+import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.user.data.User;
+
+import java.util.HashMap;
+
+/**
+ * Created by @SrGutyerrez
+ */
+public class ShortDisableCommand extends CustomArgumentCommand {
+    public ShortDisableCommand() {
+        super(0, "disable");
+    }
+
+    @Override
+    public void onCommand(User user, String[] args) {
+        Language language = user.getLanguage();
+
+        if (args.length != 1) {
+            user.sendMessage(
+                    String.format(
+                            language.getMessage("messages.default_commands.invalid_usage"),
+                            ShortCommand.COMMAND_NAME,
+                            "<nome>"
+                    )
+            );
+        }
+
+        String name = args[0];
+
+        ShortedURL shortedURL = ShortedURLManager.getShortedURL(name);
+
+        if (shortedURL == null) {
+            user.sendMessage(
+                    language.getMessage("shortener.unknown_shorted_url")
+            );
+            return;
+        }
+
+        ShortedURLDao shortedURLDao = new ShortedURLDao();
+
+        HashMap<String, Object> keys = Maps.newHashMap();
+
+        keys.put("active", false);
+
+        shortedURLDao.update(keys, "id", shortedURL.getId());
+
+        shortedURL.setActive(false);
+
+        user.sendMessage(
+                language.getMessage("shortener.disabled")
+        );
+    }
+}

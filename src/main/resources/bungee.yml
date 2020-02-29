@@ -1,5 +1,5 @@
 name: Proxy
-main: com.redefocus.proxy.Proxy
+main: com.redecommunity.proxy.Proxy
 version: 1.0-SNAPSHOT
 author: Gutyerrez
 depends:
