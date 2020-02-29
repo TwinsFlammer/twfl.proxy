@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.players.tell;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMessageManager;
@@ -12,7 +13,7 @@ import com.redecommunity.proxy.commands.defaults.players.tell.manager.DirectMess
  */
 public class ReplyDirectMessageCommand extends CustomCommand {
     public ReplyDirectMessageCommand() {
-        super("r", CommandRestriction.IN_GAME, "default");
+        super("r", CommandRestriction.IN_GAME, GroupNames.DEFAULT);
     }
 
     @Override
