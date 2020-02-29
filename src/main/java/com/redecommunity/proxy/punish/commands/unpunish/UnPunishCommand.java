@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.punish.commands.unpunish;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.punish.data.Punishment;
 import com.redecommunity.proxy.punish.data.RevokeReason;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class UnPunishCommand extends CustomCommand {
     public UnPunishCommand() {
-        super("unpunish", CommandRestriction.IN_GAME, "helper");
+        super("unpunish", CommandRestriction.IN_GAME, GroupNames.HELPER);
     }
 
     @Override
