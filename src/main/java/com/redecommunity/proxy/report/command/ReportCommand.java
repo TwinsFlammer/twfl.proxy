@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ReportCommand extends CustomCommand {
     public ReportCommand() {
-        super("report", CommandRestriction.IN_GAME, "default");
+        super("report", CommandRestriction.IN_GAME, GroupNames.DEFAULT);
     }
 
     @Override
