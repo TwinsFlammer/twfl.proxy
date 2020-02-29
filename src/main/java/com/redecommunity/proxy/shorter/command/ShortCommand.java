@@ -3,6 +3,7 @@ package com.redecommunity.proxy.shorter.command;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.util.Helper;
 import com.redecommunity.proxy.shorter.command.arguments.ShortDisableCommand;
@@ -18,7 +19,7 @@ public class ShortCommand extends CustomCommand {
     public static final String COMMAND_NAME = "short";
 
     public ShortCommand() {
-        super(ShortCommand.COMMAND_NAME, CommandRestriction.ALL, "helper");
+        super(ShortCommand.COMMAND_NAME, CommandRestriction.ALL, GroupNames.HELPER);
 
         this.addArgument(
                 new ShortDisableCommand(),
