@@ -4,6 +4,7 @@ import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.group.data.UserGroup;
@@ -24,7 +25,7 @@ import java.util.stream.IntStream;
  */
 public class AccountCommand extends CustomCommand {
     public AccountCommand() {
-        super("account", CommandRestriction.ALL, "helper");
+        super("account", CommandRestriction.ALL, GroupNames.HELPER);
 
         this.addArgument(
                 new AccountChangeDiscordIdCommand(),
