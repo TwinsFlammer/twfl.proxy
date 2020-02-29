@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.staff;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 
@@ -11,7 +12,7 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
  */
 public class FindCommand extends CustomCommand {
     public FindCommand() {
-        super("find", CommandRestriction.ALL, "moderator");
+        super("find", CommandRestriction.ALL, GroupNames.MODERATOR);
     }
 
     @Override
