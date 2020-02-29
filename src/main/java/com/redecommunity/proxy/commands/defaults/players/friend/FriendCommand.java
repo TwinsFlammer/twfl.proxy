@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.commands.defaults.players.friend;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.commands.defaults.players.friend.arguments.*;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
@@ -14,7 +15,7 @@ public class FriendCommand extends CustomCommand {
     public static final String COMMAND_NAME = "amigo";
 
     public FriendCommand() {
-        super(FriendCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "default");
+        super(FriendCommand.COMMAND_NAME, CommandRestriction.IN_GAME, GroupNames.DEFAULT);
 
         this.addArgument(
                 new FriendAcceptCommand(),
