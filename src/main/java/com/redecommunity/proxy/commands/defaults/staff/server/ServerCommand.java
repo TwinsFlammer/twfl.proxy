@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.staff.server;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.commands.defaults.staff.server.arguments.ServerConnectCommand;
@@ -14,7 +15,7 @@ public class ServerCommand extends CustomCommand {
     public static final String COMMAND_NAME = "server";
 
     public ServerCommand() {
-        super(ServerCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "helper");
+        super(ServerCommand.COMMAND_NAME, CommandRestriction.IN_GAME, GroupNames.HELPER);
 
         this.addArgument(
                 new ServerConnectCommand()
