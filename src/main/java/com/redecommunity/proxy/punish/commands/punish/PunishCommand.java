@@ -1,6 +1,7 @@
 package com.redecommunity.proxy.punish.commands.punish;
 
 import com.google.common.collect.Maps;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.punish.dao.PunishmentDao;
 import com.redecommunity.proxy.punish.data.Duration;
 import com.redecommunity.proxy.punish.data.PunishReason;
@@ -24,7 +25,7 @@ import java.util.stream.IntStream;
  */
 public class PunishCommand extends CustomCommand {
     public PunishCommand() {
-        super("punir", CommandRestriction.ALL, "helper");
+        super("punir", CommandRestriction.ALL, GroupNames.HELPER);
     }
 
     @Override
