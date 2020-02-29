@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.staff;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.proxy.Proxy;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class StaffListCommand extends CustomCommand {
     public StaffListCommand() {
-        super("staff", CommandRestriction.ALL, "helper");
+        super("staff", CommandRestriction.ALL, GroupNames.HELPER);
     }
 
     @Override
