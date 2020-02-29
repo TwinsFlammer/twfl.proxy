@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.commands.defaults.players;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.Proxy;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
@@ -12,7 +13,7 @@ import com.redecommunity.common.shared.server.data.Server;
  */
 public class OnlineCommand extends CustomCommand {
     public OnlineCommand() {
-        super("online", CommandRestriction.ALL, "default");
+        super("online", CommandRestriction.ALL, GroupNames.DEFAULT);
     }
 
     @Override
