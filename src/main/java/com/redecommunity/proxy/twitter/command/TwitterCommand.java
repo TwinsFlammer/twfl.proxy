@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.twitter.command;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.twitter.command.arguments.*;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
@@ -14,7 +15,7 @@ public class TwitterCommand extends CustomCommand {
     public static final String COMMAND_NAME = "twitter";
 
     public TwitterCommand() {
-        super(TwitterCommand.COMMAND_NAME, CommandRestriction.IN_GAME, "default");
+        super(TwitterCommand.COMMAND_NAME, CommandRestriction.IN_GAME, GroupNames.DEFAULT);
 
         this.addArgument(
                 new AssociateCommand(),
