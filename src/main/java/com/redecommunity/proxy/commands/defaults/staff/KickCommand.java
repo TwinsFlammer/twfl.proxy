@@ -3,6 +3,7 @@ package com.redecommunity.proxy.commands.defaults.staff;
 import com.redecommunity.api.bungeecord.commands.CustomCommand;
 import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
@@ -12,7 +13,7 @@ import com.redecommunity.common.shared.util.Helper;
  */
 public class KickCommand extends CustomCommand {
     public KickCommand() {
-        super("chutar", CommandRestriction.ALL, "manager");
+        super("chutar", CommandRestriction.ALL, GroupNames.MANAGER);
     }
 
     @Override
