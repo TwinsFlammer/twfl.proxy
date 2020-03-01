@@ -92,7 +92,7 @@ public class Proxy extends CommunityPlugin {
     }
 
     public static void broadcastMessage(Group group, String message) {
-        Proxy.broadcastMessage(group, message, new Preference[] {});
+        Proxy.broadcastMessage(group, message, new Preference[]{});
     }
 
     public static void broadcastMessage(Group group, String message, Preference... preferences) {
@@ -107,7 +107,10 @@ public class Proxy extends CommunityPlugin {
 
         jsonObject.put("preferences", jsonArray);
 
-        Common.getInstance().getDatabaseManager().getRedisManager().getDatabases().values()
+        Common.getInstance().getDatabaseManager()
+                .getRedisManager()
+                .getDatabases()
+                .values()
                 .forEach(redis -> redis.sendMessage(
                         Constants.BROADCAST_MESSAGE,
                         jsonObject.toString()
