@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.listeners.general;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
 import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
@@ -57,7 +58,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         proxyServerDao.update(proxyServer);
 
-        TabList tabList = user.hasGroup("manager") ? TabListManager.getStaffTabList(user) : TabListManager.getCurrentTabList(user);
+        TabList tabList = user.hasGroup(GroupNames.MANAGER) ? TabListManager.getStaffTabList(user) : TabListManager.getCurrentTabList(user);
 
         if (tabList != null)
             proxiedPlayer.setTabHeader(
