@@ -24,7 +24,7 @@ public class AnnouncementDao extends Table {
 
     @Override
     public String getTableName() {
-        return "server_announcements";
+        return "server_announcement";
     }
 
     @Override
