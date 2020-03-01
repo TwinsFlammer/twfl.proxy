@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.commands.defaults.staff.group.arguments;
 
+import com.redecommunity.common.shared.permissions.user.group.channel.UserGroupChannel;
 import com.redecommunity.proxy.commands.defaults.staff.group.GroupCommand;
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.common.shared.language.enums.Language;
@@ -12,6 +13,8 @@ import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.util.Helper;
+import com.redecommunity.proxy.commands.defaults.staff.group.handler.GroupHandler;
+import org.json.simple.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -108,7 +111,13 @@ public class GroupAddCommand extends CustomArgumentCommand {
                 userGroup
         );
 
-        if (user1.isOnline()) user1.getGroups().add(userGroup);
+        GroupHandler.update(
+                user1,
+                group,
+                serverId,
+                duration,
+                false
+        );
     }
 
     private void sendUsage(Language language, User user) {
