@@ -107,7 +107,7 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n")
                 .next()
-                .text("   Último IP: §7" + (user.hasGroup("manager") ? user1.getLastAddress() : "§cSem permissão"))
+                .text("   Último IP: §7" + (user.hasGroup(GroupNames.MANAGER) ? user1.getLastAddress() : "§cSem permissão"))
                 .next()
                 .text("\n\n")
                 .next()
@@ -122,12 +122,12 @@ public class AccountCommand extends CustomCommand {
                 .text("   Discord: §7")
                 .next();
 
-        if (user.hasGroup("manager") && user1.getDiscordId() == 0) {
+        if (user.hasGroup(GroupNames.MANAGER) && user1.getDiscordId() == 0) {
             jsonText.text("§7Indisponível");
         } else if (user1.getDiscordId() != 0) {
             jsonText.text("§7[Clique para copiar]")
                     .clickSuggest(user1.getDiscordId().toString());
-        } else if (!user.hasGroup("manager")) jsonText.text("§cSem permissão");
+        } else if (!user.hasGroup(GroupNames.MANAGER)) jsonText.text("§cSem permissão");
 
         jsonText.next()
                 .text("\n")
