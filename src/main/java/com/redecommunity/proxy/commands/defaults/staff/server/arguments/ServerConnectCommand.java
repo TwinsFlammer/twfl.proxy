@@ -1,5 +1,6 @@
 package com.redecommunity.proxy.commands.defaults.staff.server.arguments;
 
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.proxy.commands.defaults.staff.server.ServerCommand;
 import com.redecommunity.api.bungeecord.commands.CustomArgumentCommand;
 import com.redecommunity.common.shared.language.enums.Language;
@@ -54,7 +55,7 @@ public class ServerConnectCommand extends CustomArgumentCommand {
             );
         }
 
-        if (!server.isAccessible() && !user.hasGroup("manager")) {
+        if (!server.isAccessible() && !user.hasGroup(GroupNames.MANAGER)) {
             user.sendMessage(
                     language.getMessage("messages.default_commands.server.inaccessible_server")
             );
