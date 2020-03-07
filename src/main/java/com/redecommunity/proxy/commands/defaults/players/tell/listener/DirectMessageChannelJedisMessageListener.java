@@ -4,6 +4,7 @@ import com.redecommunity.common.shared.databases.redis.handler.JedisMessageListe
 import com.redecommunity.common.shared.databases.redis.handler.annonation.ChannelName;
 import com.redecommunity.common.shared.databases.redis.handler.event.JedisMessageEvent;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.data.Group;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.util.Helper;
@@ -36,15 +37,19 @@ public class DirectMessageChannelJedisMessageListener implements JedisMessageLis
         Language targetLanguage = targetUser.getLanguage();
         Language senderLanguage = senderUser.getLanguage();
 
+        Group highestGroup = senderUser.getHighestGroup();
+
         String from = String.format(
-                targetLanguage.getMessage("tell.formats.from"),
-                senderUser.getHighestGroup().getPrefix() + senderUser.getDisplayName(),
+                senderLanguage.getMessage("tell.formats.from"),
+                highestGroup.getColor() + highestGroup.getPrefix() + senderUser.getDisplayName(),
                 subject
         );
 
+        Group highestGroup1 = targetUser.getHighestGroup();
+
         String to = String.format(
-                senderLanguage.getMessage("tell.formats.to"),
-                targetUser.getHighestGroup().getPrefix() + targetUser.getDisplayName(),
+                targetLanguage.getMessage("tell.formats.to"),
+                highestGroup1.getColor() + highestGroup1.getPrefix() + targetUser.getDisplayName(),
                 subject
         );
 
