@@ -1,16 +1,16 @@
 package com.redecommunity.proxy.listeners.general;
 
-import com.redecommunity.common.shared.permissions.group.GroupNames;
-import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
-import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
 import com.redecommunity.api.shared.connection.data.ProxyServer;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
 import com.redecommunity.common.shared.skin.data.Skin;
 import com.redecommunity.proxy.Proxy;
+import com.redecommunity.proxy.listeners.general.tablist.data.TabList;
+import com.redecommunity.proxy.listeners.general.tablist.manager.TabListManager;
 import com.redecommunity.proxy.skin.handler.SkinHandler;
 import com.redecommunity.proxy.util.Messages;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -52,7 +52,9 @@ public class ProxiedPlayerPostLoginListener implements Listener {
 
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
-        proxyServer.getUsers().add(user);
+        proxyServer.getUsersId().removeIf(userId -> userId.equals(user.getId()));
+
+        proxyServer.getUsersId().add(user.getId());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
