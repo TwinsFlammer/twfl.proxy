@@ -14,7 +14,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * Created by @SrGutyerrez
@@ -25,7 +27,14 @@ public class AnnouncementManager {
 
         Common.getInstance().getScheduler().scheduleWithFixedDelay(
                 () -> {
-                    List<Announcement> announcements = Lists.newArrayList(announcementDao.findAll());
+                    Set<Announcement> announcements = announcementDao.findAll();
+
+                    List<Announcement> announcements1 = Lists.newArrayList(announcements)
+                            .stream()
+                            .filter(Announcement::isActive)
+                            .collect(Collectors.toList());
+
+                    if (announcements1.isEmpty()) return;
 
                     JSONText jsonText = new JSONText();
 
@@ -37,25 +46,23 @@ public class AnnouncementManager {
                             .text("\n\n")
                             .next();
 
-                    announcements.stream()
-                            .filter(Announcement::isActive)
-                            .forEach(announcement -> {
-                                jsonText.text("§e * ")
-                                        .next()
-                                        .text(announcement.getTitle())
-                                        .next()
-                                        .text(" ")
-                                        .next()
-                                        .text(announcement.getMessage());
+                    announcements1.forEach(announcement -> {
+                        jsonText.text("§e * ")
+                                .next()
+                                .text(announcement.getTitle())
+                                .next()
+                                .text(" ")
+                                .next()
+                                .text(announcement.getMessage());
 
-                                if (announcement.getUrl() != null)
-                                    jsonText.clickOpenURL(announcement.getUrl().toExternalForm());
+                        if (announcement.getUrl() != null)
+                            jsonText.clickOpenURL(announcement.getUrl().toExternalForm());
 
-                                jsonText.next()
-                                        .text("\n")
-                                        .next()
-                                        .text("§7 [Ver mais]");
-                            });
+                        jsonText.next()
+                                .text("\n")
+                                .next()
+                                .text("§7 [Ver mais]");
+                    });
 
                     ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> {
                         User user = UserManager.getUser(proxiedPlayer.getUniqueId());
