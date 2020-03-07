@@ -6,7 +6,6 @@ import com.redecommunity.api.shared.connection.data.ProxyServer;
 import com.redecommunity.common.shared.permissions.user.dao.UserDao;
 import com.redecommunity.common.shared.permissions.user.data.User;
 import com.redecommunity.common.shared.permissions.user.manager.UserManager;
-import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.proxy.Proxy;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
@@ -39,7 +38,7 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
-        proxyServer.getUsers().remove(user);
+        proxyServer.getUsersId().removeIf(userId -> userId.equals(user.getId()));
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
