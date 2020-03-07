@@ -1,9 +1,6 @@
 package com.redecommunity.proxy;
 
 import com.google.common.collect.Lists;
-import com.redecommunity.proxy.configuration.ProxyConfiguration;
-import com.redecommunity.proxy.manager.StartManager;
-import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
 import com.redecommunity.api.shared.connection.data.ProxyServer;
@@ -18,6 +15,9 @@ import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.common.shared.util.Constants;
 import com.redecommunity.proxy.authentication.manager.AuthenticationManager;
+import com.redecommunity.proxy.configuration.ProxyConfiguration;
+import com.redecommunity.proxy.manager.StartManager;
+import com.redecommunity.proxy.punish.manager.PunishmentManager;
 import lombok.Getter;
 import net.md_5.bungee.api.config.ServerInfo;
 import org.json.simple.JSONArray;
@@ -121,7 +121,7 @@ public class Proxy extends CommunityPlugin {
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
         proxyServer.setStatus(false);
-        proxyServer.setUsers(Lists.newArrayList());
+        proxyServer.setUsersId(Lists.newArrayList());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
