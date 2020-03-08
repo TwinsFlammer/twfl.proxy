@@ -121,6 +121,13 @@ public class Proxy extends CommunityPlugin {
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
         proxyServer.setStatus(false);
+
+        proxyServer.getUsersId().forEach(userId -> {
+            User user = UserManager.getUser(userId);
+
+            user.setLogged(false);
+        });
+
         proxyServer.setUsersId(Lists.newArrayList());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
