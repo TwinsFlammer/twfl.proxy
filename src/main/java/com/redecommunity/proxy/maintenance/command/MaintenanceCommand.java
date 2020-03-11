@@ -76,7 +76,9 @@ public class MaintenanceCommand extends CustomCommand {
             return;
         }
 
-        server.setStatus(switchMode ? 3 : 0);
+        Integer oldStatus = server.getOldStatus() == null ? 0 : server.getOldStatus();
+
+        server.setStatus(switchMode ? 3 : oldStatus);
 
         user.sendMessage(
                 String.format(
