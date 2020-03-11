@@ -54,14 +54,25 @@ public class MaintenanceCommand extends CustomCommand {
         }
 
         Boolean switchMode = action.equals("on");
+        String switchModeString = switchMode ? "ativada" : "desligada";
 
         if (serverName.equalsIgnoreCase("geral")) {
+            if (switchMode && MaintenanceFactory.inMaintenance() || !switchMode && !MaintenanceFactory.inMaintenance()) {
+                user.sendMessage(
+                        String.format(
+                                language.getMessage("maintenance.already_in_status"),
+                                switchMode
+                        )
+                );
+                return;
+            }
+
             MaintenanceFactory.setMaintenance(switchMode);
             user.sendMessage(
                     String.format(
                             language.getMessage("maintenance.server_status_changed"),
                             "geral",
-                            switchMode ? "ativada" : "desativada"
+                            switchModeString
                     )
             );
             return;
@@ -76,6 +87,16 @@ public class MaintenanceCommand extends CustomCommand {
             return;
         }
 
+        if (switchMode && server.inMaintenance() || !switchMode && !server.inMaintenance()) {
+            user.sendMessage(
+                    String.format(
+                            language.getMessage("maintenance.already_in_status"),
+                            switchModeString
+                    )
+            );
+            return;
+        }
+
         Integer oldStatus = server.getOldStatus() == null ? 0 : server.getOldStatus();
 
         server.setStatus(switchMode ? 3 : oldStatus);
@@ -84,7 +105,7 @@ public class MaintenanceCommand extends CustomCommand {
                 String.format(
                         language.getMessage("maintenance.server_status_changed"),
                         server.getDisplayName(),
-                        switchMode ? "ativada" : "desativada"
+                        switchModeString
                 )
         );
     }
