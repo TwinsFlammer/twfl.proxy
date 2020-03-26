@@ -15,7 +15,7 @@ import com.redecommunity.proxy.authentication.manager.AuthenticationManager;
  */
 public class LoginCommand extends CustomCommand {
     public LoginCommand() {
-        super("logar", CommandRestriction.IN_GAME, GroupNames.DEFAULT, "login");
+        super("logar", CommandRestriction.IN_GAME, GroupNames.DEFAULT, new String[] { "login" });
     }
 
     @Override
