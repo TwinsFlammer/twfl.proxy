@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class RegisterCommand extends CustomCommand {
     public RegisterCommand() {
-        super("registrar", CommandRestriction.IN_GAME, GroupNames.DEFAULT, "register");
+        super("registrar", CommandRestriction.IN_GAME, GroupNames.DEFAULT, new String[] { "register" });
     }
 
     @Override
