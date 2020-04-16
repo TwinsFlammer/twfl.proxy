@@ -5,8 +5,11 @@ import com.redecommunity.api.bungeecord.commands.enums.CommandRestriction;
 import com.redecommunity.api.bungeecord.util.JSONText;
 import com.redecommunity.common.shared.permissions.group.GroupNames;
 import com.redecommunity.common.shared.permissions.user.data.User;
+import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.commands.defaults.staff.server.arguments.ServerConnectCommand;
+
+import java.util.Comparator;
 
 /**
  * Created by @SrGutyerrez
@@ -33,31 +36,34 @@ public class ServerCommand extends CustomCommand {
                 .next()
                 .text("\n");
 
-        ServerManager.getServers().forEach(server -> {
-            jsonText.next()
-                    .text("\n")
-                    .next()
-                    .text("  §f- ")
-                    .next()
-                    .text(server.inMaintenance() ? "§c[Man.] " : "")
-                    .next()
-                    .text(server.getStatusColor() + server.getDisplayName() + " ")
-                    .hoverText(
-                            "§e" + server.getDisplayName() +
-                            "\n\n" +
-                            server.getDescription() +
-                            "\n\n" +
-                            "§fJogadores online: §7" + server.getPlayerCount() +
-                            "\n" +
-                            "§fEstado atual: " + server.getStatus() +
-                            "\n" +
-                            "§fMáximo de jogadores: §7" + server.getSlots() +
-                            "\n" +
-                            "§fDescrição: §7" + server.getDescription())
-                    .next()
-                    .text("§7[Clique para conectar]")
-                    .clickRunCommand("/server conectar " + server.getName());
-        });
+        ServerManager.getServers()
+                .stream()
+                .sorted(Comparator.comparing(Server::getName))
+                .forEach(server -> {
+                    jsonText.next()
+                            .text("\n")
+                            .next()
+                            .text("  §f- ")
+                            .next()
+                            .text(server.inMaintenance() ? "§c[Man.] " : "")
+                            .next()
+                            .text(server.getStatusColor() + server.getDisplayName() + " ")
+                            .hoverText(
+                                    "§e" + server.getDisplayName() +
+                                            "\n\n" +
+                                            server.getDescription() +
+                                            "\n\n" +
+                                            "§fJogadores online: §7" + server.getPlayerCount() +
+                                            "\n" +
+                                            "§fEstado atual: " + server.getStatus() +
+                                            "\n" +
+                                            "§fMáximo de jogadores: §7" + server.getSlots() +
+                                            "\n" +
+                                            "§fDescrição: §7" + server.getDescription())
+                            .next()
+                            .text("§7[Clique para conectar]")
+                            .clickRunCommand("/server conectar " + server.getName());
+                });
 
         jsonText.next()
                 .text("\n")
