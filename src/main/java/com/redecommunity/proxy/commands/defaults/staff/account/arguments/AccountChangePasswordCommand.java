@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class AccountChangePasswordCommand extends CustomArgumentCommand {
     public AccountChangePasswordCommand() {
-        super(1, "changepass");
+        super(0, "changepass");
     }
 
     @Override
