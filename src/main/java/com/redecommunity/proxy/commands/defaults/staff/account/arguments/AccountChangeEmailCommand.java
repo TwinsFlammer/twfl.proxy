@@ -8,11 +8,10 @@ import com.redecommunity.common.shared.permissions.user.data.User;
  */
 public class AccountChangeEmailCommand extends CustomArgumentCommand {
     public AccountChangeEmailCommand() {
-        super(0, "changepass");
+        super(0, "changeemail");
     }
 
     @Override
     public void onCommand(User user, String[] strings) {
-
     }
 }
