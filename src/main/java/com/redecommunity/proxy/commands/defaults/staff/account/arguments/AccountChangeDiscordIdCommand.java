@@ -8,7 +8,7 @@ import com.redecommunity.common.shared.permissions.user.data.User;
  */
 public class AccountChangeDiscordIdCommand extends CustomArgumentCommand {
     public AccountChangeDiscordIdCommand() {
-        super(1, "changepass");
+        super(0, "changepass");
     }
 
     @Override
