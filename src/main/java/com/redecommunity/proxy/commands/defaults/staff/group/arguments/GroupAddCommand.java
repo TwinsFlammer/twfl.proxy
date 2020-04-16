@@ -76,6 +76,13 @@ public class GroupAddCommand extends CustomArgumentCommand {
             return;
         }
 
+        if (!Helper.isInteger(targetPreTime)) {
+            user.sendMessage(
+                    language.getMessage("messages.default_commands.groups.invalid_duration")
+            );
+            return;
+        }
+
         Integer serverId = Integer.parseInt(targetServerPreId);
 
         Server server = ServerManager.getServer(serverId);
