@@ -10,6 +10,7 @@ import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.proxy.commands.defaults.staff.server.arguments.ServerConnectCommand;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 /**
  * Created by @SrGutyerrez
@@ -38,8 +39,8 @@ public class ServerCommand extends CustomCommand {
 
         ServerManager.getServers()
                 .stream()
+                .sorted(Comparator.comparing(server -> !server.isOnline()))
                 .sorted(Comparator.comparing(Server::getName))
-                .sorted(Comparator.comparing(Server::isOnline))
                 .forEach(server -> {
                     jsonText.next()
                             .text("\n")
