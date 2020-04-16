@@ -65,7 +65,7 @@ public class AccountChangePasswordCommand extends CustomArgumentCommand {
         userDao.update(
                 keys,
                 "id",
-                user.getId()
+                user1.getId()
         );
 
         user.sendMessage(
