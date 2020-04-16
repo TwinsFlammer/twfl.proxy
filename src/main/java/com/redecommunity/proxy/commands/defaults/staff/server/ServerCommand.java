@@ -39,6 +39,7 @@ public class ServerCommand extends CustomCommand {
         ServerManager.getServers()
                 .stream()
                 .sorted(Comparator.comparing(Server::getName))
+                .sorted(Comparator.comparing(Server::isOnline))
                 .forEach(server -> {
                     jsonText.next()
                             .text("\n")
