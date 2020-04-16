@@ -1,6 +1,6 @@
 package com.redecommunity.proxy;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.redecommunity.api.bungeecord.CommunityPlugin;
 import com.redecommunity.api.shared.connection.dao.ProxyServerDao;
 import com.redecommunity.api.shared.connection.data.ProxyServer;
@@ -128,7 +128,7 @@ public class Proxy extends CommunityPlugin {
             user.setLogged(false);
         });
 
-        proxyServer.setUsersId(Lists.newArrayList());
+        proxyServer.setUsersId(Sets.newHashSet());
 
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
