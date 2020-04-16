@@ -45,9 +45,16 @@ public class AccountChangePasswordCommand extends CustomArgumentCommand {
 
         User user1 = UserManager.getUser(username);
 
+        if (user1 == null) {
+            user.sendMessage(
+                    language.getMessage("messages.player.invalid_player")
+            );
+            return;
+        }
+
         String hashedPassword = Helper.hash(password);
 
-        user.setPassword(hashedPassword);
+        user1.setPassword(hashedPassword);
 
         HashMap<String, String> keys = Maps.newHashMap();
 
