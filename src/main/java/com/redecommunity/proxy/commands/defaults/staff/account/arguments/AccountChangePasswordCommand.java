@@ -21,11 +21,7 @@ public class AccountChangePasswordCommand extends CustomArgumentCommand {
 
     @Override
     public void onCommand(User user, String[] args) {
-        System.out.println("dale");
-
         if (!user.hasGroup(GroupNames.MANAGER)) return;
-
-        System.out.println("ixi");
 
         Language language = user.getLanguage();
 
