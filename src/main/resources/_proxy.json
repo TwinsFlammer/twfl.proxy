@@ -1,4 +1,5 @@
 {
   "proxy_id": 1,
-  "proxy_name": "proxy-general-1"
+  "proxy_name": "proxy-1",
+  "proxy_address": "147.135.30.194"
 }
