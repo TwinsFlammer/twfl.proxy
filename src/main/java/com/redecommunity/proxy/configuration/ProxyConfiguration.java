@@ -22,7 +22,7 @@ public class ProxyConfiguration {
     @Getter
     private Integer id;
     @Getter
-    private String name;
+    private String name, address;
 
     public ProxyConfiguration() {
         this.file = new File("_proxy.json");
@@ -60,5 +60,6 @@ public class ProxyConfiguration {
 
         this.id = ((Long) jsonObject.get("proxy_id")).intValue();
         this.name = (String) jsonObject.get("proxy_name");
+        this.address = (String) jsonObject.get("proxy_address");
     }
 }
