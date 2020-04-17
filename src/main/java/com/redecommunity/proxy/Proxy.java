@@ -14,7 +14,10 @@ import com.redecommunity.common.shared.server.data.Server;
 import com.redecommunity.common.shared.server.manager.ServerManager;
 import com.redecommunity.common.shared.twitter.manager.TwitterManager;
 import com.redecommunity.common.shared.util.Constants;
+import com.redecommunity.common.shared.util.Printer;
 import com.redecommunity.proxy.authentication.manager.AuthenticationManager;
+import com.redecommunity.proxy.cloudflare.api.CloudFlareAPI;
+import com.redecommunity.proxy.cloudflare.data.DNSRecord;
 import com.redecommunity.proxy.configuration.ProxyConfiguration;
 import com.redecommunity.proxy.manager.StartManager;
 import com.redecommunity.proxy.punish.manager.PunishmentManager;
@@ -44,18 +47,24 @@ public class Proxy extends CommunityPlugin {
     private ClassLoader classLoader = this.getClass().getClassLoader();
 
     @Getter
+    private static ProxyConfiguration proxyConfiguration;
+
+    @Getter
     private Integer id;
     @Getter
-    private String name;
+    private String name, address;
 
     @Override
     public void onEnablePlugin() {
-        ProxyConfiguration proxyConfiguration = new ProxyConfiguration();
+        Proxy.proxyConfiguration = new ProxyConfiguration();
 
-        this.id = proxyConfiguration.getId();
-        this.name = proxyConfiguration.getName();
+        this.id = Proxy.proxyConfiguration.getId();
+        this.name = Proxy.proxyConfiguration.getName();
+        this.address = Proxy.proxyConfiguration.getAddress();
 
         new StartManager();
+
+        this.markOnline();
     }
 
     @Override
@@ -117,6 +126,47 @@ public class Proxy extends CommunityPlugin {
                 ));
     }
 
+    private void markOnline() {
+        DNSRecord dnsRecord = Proxy.getDNSRecord();
+
+
+        net.md_5.bungee.api.ProxyServer proxyServer = net.md_5.bungee.api.ProxyServer.getInstance();
+
+        Integer port = proxyServer.getConfig().getListeners()
+                .stream()
+                .findFirst()
+                .get()
+                .getQueryPort();
+
+        if (dnsRecord == null) {
+            if (CloudFlareAPI.createRecord(
+                    "SRV",
+                    this.name,
+                    "redefocus.com",
+                    port
+            )) {
+                Printer.INFO.print("&aCreation of an DNS Record for this proxy successful.");
+            } else {
+                Printer.INFO.print("&cAn internal error ocurred while creating DNS Record for this proxy, shutting down.");
+
+                proxyServer.stop();
+            }
+        }
+    }
+
+    private static DNSRecord getDNSRecord() {
+        return CloudFlareAPI.listDNSRecords()
+                .stream()
+                .filter(dnsRecord1 -> dnsRecord1.getType().equalsIgnoreCase("SRV"))
+                .filter(dnsRecord1 -> {
+                    System.out.println(dnsRecord1);
+
+                    return dnsRecord1.getValue().equals("0\t25565\tredefocus.com");
+                })
+                .findFirst()
+                .orElse(null);
+    }
+
     public static void setOffline() {
         ProxyServer proxyServer = Proxy.getCurrentProxy();
 
@@ -133,6 +183,20 @@ public class Proxy extends CommunityPlugin {
         ProxyServerDao proxyServerDao = new ProxyServerDao();
 
         proxyServerDao.update(proxyServer);
+
+        DNSRecord dnsRecord = Proxy.getDNSRecord();
+
+        if (dnsRecord != null) {
+            Printer.INFO.print("&eDNS Record found, deleting it.");
+
+            if (CloudFlareAPI.deleteRecord(dnsRecord.getId())) {
+                Printer.INFO.print("&eDNS Record created successful.");
+            } else {
+                Printer.INFO.print("&cAn internal error ocurred while deleting DNS Record for this proxy, shutting down.");
+
+                net.md_5.bungee.api.ProxyServer.getInstance().stop();
+            }
+        }
     }
 
     public static Integer getCurrentProxyPlayerCount() {
