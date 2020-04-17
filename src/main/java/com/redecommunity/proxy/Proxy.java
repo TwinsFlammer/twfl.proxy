@@ -129,7 +129,6 @@ public class Proxy extends CommunityPlugin {
     private void markOnline() {
         DNSRecord dnsRecord = Proxy.getDNSRecord();
 
-
         net.md_5.bungee.api.ProxyServer proxyServer = net.md_5.bungee.api.ProxyServer.getInstance();
 
         Integer port = proxyServer.getConfig().getListeners()
@@ -145,9 +144,9 @@ public class Proxy extends CommunityPlugin {
                     "redefocus.com",
                     port
             )) {
-                Printer.INFO.print("&aCreation of an DNS Record for this proxy successful.");
+                Printer.INFO.coloredPrint("&aCreation of an DNS Record for this proxy successful.");
             } else {
-                Printer.INFO.print("&cAn internal error ocurred while creating DNS Record for this proxy, shutting down.");
+                Printer.INFO.coloredPrint("&cAn internal error ocurred while creating DNS Record for this proxy, shutting down.");
 
                 proxyServer.stop();
             }
@@ -158,11 +157,7 @@ public class Proxy extends CommunityPlugin {
         return CloudFlareAPI.listDNSRecords()
                 .stream()
                 .filter(dnsRecord1 -> dnsRecord1.getType().equalsIgnoreCase("SRV"))
-                .filter(dnsRecord1 -> {
-                    System.out.println(dnsRecord1);
-
-                    return dnsRecord1.getValue().equals("0\t25565\tredefocus.com");
-                })
+                .filter(dnsRecord1 -> dnsRecord1.getValue().equals("0\t25565\tredefocus.com"))
                 .findFirst()
                 .orElse(null);
     }
@@ -187,12 +182,12 @@ public class Proxy extends CommunityPlugin {
         DNSRecord dnsRecord = Proxy.getDNSRecord();
 
         if (dnsRecord != null) {
-            Printer.INFO.print("&eDNS Record found, deleting it.");
+            Printer.INFO.coloredPrint("&eDNS Record found, deleting it.");
 
             if (CloudFlareAPI.deleteRecord(dnsRecord.getId())) {
-                Printer.INFO.print("&eDNS Record created successful.");
+                Printer.INFO.coloredPrint("&eDNS Record created successful.");
             } else {
-                Printer.INFO.print("&cAn internal error ocurred while deleting DNS Record for this proxy, shutting down.");
+                Printer.INFO.coloredPrint("&cAn internal error ocurred while deleting DNS Record for this proxy, shutting down.");
 
                 net.md_5.bungee.api.ProxyServer.getInstance().stop();
             }
