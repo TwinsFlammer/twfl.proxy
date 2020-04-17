@@ -33,8 +33,8 @@ public class ShortedURLDao extends Table {
                         "CREATE TABLE IF NOT EXISTS %s " +
                                 "(" +
                                 "`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT," +
-                                "`link` VARCHAR(255) NOT NULL," +
                                 "`name` VARCHAR(255) NOT NULL," +
+                                "`url` VARCHAR(255) NOT NULL," +
                                 "`user_id` INTEGER NOT NULL," +
                                 "`time` LONG NOT NULL," +
                                 "`active` BOOLEAN NOT NULL" +
