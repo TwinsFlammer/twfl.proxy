@@ -38,6 +38,7 @@ public class FriendListCommand extends CustomArgumentCommand {
         List<User> users = user.getFriends()
                 .stream()
                 .sorted((friendId1, friendId2) -> UserManager.getUser(friendId2).isOnline().compareTo(UserManager.getUser(friendId1).isOnline()))
+                .distinct()
                 .map(UserManager::getUser)
                 .collect(Collectors.toList());
 
@@ -56,7 +57,7 @@ public class FriendListCommand extends CustomArgumentCommand {
         jsonText.next()
                 .text("\n")
                 .next()
-                .text("§eLista de amigos - " + page + "/" + pages)
+                .text("§eLista de amigos - " + page + "/" + (pages == 0 ? 1 : pages))
                 .next()
                 .text("\n\n")
                 .next();
