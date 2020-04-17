@@ -17,44 +17,6 @@ import java.util.List;
 
 @Beta
 public class CloudFlareAPI {
-    public static void main(String[] args) {
-        DNSRecord dnsRecord = CloudFlareAPI.listDNSRecords()
-                .stream()
-                .filter(dnsRecord1 -> dnsRecord1.getType().equalsIgnoreCase("SRV"))
-                .filter(dnsRecord1 -> {
-                    System.out.println(dnsRecord1);
-
-                    return dnsRecord1.getValue().equals("0\t25565\tredefocus.com");
-                })
-                .findFirst()
-                .orElse(null);
-
-        System.out.println(dnsRecord);
-
-        if (dnsRecord == null) {
-            if (CloudFlareAPI.createRecord(
-                    "SRV",
-                    "proxy-1",
-                    "redefocus.com",
-                    25565
-            )) {
-                System.out.println("Criado !");
-            } else {
-                System.out.println("Ocorreu um erro ao criar...");
-            }
-        }
-
-        if (dnsRecord != null) {
-            System.out.println("Deletar");
-
-            if (CloudFlareAPI.deleteRecord(dnsRecord.getId())) {
-                System.out.println("Deletado!");
-            } else {
-                System.out.println("Ocorreu um erro ao deletar...");
-            }
-        }
-    }
-
     public static List<DNSRecord> listDNSRecords() {
         List<DNSRecord> records = Lists.newArrayList();
 
