@@ -38,6 +38,7 @@ public class IgnoreListCommand extends CustomArgumentCommand {
         List<User> users = user.getIgnored()
                 .stream()
                 .sorted((friendId1, friendId2) -> UserManager.getUser(friendId2).isOnline().compareTo(UserManager.getUser(friendId1).isOnline()))
+                .distinct()
                 .map(UserManager::getUser)
                 .collect(Collectors.toList());
 
@@ -56,7 +57,7 @@ public class IgnoreListCommand extends CustomArgumentCommand {
         jsonText.next()
                 .text("\n")
                 .next()
-                .text("§eLista de usuários ignorados - " + page + "/" + pages)
+                .text("§eLista de usuários ignorados - " + page + "/" + (pages == 0 ? 1 : pages))
                 .next()
                 .text("\n\n")
                 .next();
