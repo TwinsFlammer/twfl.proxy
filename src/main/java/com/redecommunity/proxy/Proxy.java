@@ -140,7 +140,7 @@ public class Proxy extends CommunityPlugin {
         if (dnsRecord == null) {
             if (CloudFlareAPI.createRecord(
                     "SRV",
-                    this.name,
+                    "redefocus.com",
                     "redefocus.com",
                     port
             )) {
