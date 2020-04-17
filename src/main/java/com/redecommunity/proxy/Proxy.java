@@ -54,6 +54,9 @@ public class Proxy extends CommunityPlugin {
     @Getter
     private String name, address;
 
+    @Getter
+    private Integer port;
+
     @Override
     public void onEnablePlugin() {
         Proxy.proxyConfiguration = new ProxyConfiguration();
@@ -61,6 +64,11 @@ public class Proxy extends CommunityPlugin {
         this.id = Proxy.proxyConfiguration.getId();
         this.name = Proxy.proxyConfiguration.getName();
         this.address = Proxy.proxyConfiguration.getAddress();
+        this.port = this.getProxy().getConfig().getListeners()
+                .stream()
+                .findFirst()
+                .get()
+                .getQueryPort();
 
         new StartManager();
 
@@ -129,26 +137,18 @@ public class Proxy extends CommunityPlugin {
     private void markOnline() {
         DNSRecord dnsRecord = Proxy.getDNSRecord();
 
-        net.md_5.bungee.api.ProxyServer proxyServer = net.md_5.bungee.api.ProxyServer.getInstance();
-
-        Integer port = proxyServer.getConfig().getListeners()
-                .stream()
-                .findFirst()
-                .get()
-                .getQueryPort();
-
         if (dnsRecord == null) {
             if (CloudFlareAPI.createRecord(
                     "SRV",
                     "redefocus.com",
                     "redefocus.com",
-                    port
+                    this.port
             )) {
                 Printer.INFO.coloredPrint("&aCreation of an DNS Record for this proxy successful.");
             } else {
                 Printer.INFO.coloredPrint("&cAn internal error ocurred while creating DNS Record for this proxy, shutting down.");
 
-                proxyServer.stop();
+                net.md_5.bungee.api.ProxyServer.getInstance().stop();
             }
         }
     }
@@ -157,7 +157,7 @@ public class Proxy extends CommunityPlugin {
         return CloudFlareAPI.listDNSRecords()
                 .stream()
                 .filter(dnsRecord1 -> dnsRecord1.getType().equalsIgnoreCase("SRV"))
-                .filter(dnsRecord1 -> dnsRecord1.getValue().equals("0\t25565\tredefocus.com"))
+                .filter(dnsRecord1 -> dnsRecord1.getValue().equals("0\t" + Proxy.getInstance().getPort() + "\tredefocus.com"))
                 .findFirst()
                 .orElse(null);
     }
