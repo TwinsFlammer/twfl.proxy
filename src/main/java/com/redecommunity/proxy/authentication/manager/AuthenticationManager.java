@@ -1,7 +1,9 @@
 package com.redecommunity.proxy.authentication.manager;
 
 import com.google.common.collect.Maps;
-import com.redecommunity.proxy.authentication.commands.LoginCommand;
+import com.redecommunity.common.shared.language.enums.Language;
+import com.redecommunity.common.shared.server.data.Server;
+import com.redecommunity.proxy.Proxy;
 import com.redecommunity.common.shared.Common;
 import com.redecommunity.common.shared.permissions.user.data.User;
 
@@ -42,9 +44,11 @@ public class AuthenticationManager {
     }
 
     public static void authenticate(User user) {
+        user.setLogged(true);
+
         user.sendTitle(
-                "§aAutênticado!",
-                "§fRedirecionando...",
+                "§a§lAutênticado!",
+                "§f§lRedirecionando...",
                 0,
                 60,
                 0
@@ -52,10 +56,25 @@ public class AuthenticationManager {
 
         Common.getInstance().getScheduler().schedule(
                 () -> {
-                    LoginCommand.sendUserToLobby(user);
+                    AuthenticationManager.sendUserToLobby(user);
                 },
                 3,
                 TimeUnit.SECONDS
         );
+    }
+
+    private static void sendUserToLobby(User user) {
+        Language language = user.getLanguage();
+
+        Server server = Proxy.getLobby();
+
+        if (server == null) {
+            user.kick(
+                    language.getMessage("messages.default_commands.not_have_lobby_live")
+            );
+            return;
+        }
+
+        user.connect(server);
     }
 }
