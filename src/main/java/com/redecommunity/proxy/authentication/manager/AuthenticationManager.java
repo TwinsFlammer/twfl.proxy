@@ -48,7 +48,7 @@ public class AuthenticationManager {
 
         user.sendTitle(
                 "§a§lAutênticado!",
-                "§f§lRedirecionando...",
+                "§fRedirecionando...",
                 0,
                 60,
                 0
