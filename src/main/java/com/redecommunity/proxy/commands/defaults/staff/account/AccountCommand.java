@@ -167,6 +167,7 @@ public class AccountCommand extends CustomCommand {
                     List<Group> groups = user1.getGroups()
                             .stream()
                             .filter(userGroup -> server == null ? userGroup.getServer() == null : userGroup.getServer().isSimilar(server))
+                            .distinct()
                             .map(UserGroup::getGroup)
                             .sorted((group1, group2) -> group2.getPriority().compareTo(group1.getPriority()))
                             .collect(Collectors.toList());
