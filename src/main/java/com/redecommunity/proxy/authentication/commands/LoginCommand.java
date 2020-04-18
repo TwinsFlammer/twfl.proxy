@@ -84,23 +84,6 @@ public class LoginCommand extends CustomCommand {
                 language.getMessage("authentication.successfully_logged")
         );
 
-        user.setLogged(true);
-
         AuthenticationManager.authenticate(user);
-    }
-
-    public static void sendUserToLobby(User user) {
-        Language language = user.getLanguage();
-
-        Server server = Proxy.getLobby();
-
-        if (server == null) {
-            user.kick(
-                    language.getMessage("messages.default_commands.not_have_lobby_live")
-            );
-            return;
-        }
-
-        user.connect(server);
     }
 }
