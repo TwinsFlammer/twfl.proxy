@@ -35,7 +35,7 @@ public class RegisterCommand extends CustomCommand {
             return;
         }
 
-        if (user.getPassword() != null) {
+        if (user.getPassword() != null && !user.getPassword().isEmpty() || user.getEmail() != null && user.getEmail().isEmpty()) {
             user.sendMessage(
                     language.getMessage("authentication.already_registered")
             );
@@ -89,8 +89,6 @@ public class RegisterCommand extends CustomCommand {
         user.sendMessage(
                 language.getMessage("authentication.successfully_registered")
         );
-
-        user.setLogged(true);
 
         AuthenticationManager.authenticate(user);
     }
