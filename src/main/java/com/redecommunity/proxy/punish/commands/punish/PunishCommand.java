@@ -136,7 +136,7 @@ public class PunishCommand extends CustomCommand {
                 return;
             }
 
-            if (!user.hasGroup("manager") && !Helper.isURLValid(proof)) {
+            if (!user.hasGroup(GroupNames.DIRECTOR) && !Helper.isURLValid(proof)) {
                 user.sendMessage(
                         language.getMessage("punishment.invalid_proof_url")
                 );
