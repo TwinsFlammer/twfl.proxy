@@ -101,7 +101,9 @@ public class CheckPunishCommand extends CustomCommand {
                             .next()
                             .text("[Prova]");
 
-                    if (punishment.hasValidProof()) jsonText.clickOpenURL(punishment.getProof());
+                    if (punishment.hasValidProof())
+                        jsonText.hoverText(punishment.getProof())
+                                .clickOpenURL(punishment.getProof());
 
                     jsonText.next()
                             .text(" ")
