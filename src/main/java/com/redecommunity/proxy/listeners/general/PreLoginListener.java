@@ -104,7 +104,7 @@ public class PreLoginListener implements Listener {
                                     language.getMessage("punishment.kick_message"),
                                     punishType.getDisplayName(),
                                     punishReason.getDisplayName(),
-                                    punishment.getProof(),
+                                    punishment.getFancyProof(),
                                     punishment.getStaffer().getDisplayName(),
                                     punishment.getId()
                             )
