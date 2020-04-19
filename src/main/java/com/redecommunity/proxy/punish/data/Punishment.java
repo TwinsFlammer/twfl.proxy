@@ -235,7 +235,7 @@ public class Punishment {
                 .append(duration.getTimeTypeDisplayName())
                 .append("\n");
 
-        Group group = this.hidden ? GroupManager.getGroup("manager") : GroupManager.getGroup("default");
+        Group group = this.hidden ? GroupManager.getGroup(GroupNames.DIRECTOR) : GroupManager.getGroup("default");
 
         Proxy.broadcastMessage(
                 group,
