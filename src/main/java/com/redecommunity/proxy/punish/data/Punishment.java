@@ -123,6 +123,10 @@ public class Punishment {
         return this.hasValidProof() ? " - " + this.proof : "";
     }
 
+    public String getDefaultProof() {
+        return this.proof;
+    }
+
     public String getDate() {
         return this.getSimpleDateFormat().format(this.time);
     }
