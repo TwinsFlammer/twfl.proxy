@@ -120,11 +120,11 @@ public class Punishment {
     }
 
     public String getProof() {
-        return this.hasValidProof() ? " - " + this.proof : "";
+        return this.proof;
     }
 
-    public String getDefaultProof() {
-        return this.proof;
+    public String getFancyProof() {
+        return this.hasValidProof() ? " - " + this.proof : "";
     }
 
     public String getDate() {
@@ -231,6 +231,7 @@ public class Punishment {
                 .append("\n")
                 .append("§c * Motivo: ")
                 .append(punishReason.getDisplayName())
+                .append(this.proof == null || this.proof.isEmpty() ? "" : " - ")
                 .append(this.getProof())
                 .append("\n");
 
