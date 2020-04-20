@@ -63,7 +63,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
                         "`hidden`," +
                         "`perpetual`," +
                         "`status`," +
-                        "`proof`," +
+                        (object.hasValidProof() ? "`proof`," : "") +
                         "`time`," +
                         "`end_time`" +
                         ")" +
@@ -76,7 +76,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
                         "%b," +
                         "%b," +
                         "%b," +
-                        "%s," +
+                        (object.hasValidProof() ? "'" + object.getProof() + "'," : "") +
                         "%d," +
                         "%d" +
                         ");",
@@ -88,7 +88,6 @@ public class PunishmentDao<T extends Punishment> extends Table {
                 object.isHidden(),
                 object.isPerpetual(),
                 object.getStatus(),
-                object.hasValidProof() ? null : "'" + object.getProof() + "'",
                 object.getTime(),
                 object.getEndTime()
         );
