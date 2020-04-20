@@ -153,14 +153,10 @@ public class PunishCommand extends CustomCommand {
 
             Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(15);
 
-            Optional<Punishment> optionalPunishment = punishments
-                    .stream()
+            if (punishments.stream()
                     .filter(Objects::nonNull)
                     .filter(punishment -> punishment.getReasonId().equals(punishReason.getId()))
-                    .filter(punishment -> punishment.getTime() >= minTime)
-                    .findAny();
-
-            if (optionalPunishment.isPresent()) {
+                    .anyMatch(punishment -> punishment.getTime() >= minTime)) {
                 user.sendMessage(
                         language.getMessage("punishment.user_already_punished_with_this_motive_in_moments_ago")
                 );
@@ -178,6 +174,11 @@ public class PunishCommand extends CustomCommand {
             PunishmentDao punishmentDao = new PunishmentDao();
 
             Punishment punishment1 = punishmentDao.insert(punishment);
+
+            if (punishment1 == null) {
+                user.sendMessage("§cOcorreu um erro ao efetuar essa punição.");
+                return;
+            }
 
             punishment1.broadcast();
 
