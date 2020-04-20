@@ -102,7 +102,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             return (T) new Punishment(
-                    resultSet.getInt("id"),
+                    resultSet.getInt(0),
                     object.getUserId(),
                     object.getStafferId(),
                     object.getReasonId(),
