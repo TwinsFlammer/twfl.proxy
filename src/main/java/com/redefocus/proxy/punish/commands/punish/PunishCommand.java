@@ -175,11 +175,6 @@ public class PunishCommand extends CustomCommand {
 
             Punishment punishment1 = punishmentDao.insert(punishment);
 
-            if (punishment1 == null) {
-                user.sendMessage("§cOcorreu um erro ao efetuar essa punição.");
-                return;
-            }
-
             punishment1.broadcast();
 
             punishments.add(punishment1);
