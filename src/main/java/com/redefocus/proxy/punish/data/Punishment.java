@@ -99,7 +99,7 @@ public class Punishment {
     }
 
     public Boolean hasValidProof() {
-        return this.proof != null && !this.proof.isEmpty();
+        return this.proof != null && !this.proof.isEmpty() && !this.proof.equalsIgnoreCase("null");
     }
 
     public Boolean canRevokeBy(User user) {
