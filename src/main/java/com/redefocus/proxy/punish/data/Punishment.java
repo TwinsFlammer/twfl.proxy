@@ -119,10 +119,6 @@ public class Punishment {
         return !this.isStarted() && !this.isFinalized() ? ChatColor.YELLOW : this.status ? ChatColor.GREEN : ChatColor.RED;
     }
 
-    public String getProof() {
-        return this.proof;
-    }
-
     public String getFancyProof() {
         return this.hasValidProof() ? " - " + this.proof : "";
     }
@@ -231,9 +227,12 @@ public class Punishment {
                 .append("\n")
                 .append("§c * Motivo: ")
                 .append(punishReason.getDisplayName())
-                .append(this.proof == null || this.proof.isEmpty() ? "" : " - ")
-                .append(this.getProof())
-                .append("\n");
+                .append(this.proof == null || this.proof.isEmpty() ? "" : " - ");
+
+        if (this.hasValidProof())
+            stringBuilder.append(this.getProof());
+
+        stringBuilder.append("\n");
 
         if (duration.isTemporary()) stringBuilder.append("§c * Duração: ")
                 .append(duration.getDuration())
