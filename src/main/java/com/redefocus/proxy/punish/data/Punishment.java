@@ -204,7 +204,7 @@ public class Punishment {
 
         PunishType punishType = duration.getPunishType();
 
-        if (user.isOnline()) {
+        if (user.isOnline() && punishType != PunishType.MUTE) {
             this.update(UpdateType.START);
 
             user.kick(
