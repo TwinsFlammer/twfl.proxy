@@ -92,7 +92,7 @@ public class CheckPunishCommand extends CustomCommand {
                                                                     "\n" +
                                                                     "Revogada em: " + punishment.getRevokeDate() +
                                                                     "\n" +
-                                                                    "Motivo: " + revokeReason.getDisplayName()
+                                                                    "Motivo: " + (revokeReason == null ? "Nenhum especificado" : revokeReason.getDisplayName())
                                                             :
                                                             ""
                                             )
