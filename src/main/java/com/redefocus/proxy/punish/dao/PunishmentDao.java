@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Created by @SrGutyerrez
  */
-public class PunishmentDao<T> extends Table {
+public class PunishmentDao<T extends Punishment> extends Table {
 
     @Override
     public String getDatabaseName() {
@@ -55,7 +55,7 @@ public class PunishmentDao<T> extends Table {
         );
     }
 
-    public <T extends Punishment> T insert(T object) {
+    public T insert(T object) {
         String query = String.format(
                 "INSERT INTO %s " +
                         "(" +
@@ -102,22 +102,25 @@ public class PunishmentDao<T> extends Table {
         ) {
             preparedStatement.execute();
 
-            HashMap<Object, Object> keys = Maps.newHashMap();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
-            keys.put("user_id", object.getUserId());
-            keys.put("staffer_id", object.getStafferId());
-            keys.put("reason_id", object.getReasonId());
-            keys.put("count", object.getCount());
-            keys.put("hidden", object.isHidden());
-            keys.put("perpetual", object.isPerpetual());
-            keys.put("status", object.getStatus());
-            keys.put("proof", object.getProof());
-            keys.put("time", object.getTime());
-
-            if (object.isTemporary())
-                keys.put("end_time", object.getEndTime());
-
-            return (T) this.findOne(keys);
+            return (T) new Punishment(
+                    resultSet.getInt("id"),
+                    object.getUserId(),
+                    object.getStafferId(),
+                    object.getReasonId(),
+                    object.getCount(),
+                    object.getRevokeUserId(),
+                    object.getRevokeReasonId(),
+                    object.isHidden(),
+                    object.isPerpetual(),
+                    object.getStatus(),
+                    object.getProof(),
+                    object.getTime(),
+                    object.getStartTime(),
+                    object.getEndTime(),
+                    object.getRevokeTime()
+            );
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
