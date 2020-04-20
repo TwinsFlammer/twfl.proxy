@@ -40,7 +40,7 @@ public class ProxiedPlayerPostLoginListener implements Listener {
             return;
         }
 
-        User user = UserManager.getUser(proxiedPlayer.getUniqueId());
+        User user = UserManager.getUser(proxiedPlayer.getUniqueId(), true);
         Language language = user.getLanguage();
 
         if (user.isConsole()) {
