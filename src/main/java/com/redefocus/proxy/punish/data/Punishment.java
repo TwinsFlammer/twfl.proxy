@@ -208,7 +208,7 @@ public class Punishment {
                             language.getMessage("punishment.kick_message"),
                             punishType.getDisplayName(),
                             punishReason.getDisplayName(),
-                            this.proof,
+                            this.hasValidProof() ? this.proof : "",
                             this.getStaffer().getDisplayName(),
                             this.id
                     )
@@ -227,7 +227,7 @@ public class Punishment {
                 .append("\n")
                 .append("§c * Motivo: ")
                 .append(punishReason.getDisplayName())
-                .append(this.hasValidProof() ? "" : " - ");
+                .append(this.hasValidProof() ? " - " : "");
 
         if (this.hasValidProof())
             stringBuilder.append(this.getProof());
@@ -235,7 +235,6 @@ public class Punishment {
         stringBuilder.append("\n");
 
         if (duration.isTemporary()) stringBuilder.append("§c * Duração: ")
-                .append(duration.getDuration())
                 .append(duration.getTimeTypeDisplayName())
                 .append("\n");
 
