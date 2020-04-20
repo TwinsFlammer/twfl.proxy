@@ -76,7 +76,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
                         "%b," +
                         "%b," +
                         "%b," +
-                        "'%s'," +
+                        "%s," +
                         "%d," +
                         "%d" +
                         ");",
@@ -88,7 +88,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
                 object.isHidden(),
                 object.isPerpetual(),
                 object.getStatus(),
-                object.getProof(),
+                object.hasValidProof() ? null : "'" + object.getProof() + "'",
                 object.getTime(),
                 object.getEndTime()
         );
