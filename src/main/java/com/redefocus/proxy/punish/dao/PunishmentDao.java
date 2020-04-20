@@ -108,7 +108,10 @@ public class PunishmentDao<T extends Punishment> extends Table {
             keys.put("hidden", object.isHidden());
             keys.put("perpetual", object.isPerpetual());
             keys.put("status", object.getStatus());
-            keys.put("proof", object.getProof());
+
+            if (object.hasValidProof())
+                keys.put("proof", object.getProof());
+
             keys.put("time", object.getTime());
 
             if (object.isTemporary())
