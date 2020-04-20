@@ -227,7 +227,7 @@ public class Punishment {
                 .append("\n")
                 .append("§c * Motivo: ")
                 .append(punishReason.getDisplayName())
-                .append(this.proof == null || this.proof.isEmpty() ? "" : " - ");
+                .append(this.hasValidProof() ? "" : " - ");
 
         if (this.hasValidProof())
             stringBuilder.append(this.getProof());
