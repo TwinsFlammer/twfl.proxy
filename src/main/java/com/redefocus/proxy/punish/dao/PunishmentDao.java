@@ -6,10 +6,7 @@ import com.redefocus.proxy.punish.manager.PunishmentManager;
 import com.redefocus.common.shared.databases.mysql.dao.Table;
 import com.redefocus.proxy.punish.data.Punishment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -98,7 +95,7 @@ public class PunishmentDao<T extends Punishment> extends Table {
 
         try (
                 Connection connection = this.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ) {
             preparedStatement.execute();
 
