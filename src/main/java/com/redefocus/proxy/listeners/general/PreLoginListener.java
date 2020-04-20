@@ -43,7 +43,7 @@ public class PreLoginListener implements Listener {
             return;
         }
 
-        User user = UserManager.getUser(pendingConnection.getName());
+        User user = UserManager.getUser(pendingConnection.getName(), true);
 
         if (user == null) {
             UserDao userDao = new UserDao();
