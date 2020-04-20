@@ -95,29 +95,26 @@ public class PunishmentDao<T extends Punishment> extends Table {
 
         try (
                 Connection connection = this.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
             preparedStatement.execute();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            HashMap<Object, Object> keys = Maps.newHashMap();
 
-            return (T) new Punishment(
-                    resultSet.getInt(0),
-                    object.getUserId(),
-                    object.getStafferId(),
-                    object.getReasonId(),
-                    object.getCount(),
-                    object.getRevokeUserId(),
-                    object.getRevokeReasonId(),
-                    object.isHidden(),
-                    object.isPerpetual(),
-                    object.getStatus(),
-                    object.getProof(),
-                    object.getTime(),
-                    object.getStartTime(),
-                    object.getEndTime(),
-                    object.getRevokeTime()
-            );
+            keys.put("user_id", object.getUserId());
+            keys.put("staffer_id", object.getStafferId());
+            keys.put("reason_id", object.getReasonId());
+            keys.put("count", object.getCount());
+            keys.put("hidden", object.isHidden());
+            keys.put("perpetual", object.isPerpetual());
+            keys.put("status", object.getStatus());
+            keys.put("proof", object.getProof());
+            keys.put("time", object.getTime());
+
+            if (object.isTemporary())
+                keys.put("end_time", object.getEndTime());
+
+            return (T) this.findOne(keys);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
