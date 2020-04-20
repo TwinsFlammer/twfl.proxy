@@ -105,11 +105,11 @@ public class Punishment {
     public Boolean canRevokeBy(User user) {
         if (user.hasGroup(GroupNames.MANAGER)) return true;
         else if (user.hasGroup(GroupNames.ADMINISTRATOR)) {
-            return (this.startTime + TimeUnit.HOURS.toMillis(14)) >= System.currentTimeMillis();
+            return (this.time + TimeUnit.HOURS.toMillis(14)) >= System.currentTimeMillis();
         } else if (user.hasGroup(GroupNames.MODERATOR) && this.stafferId.equals(user.getId())) {
-            return (this.startTime + TimeUnit.HOURS.toMillis(7)) >= System.currentTimeMillis();
+            return (this.time + TimeUnit.HOURS.toMillis(7)) >= System.currentTimeMillis();
         } else if (user.hasGroup(GroupNames.HELPER) && this.stafferId.equals(user.getId())) {
-            return (this.startTime + TimeUnit.HOURS.toMillis(3)) >= System.currentTimeMillis();
+            return (this.time + TimeUnit.HOURS.toMillis(3)) >= System.currentTimeMillis();
         }
         return false;
     }
