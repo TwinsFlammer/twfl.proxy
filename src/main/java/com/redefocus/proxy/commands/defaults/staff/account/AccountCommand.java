@@ -7,6 +7,7 @@ import com.redefocus.common.shared.language.enums.Language;
 import com.redefocus.common.shared.permissions.group.GroupNames;
 import com.redefocus.common.shared.permissions.group.data.Group;
 import com.redefocus.common.shared.permissions.user.data.User;
+import com.redefocus.common.shared.permissions.user.group.dao.UserGroupDao;
 import com.redefocus.common.shared.permissions.user.group.data.UserGroup;
 import com.redefocus.common.shared.permissions.user.manager.UserManager;
 import com.redefocus.proxy.commands.defaults.staff.account.arguments.AccountChangeDiscordIdCommand;
@@ -17,6 +18,7 @@ import twitter4j.TwitterException;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -154,6 +156,14 @@ public class AccountCommand extends CustomCommand {
                 .text(" §eServidores:")
                 .next()
                 .text("\n\n");
+
+        if (user1.getGroups().isEmpty()) {
+            UserGroupDao userGroupDao = new UserGroupDao();
+
+            Set<UserGroup> groups = userGroupDao.findAll(user1.getId(), "");
+
+            user1.getGroups().addAll(groups);
+        }
 
         user1.getGroups()
                 .stream()
