@@ -31,7 +31,7 @@ public class ProxiedPlayerServerKickListener implements Listener {
             return;
         }
 
-        ServerInfo serverInfo1 = Proxy.constructServerInfo(server);
+        ServerInfo serverInfo1 = Proxy.constructServerInfo(server1);
 
         event.setCancelled(true);
         event.setCancelServer(serverInfo1);
