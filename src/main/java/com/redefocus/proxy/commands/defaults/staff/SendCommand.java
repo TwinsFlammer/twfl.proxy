@@ -81,7 +81,7 @@ public class SendCommand extends CustomCommand {
             return;
         }
 
-        if (!server.isAccessible() && !user.hasGroup("manager")) {
+        if (!server.isAccessible() && !user.hasGroup(GroupNames.MANAGER)) {
             user.sendMessage(
                     language.getMessage("messages.default_commands.server.inaccessible_server")
             );
