@@ -150,6 +150,8 @@ public class Proxy extends FocusPlugin {
 
                 net.md_5.bungee.api.ProxyServer.getInstance().stop();
             }
+        } else {
+            Printer.INFO.coloredPrint("&cDNS record already created, please verify that.");
         }
     }
 
@@ -191,6 +193,8 @@ public class Proxy extends FocusPlugin {
 
                 net.md_5.bungee.api.ProxyServer.getInstance().stop();
             }
+        } else {
+            Printer.INFO.coloredPrint("&cDNS record already deleted, what's happening?");
         }
     }
 
