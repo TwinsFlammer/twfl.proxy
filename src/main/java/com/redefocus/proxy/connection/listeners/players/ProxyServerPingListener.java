@@ -17,6 +17,8 @@ public class ProxyServerPingListener implements Listener {
     public void onPing(ProxyPingEvent event) {
         ServerPing serverPing = event.getResponse();
 
+        if (serverPing == null) return;
+
         ServerPing.Players players = serverPing.getPlayers();
 
         players.setOnline(Proxy.getUsers().size());
