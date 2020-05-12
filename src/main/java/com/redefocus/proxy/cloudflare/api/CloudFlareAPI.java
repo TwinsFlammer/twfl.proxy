@@ -127,11 +127,15 @@ public class CloudFlareAPI {
 
     public static Boolean deleteRecord(String id) {
         try {
+            String url = String.format(
+                    Constants.BASE_URL,
+                    "/zones/" + Constants.ZONE_ID + "/dns_records/" + id
+            );
+
+            System.out.println("Delete url: " + url);
+
             HttpURLConnection httpURLConnection = CloudFlareAPI.getHttpURLConnection(
-                    String.format(
-                            Constants.BASE_URL,
-                            "/zones/" + Constants.ZONE_ID + "/dns_records/" + id
-                    ),
+                    url,
                     "DELETE"
             );
 
