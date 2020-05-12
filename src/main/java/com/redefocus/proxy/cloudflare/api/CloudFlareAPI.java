@@ -115,6 +115,8 @@ public class CloudFlareAPI {
 
             httpURLConnection.connect();
 
+            System.out.println("CloudFlare response: " + httpURLConnection.getResponseCode());
+
             return httpURLConnection.getResponseCode() == 200;
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -134,6 +136,8 @@ public class CloudFlareAPI {
             );
 
             httpURLConnection.connect();
+
+            System.out.println("CloudFlare response: " + httpURLConnection.getResponseCode());
 
             return httpURLConnection.getResponseCode() == 200;
         } catch (IOException exception) {
