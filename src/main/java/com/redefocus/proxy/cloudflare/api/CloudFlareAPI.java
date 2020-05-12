@@ -135,6 +135,8 @@ public class CloudFlareAPI {
                     "DELETE"
             );
 
+            httpURLConnection.setDoOutput(true);
+
             httpURLConnection.connect();
 
             System.out.println("CloudFlare response: " + httpURLConnection.getResponseCode());
