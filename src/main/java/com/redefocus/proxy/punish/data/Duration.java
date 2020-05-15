@@ -34,7 +34,7 @@ public class Duration {
     }
 
     public Long getEndTime() {
-        return System.currentTimeMillis() + timeType.toMillis(this.duration);
+        return timeType.toMillis(this.duration);
     }
 
     public Boolean isTemporary() {
