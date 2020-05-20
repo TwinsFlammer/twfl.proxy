@@ -10,7 +10,7 @@
     <name>Proxy</name>
 
     <parent>
-        <groupId>com.redefocus</groupId>
+        <groupId>br.com.twinsflammer</groupId>
         <artifactId>super</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
