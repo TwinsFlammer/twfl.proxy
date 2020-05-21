@@ -140,8 +140,8 @@ public class Proxy extends TwinsPlugin {
         if (dnsRecord == null) {
             if (CloudFlareAPI.createRecord(
                     "SRV",
-                    "redefocus.com",
-                    "redefocus.com",
+                    "twinsflammer.com.br",
+                    "twinsflammer.com.br",
                     this.port
             )) {
                 Printer.INFO.coloredPrint("&aCreation of an DNS Record for this proxy successful.");
