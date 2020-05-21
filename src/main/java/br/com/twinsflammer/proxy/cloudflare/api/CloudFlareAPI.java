@@ -159,7 +159,7 @@ public class CloudFlareAPI {
         httpURLConnection.setRequestProperty("Content-Type", "application/json");
         httpURLConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
         httpURLConnection.setRequestProperty("X-Auth-Email", "srgutyerrez@gmail.com");
-        httpURLConnection.setRequestProperty("X-Auth-Key", "mMWsfTXAwAOykE3q4l333PRKN6E6mnS0h_PTtS_u");
+        httpURLConnection.setRequestProperty("X-Auth-Key", "27aaaba6e8cb517531e38f747ef8e6ecf828a");
 
         return httpURLConnection;
     }
