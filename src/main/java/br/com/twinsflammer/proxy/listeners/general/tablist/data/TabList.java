@@ -1,6 +1,7 @@
 package br.com.twinsflammer.proxy.listeners.general.tablist.data;
 
 import br.com.twinsflammer.api.shared.connection.manager.ProxyServerManager;
+import br.com.twinsflammer.common.shared.Common;
 import br.com.twinsflammer.common.shared.permissions.group.data.Group;
 import br.com.twinsflammer.common.shared.util.Helper;
 import br.com.twinsflammer.proxy.Proxy;
@@ -49,14 +50,16 @@ public class TabList {
                         "{proxy_count_player}",
                         "{proxy_count_online}",
                         "{proxy_count_players}",
-                        "\\\\n"
+                        "\\\\n",
+                        "{server_url}"
                 },
                 new String[] {
                         String.valueOf(ProxyServerManager.getProxyCount()),
                         String.valueOf(Proxy.getCurrentProxyPlayerCount()),
                         String.valueOf(ProxyServerManager.getProxyCountOnline()),
                         String.valueOf(ProxyServerManager.getUsers().size()),
-                        "\n"
+                        "\n",
+                        Common.SERVER_URL
                 }
         ).replaceAll("\\\\n", "\n");
     }
