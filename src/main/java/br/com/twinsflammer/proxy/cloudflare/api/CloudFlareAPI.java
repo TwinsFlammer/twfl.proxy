@@ -163,4 +163,9 @@ public class CloudFlareAPI {
 
         return httpURLConnection;
     }
+
+    public static class DNSType {
+        public static final String SRV = "SRV",
+                A = "A";
+    }
 }
