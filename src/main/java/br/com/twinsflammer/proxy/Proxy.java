@@ -139,9 +139,9 @@ public class Proxy extends TwinsPlugin {
 
         if (dnsRecord == null) {
             if (CloudFlareAPI.createRecord(
-                    "SRV",
-                    "twinsflammer.com.br",
-                    "twinsflammer.com.br",
+                    CloudFlareAPI.DNSType.SRV,
+                    Common.SERVER_URL,
+                    Common.SERVER_URL,
                     this.port
             )) {
                 Printer.INFO.coloredPrint("&aCreation of an DNS Record for this proxy successful.");
@@ -159,7 +159,7 @@ public class Proxy extends TwinsPlugin {
         return CloudFlareAPI.listDNSRecords()
                 .stream()
                 .filter(dnsRecord1 -> dnsRecord1.getType().equalsIgnoreCase("SRV"))
-                .filter(dnsRecord1 -> dnsRecord1.getValue().equals("0\t" + Proxy.getInstance().getPort() + "\tredefocus.com"))
+                .filter(dnsRecord1 -> dnsRecord1.getValue().equals("0\t" + Proxy.getInstance().getPort() + "\t" + Common.SERVER_URL))
                 .findFirst()
                 .orElse(null);
     }
