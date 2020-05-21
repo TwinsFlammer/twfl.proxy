@@ -7,7 +7,7 @@ import br.com.twinsflammer.proxy.configuration.ProxyConfiguration;
 import br.com.twinsflammer.proxy.manager.StartManager;
 import br.com.twinsflammer.proxy.punish.manager.PunishmentManager;
 import com.google.common.collect.Sets;
-import br.com.twinsflammer.api.bungeecord.FocusPlugin;
+import br.com.twinsflammer.api.bungeecord.TwinsPlugin;
 import br.com.twinsflammer.api.shared.connection.dao.ProxyServerDao;
 import br.com.twinsflammer.api.shared.connection.data.ProxyServer;
 import br.com.twinsflammer.api.shared.connection.manager.ProxyServerManager;
@@ -37,7 +37,7 @@ import java.util.Objects;
 /**
  * Created by @SrGutyerrez
  */
-public class Proxy extends FocusPlugin {
+public class Proxy extends TwinsPlugin {
     private static Proxy instance;
 
     public Proxy() {
