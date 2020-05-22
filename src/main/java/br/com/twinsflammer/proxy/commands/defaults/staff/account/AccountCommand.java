@@ -89,7 +89,7 @@ public class AccountCommand extends CustomCommand {
                 .next()
                 .text("\n")
                 .next()
-                .text("   Última autenticação: §7" + (user1.getLastLogin() == null ? "Indisponível" : this.format(user1.getLastLogin())))
+                .text("   Última autenticação: §7" + (user1.getLastLogin() == null || user1.getLastLogin().equals("null") ? "Indisponível" : this.format(user1.getLastLogin())))
                 .next()
                 .text("\n")
                 .next()
