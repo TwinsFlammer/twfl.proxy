@@ -4,7 +4,7 @@ package br.com.twinsflammer.proxy.util;
  * Created by @SrGutyerrez
  */
 public class Messages {
-    public static final String PREFIX = "§6§lREDE FOCUS";
+    public static final String PREFIX = "§c§lTWINS FLAMMER";
 
     public static final String INVALID_UUID_MESSAGE = "\n" +
             Messages.PREFIX +
