@@ -1,5 +1,6 @@
 package br.com.twinsflammer.proxy.authentication.manager;
 
+import br.com.twinsflammer.common.shared.permissions.user.dao.UserDao;
 import com.google.common.collect.Maps;
 import br.com.twinsflammer.common.shared.language.enums.Language;
 import br.com.twinsflammer.common.shared.server.data.Server;
@@ -45,6 +46,19 @@ public class AuthenticationManager {
 
     public static void authenticate(User user) {
         user.setLogged(true);
+        user.setLastLogin(System.currentTimeMillis());
+
+        UserDao userDao = new UserDao();
+
+        HashMap<String, Object> keys = Maps.newHashMap();
+
+        keys.put("last_login", user.getLastLogin());
+
+        userDao.update(
+                keys,
+                "id",
+                user.getId()
+        );
 
         user.sendTitle(
                 "§a§lAutênticado!",
