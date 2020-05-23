@@ -1,6 +1,7 @@
 package br.com.twinsflammer.proxy.authentication.manager;
 
 import br.com.twinsflammer.common.shared.permissions.user.dao.UserDao;
+import br.com.twinsflammer.common.shared.permissions.user.manager.UserManager;
 import com.google.common.collect.Maps;
 import br.com.twinsflammer.common.shared.language.enums.Language;
 import br.com.twinsflammer.common.shared.server.data.Server;
@@ -75,6 +76,17 @@ public class AuthenticationManager {
                 3,
                 TimeUnit.SECONDS
         );
+
+        user.getFriends().forEach(friendId -> {
+            User user1 = UserManager.getUser(friendId);
+
+            user1.sendMessage(
+                    String.format(
+                            "%s §aentrou no servidor.",
+                            user.getPrefix() + user.getDisplayName()
+                    )
+            );
+        });
     }
 
     private static void sendUserToLobby(User user) {
