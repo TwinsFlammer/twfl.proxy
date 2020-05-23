@@ -44,6 +44,17 @@ public class ProxiedPlayerDisconnectListener implements Listener {
 
         proxyServerDao.update(proxyServer);
 
+        user.getFriends().forEach(friendId -> {
+            User user1 = UserManager.getUser(friendId);
+
+            user1.sendMessage(
+                    String.format(
+                            "%s §csaiu do servidor.",
+                            user.getPrefix() + user.getDisplayName()
+                    )
+            );
+        });
+
         Proxy.unloadUser(user);
     }
 }
