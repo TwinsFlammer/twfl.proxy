@@ -149,14 +149,15 @@ public class PunishCommand extends CustomCommand {
             keys.put("reason_id", punishReason.getId());
             keys.put("status", true);
 
-            List<Punishment> punishments = PunishmentManager.getPunishments(user1);
+            Set<Punishment> punishments = PunishmentManager.getPunishments(user1);
 
             Long minTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(15);
 
             if (punishments.stream()
                     .filter(Objects::nonNull)
                     .filter(punishment -> punishment.getReasonId().equals(punishReason.getId()))
-                    .anyMatch(punishment -> punishment.getTime() >= minTime)) {
+                    .anyMatch(punishment -> punishment.getTime() >= minTime)
+            ) {
                 user.sendMessage(
                         language.getMessage("punishment.user_already_punished_with_this_motive_in_moments_ago")
                 );
