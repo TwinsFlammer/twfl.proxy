@@ -1,6 +1,7 @@
 package br.com.twinsflammer.proxy.punish.commands.checkpunish;
 
 import br.com.twinsflammer.common.shared.permissions.group.GroupNames;
+import br.com.twinsflammer.proxy.punish.dao.PunishmentDao;
 import br.com.twinsflammer.proxy.punish.data.Duration;
 import br.com.twinsflammer.proxy.punish.data.Punishment;
 import br.com.twinsflammer.proxy.punish.data.RevokeReason;
@@ -12,13 +13,17 @@ import br.com.twinsflammer.api.bungeecord.util.JSONText;
 import br.com.twinsflammer.common.shared.language.enums.Language;
 import br.com.twinsflammer.common.shared.permissions.user.data.User;
 import br.com.twinsflammer.common.shared.permissions.user.manager.UserManager;
+import com.google.common.collect.Maps;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by @SrGutyerrez
  */
 public class CheckPunishCommand extends CustomCommand {
+    private final String SQUARE_SYMBOL = "\u2588";
+
     public CheckPunishCommand() {
         super("checkpunir", CommandRestriction.ALL, GroupNames.HELPER);
     }
@@ -49,16 +54,18 @@ public class CheckPunishCommand extends CustomCommand {
             return;
         }
 
-        List<Punishment> punishments = PunishmentManager.getPunishments(user1);
+//        PunishmentDao punishmentDao = new PunishmentDao();
+//
+//        HashMap<String, Object> keys = Maps.newHashMap();
+
+        Set<Punishment> punishments = PunishmentManager.getPunishments(user);
 
         JSONText jsonText = new JSONText();
-
-        String squareSymbol = "\u2588";
 
         jsonText.next()
                 .text("\n")
                 .next()
-                .text("§e" + squareSymbol + " Pendente §a" + squareSymbol + " Ativo §c" + squareSymbol + " Finalizado §7" + squareSymbol + " Revogado")
+                .text("§e" + this.SQUARE_SYMBOL + " Pendente §a" + this.SQUARE_SYMBOL + " Ativo §c" + this.SQUARE_SYMBOL + " Finalizado §7" + this.SQUARE_SYMBOL + " Revogado")
                 .next()
                 .text("\n\n")
                 .next();
@@ -87,12 +94,13 @@ public class CheckPunishCommand extends CustomCommand {
                                             "Tipo: §7[" + duration.getPunishType().toString() + "]" +
                                             (
                                                     punishment.isRevoked() ?
-                                                            "\n\n" +
-                                                                    "Revogada por: " + revoker.getPrefix() + revoker.getDisplayName() +
-                                                                    "\n" +
-                                                                    "Revogada em: " + punishment.getRevokeDate() +
-                                                                    "\n" +
-                                                                    "Motivo: " + (revokeReason == null ? "Nenhum especificado" : revokeReason.getDisplayName())
+                                                            "\n" +
+                                                            "\n" +
+                                                            "Revogada por: " + revoker.getPrefix() + revoker.getDisplayName() +
+                                                            "\n" +
+                                                            "Revogada em: " + punishment.getRevokeDate() +
+                                                            "\n" +
+                                                            "Motivo: " + (revokeReason == null ? "Nenhum especificado" : revokeReason.getDisplayName())
                                                             :
                                                             ""
                                             )
