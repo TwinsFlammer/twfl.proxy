@@ -234,6 +234,5 @@ public class Proxy extends TwinsPlugin {
         TwitterManager.removeRequestToken(user.getId());
         AuthenticationManager.removeAttempt(user.getId());
         UserManager.removeUser(user.getId());
-        PunishmentManager.clearPunishments(user.getId());
     }
 }
