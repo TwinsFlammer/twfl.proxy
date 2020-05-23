@@ -16,54 +16,40 @@ import java.util.*;
  * Created by @SrGutyerrez
  */
 public class PunishmentManager {
-    private static HashMap<Integer, List<Punishment>> punishments = Maps.newHashMap();
+    public static Set<Punishment> getPunishments(Integer userId) {
+        PunishmentDao punishmentDao = new PunishmentDao();
 
-    public static List<Punishment> getPunishments(Integer userId) {
-        return PunishmentManager.punishments.containsKey(userId) ? PunishmentManager.punishments.get(userId) : PunishmentManager.findAll(userId);
+        HashMap<String, Object> keys = Maps.newHashMap();
+
+        keys.put("user_id", userId);
+
+        Set<Punishment> punishments = punishmentDao.findAll(keys);
+
+        return punishments;
     }
 
-    public static List<Punishment> getPunishments(User user) {
+    public static Set<Punishment> getPunishments(User user) {
         return PunishmentManager.getPunishments(user.getId());
     }
 
     public static Punishment getPunishment(Integer id) {
-        for (List<Punishment> punishments : PunishmentManager.punishments.values())
-            for (Punishment punishment : punishments)
-                if (punishment != null && punishment.getId().equals(id)) return punishment;
-
-        return PunishmentManager.findOne(id);
-    }
-
-    public static List<Punishment> clearPunishments(Integer userId) {
-        return PunishmentManager.punishments.remove(userId);
-    }
-
-    public static List<Punishment> clearPunishments(User user) {
-        return PunishmentManager.clearPunishments(user.getId());
-    }
-
-    private static Punishment findOne(Integer id) {
         PunishmentDao punishmentDao = new PunishmentDao();
 
-        HashMap<String, Integer> keys = Maps.newHashMap();
+        HashMap<String, Object> keys = Maps.newHashMap();
 
         keys.put("id", id);
 
         return punishmentDao.findOne(keys);
     }
 
-    private static List<Punishment> findAll(Integer userId) {
+    private static Set<Punishment> findAll(Integer userId) {
         PunishmentDao punishmentDao = new PunishmentDao();
 
         HashMap<String, Integer> keys = Maps.newHashMap();
 
         keys.put("user_id", userId);
 
-        List<Punishment> punishments = Lists.newArrayList(punishmentDao.findAll(keys));
-
-        PunishmentManager.punishments.put(userId, punishments);
-
-        return punishments;
+        return punishmentDao.findAll(keys);
     }
 
     public static Duration getDuration(Integer punishCount, PunishReason punishReason) {
@@ -73,7 +59,7 @@ public class PunishmentManager {
     }
 
     public static Punishment generatePunishment(User staffer, User user, PunishReason punishReason, String proof, Boolean hidden) {
-        List<Punishment> punishments = PunishmentManager.getPunishments(user);
+        Set<Punishment> punishments = PunishmentManager.getPunishments(user);
 
         Integer count = (int) punishments.stream()
                 .filter(Objects::nonNull)
