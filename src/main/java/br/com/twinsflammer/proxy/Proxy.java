@@ -6,7 +6,8 @@ import br.com.twinsflammer.proxy.cloudflare.data.DNSRecord;
 import br.com.twinsflammer.proxy.commands.defaults.players.LobbyCommand;
 import br.com.twinsflammer.proxy.configuration.ProxyConfiguration;
 import br.com.twinsflammer.proxy.manager.StartManager;
-import br.com.twinsflammer.proxy.punish.manager.PunishmentManager;
+import br.com.twinsflammer.proxy.user.data.ProxyUser;
+import br.com.twinsflammer.proxy.user.factory.ProxyUserFactory;
 import com.google.common.collect.Sets;
 import br.com.twinsflammer.api.bungeecord.TwinsPlugin;
 import br.com.twinsflammer.api.shared.connection.dao.ProxyServerDao;
@@ -58,6 +59,9 @@ public class Proxy extends TwinsPlugin {
     @Getter
     private Integer port;
 
+    @Getter
+    public ProxyUserFactory<? extends ProxyUser> proxyUserFactory;
+
     @Override
     public void onEnablePlugin() {
         Proxy.proxyConfiguration = new ProxyConfiguration();
@@ -70,6 +74,8 @@ public class Proxy extends TwinsPlugin {
                 .findFirst()
                 .get()
                 .getQueryPort();
+
+        this.proxyUserFactory = new ProxyUserFactory<>();
 
         new StartManager();
 
