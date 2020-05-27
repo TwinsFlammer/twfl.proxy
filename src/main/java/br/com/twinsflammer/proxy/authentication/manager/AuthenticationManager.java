@@ -80,12 +80,13 @@ public class AuthenticationManager {
         user.getFriends().forEach(friendId -> {
             User user1 = UserManager.getUser(friendId);
 
-            user1.sendMessage(
-                    String.format(
-                            "%s §aentrou no servidor.",
-                            user.getPrefix() + user.getDisplayName()
-                    )
-            );
+            if (user1.isFriend(user))
+                user1.sendMessage(
+                        String.format(
+                                "%s §aentrou no servidor.",
+                                user.getPrefix() + user.getDisplayName()
+                        )
+                );
         });
     }
 
