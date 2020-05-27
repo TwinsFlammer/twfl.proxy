@@ -13,7 +13,7 @@ import br.com.twinsflammer.common.shared.server.data.Server;
  */
 public class BtpCommand extends CustomCommand {
     public BtpCommand() {
-        super("btp", CommandRestriction.IN_GAME, GroupNames.ADMINISTRATOR);
+        super("btp", CommandRestriction.IN_GAME, GroupNames.DIRECTOR);
     }
 
     @Override
