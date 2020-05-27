@@ -1,10 +1,13 @@
 package br.com.twinsflammer.proxy.commands.defaults.players.friend.arguments;
 
+import br.com.twinsflammer.api.bungeecord.util.JSONText;
+import br.com.twinsflammer.proxy.Proxy;
 import br.com.twinsflammer.proxy.commands.defaults.players.friend.FriendCommand;
 import br.com.twinsflammer.api.bungeecord.commands.CustomArgumentCommand;
 import br.com.twinsflammer.common.shared.language.enums.Language;
 import br.com.twinsflammer.common.shared.permissions.user.data.User;
 import br.com.twinsflammer.common.shared.permissions.user.manager.UserManager;
+import br.com.twinsflammer.proxy.user.data.ProxyUser;
 
 /**
  * Created by @SrGutyerrez
@@ -76,11 +79,25 @@ public class FriendAddCommand extends CustomArgumentCommand {
                         user1.getDisplayName()
                 )
         );
-        user1.sendMessage(
-                String.format(
-                        language.getMessage("friends.friend_request_received"),
-                        user.getDisplayName()
+
+        JSONText jsonText = new JSONText()
+                .text(
+                        String.format(
+                                "§aO usuário %s §adeseja tornar-se seu amigo.",
+                                user.getPrefix() + user.getDisplayName()
+                        )
                 )
-        );
+                .next()
+                .text("§aClique ")
+                .next()
+                .text("§lAQUI")
+                .execute("/amigo aceitar " + user.getName())
+                .next()
+                .text("§r §apara aceitar o pedido de amizade.")
+                .next();
+
+        ProxyUser proxyUser = Proxy.getInstance().getProxyUserFactory().getUser(user1.getId());
+
+        proxyUser.sendMessage(jsonText);
     }
 }
