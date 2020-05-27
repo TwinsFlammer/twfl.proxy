@@ -40,6 +40,7 @@ public class FriendListCommand extends CustomArgumentCommand {
                 .sorted((friendId1, friendId2) -> UserManager.getUser(friendId2).isOnline().compareTo(UserManager.getUser(friendId1).isOnline()))
                 .distinct()
                 .map(UserManager::getUser)
+                .filter(user1 -> user1.isFriend(user))
                 .collect(Collectors.toList());
 
         final Integer perPage = 10;
