@@ -88,6 +88,8 @@ public class FriendAddCommand extends CustomArgumentCommand {
                         )
                 )
                 .next()
+                .text("\n")
+                .next()
                 .text("§aClique ")
                 .next()
                 .text("§lAQUI")
