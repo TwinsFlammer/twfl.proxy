@@ -36,7 +36,7 @@ public class AnnounceCommand extends CustomCommand {
         String message = Helper.toMessage(args);
 
         String broadcastMessage = String.format(
-                "%s§f: %s",
+                "\n§r%s§f: %s\n§r",
                 user.isConsole() ? "§e[!]" : user.getPrefix() + user.getDisplayName(),
                 message
         );
