@@ -4,9 +4,14 @@ import br.com.twinsflammer.api.bungeecord.commands.CustomArgumentCommand;
 import br.com.twinsflammer.api.bungeecord.util.JSONText;
 import br.com.twinsflammer.common.shared.language.enums.Language;
 import br.com.twinsflammer.common.shared.permissions.user.data.User;
+import br.com.twinsflammer.common.shared.permissions.user.group.dao.UserGroupDao;
+import br.com.twinsflammer.common.shared.permissions.user.group.data.UserGroup;
 import br.com.twinsflammer.common.shared.permissions.user.manager.UserManager;
 import br.com.twinsflammer.common.shared.util.Helper;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,11 +40,27 @@ public class FriendListCommand extends CustomArgumentCommand {
 
         JSONText jsonText = new JSONText();
 
+        UserGroupDao userGroupDao = new UserGroupDao();
+
         List<User> users = user.getFriends()
                 .stream()
                 .sorted((friendId1, friendId2) -> UserManager.getUser(friendId2).isOnline().compareTo(UserManager.getUser(friendId1).isOnline()))
                 .distinct()
-                .map(UserManager::getUser)
+                .map(friendId -> {
+                    User user1 = UserManager.getUser(friendId);
+
+                    HashMap<String, Object> keys = Maps.newHashMap();
+
+                    keys.put("user_id", keys);
+
+                    List<UserGroup> userGroups = Lists.newArrayList(
+                            userGroupDao.findAll(keys)
+                    );
+
+                    user1.setGroups(userGroups);
+
+                    return user1;
+                })
                 .filter(user1 -> user1.isFriend(user))
                 .collect(Collectors.toList());
 
