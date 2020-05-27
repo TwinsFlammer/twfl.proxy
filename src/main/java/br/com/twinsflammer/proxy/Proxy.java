@@ -3,6 +3,7 @@ package br.com.twinsflammer.proxy;
 import br.com.twinsflammer.proxy.authentication.manager.AuthenticationManager;
 import br.com.twinsflammer.proxy.cloudflare.api.CloudFlareAPI;
 import br.com.twinsflammer.proxy.cloudflare.data.DNSRecord;
+import br.com.twinsflammer.proxy.commands.defaults.players.LobbyCommand;
 import br.com.twinsflammer.proxy.configuration.ProxyConfiguration;
 import br.com.twinsflammer.proxy.manager.StartManager;
 import br.com.twinsflammer.proxy.punish.manager.PunishmentManager;
@@ -234,5 +235,6 @@ public class Proxy extends TwinsPlugin {
         TwitterManager.removeRequestToken(user.getId());
         AuthenticationManager.removeAttempt(user.getId());
         UserManager.removeUser(user.getId());
+        LobbyCommand.IN_VALIDATION.remove(user.getId());
     }
 }
